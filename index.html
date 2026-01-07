@@ -2,531 +2,720 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0C0C0E">
   <title>Protocole Rééducation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     :root {
-      --bg: #0d1117;
-      --card: #161b22;
-      --border: #30363d;
-      --text: #e6edf3;
-      --text-dim: #8b949e;
-      --accent: #58a6ff;
-      --green: #3fb950;
-      --orange: #d29922;
-      --red: #f85149;
-      --radius: 12px;
+      --bg: #0C0C0E; --bg-card: #18181B; --bg-card-hover: #1F1F23;
+      --text: #FAFAFA; --text-2: #A1A1AA; --text-3: #71717A;
+      --border: #27272A; --green: #22C55E; --orange: #F59E0B; --red: #EF4444;
+      --radius: 16px; --radius-lg: 24px;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 20px;
-      padding-bottom: 40px;
-    }
-    h1 {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .selectors {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .selector {
-      flex: 1;
-    }
-    .selector label {
-      display: block;
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .selector select {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--text);
-      font-size: 15px;
-      appearance: none;
-      cursor: pointer;
-    }
-    .phase-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-    .phase-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .phase-badge {
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    .phase-1 { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-    .phase-2 { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
-    .phase-3 { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
-    .phase-title {
-      font-size: 18px;
-      font-weight: 600;
-    }
-    .phase-duration {
-      font-size: 13px;
-      color: var(--text-dim);
-    }
-    .day-type {
-      display: inline-block;
-      padding: 4px 10px;
-      background: rgba(88, 166, 255, 0.15);
-      color: var(--accent);
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-    .exercises-title {
-      font-size: 14px;
-      color: var(--text-dim);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .exercise {
-      background: var(--bg);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 12px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .exercise:hover { transform: scale(1.01); }
-    .exercise:last-child { margin-bottom: 0; }
-    .exercise-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-    .exercise-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--card);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-    }
-    .exercise-name {
-      font-size: 15px;
-      font-weight: 600;
-    }
-    .exercise-params {
-      font-size: 13px;
-      color: var(--accent);
-    }
-    .exercise-desc {
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.4;
-    }
-    .exercise-detail {
-      display: none;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-    .exercise.open .exercise-detail { display: block; }
-    .detail-section {
-      margin-bottom: 16px;
-    }
-    .detail-section:last-child { margin-bottom: 0; }
-    .detail-label {
-      font-size: 11px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-    .detail-content {
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    .detail-content ul {
-      padding-left: 18px;
-    }
-    .detail-content li {
-      margin-bottom: 4px;
-    }
-    .warning {
-      background: rgba(248, 81, 73, 0.1);
-      border: 1px solid rgba(248, 81, 73, 0.3);
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 13px;
-      color: var(--red);
-    }
-    .tip {
-      background: rgba(63, 185, 80, 0.1);
-      border: 1px solid rgba(63, 185, 80, 0.3);
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 13px;
-      color: var(--green);
-    }
-    .rest-day {
-      text-align: center;
-      padding: 40px 20px;
-    }
-    .rest-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
-    }
-    .rest-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .rest-desc {
-      font-size: 14px;
-      color: var(--text-dim);
-      line-height: 1.5;
-    }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; min-height: 100dvh; -webkit-font-smoothing: antialiased; }
+    #app { max-width: 430px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; position: relative; padding: 20px; padding-top: 60px; padding-bottom: 40px; }
+    
+    /* SELECTORS */
+    .selectors { display: flex; gap: 12px; margin-bottom: 24px; }
+    .selector { flex: 1; }
+    .selector label { display: block; font-size: 12px; color: var(--text-2); margin-bottom: 8px; font-weight: 500; }
+    .selector select { width: 100%; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 15px; font-weight: 600; appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23A1A1AA'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+    .selector select:focus { outline: none; border-color: var(--text-2); }
+    
+    /* HEADER */
+    .header { text-align: center; margin-bottom: 28px; }
+    .header h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .header p { font-size: 14px; color: var(--text-2); }
+    .phase-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 30px; font-size: 14px; font-weight: 600; margin-top: 12px; }
+    
+    /* EXERCISE LIST */
+    .ex-list { display: flex; flex-direction: column; gap: 12px; }
+    .ex-card { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border-radius: var(--radius); cursor: pointer; position: relative; overflow: hidden; transition: transform 0.15s, background 0.15s; }
+    .ex-card:active { transform: scale(0.98); background: var(--bg-card-hover); }
+    .ex-card.done { opacity: 0.5; }
+    .ex-card-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+    .ex-card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-right: 14px; flex-shrink: 0; }
+    .ex-card-body { flex: 1; min-width: 0; }
+    .ex-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+    .ex-card-top h3 { font-size: 16px; font-weight: 700; }
+    .ex-card-cat { font-size: 11px; padding: 3px 8px; background: var(--bg); border-radius: 20px; color: var(--text-2); }
+    .ex-card-desc { font-size: 13px; color: var(--text-2); margin-bottom: 8px; }
+    .ex-card-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--text-3); }
+    .ex-card-action { margin-left: 12px; flex-shrink: 0; }
+    .ex-card-check { width: 32px; height: 32px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; }
+    .ex-card-check svg { width: 18px; height: 18px; }
+    .ex-card-arrow { width: 20px; height: 20px; color: var(--text-3); }
+    
+    /* EMPTY STATE */
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-2); }
+    .empty-state span { font-size: 48px; display: block; margin-bottom: 16px; }
+    
+    /* EXERCISE SCREEN */
+    .ex-screen { position: fixed; inset: 0; background: var(--bg); z-index: 100; overflow-y: auto; display: none; }
+    .ex-screen.active { display: block; }
+    .ex-header { display: flex; align-items: center; padding: 56px 20px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+    .ex-header h2 { flex: 1; text-align: center; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .hdr-btn { width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .hdr-btn svg { width: 22px; height: 22px; }
+    .hdr-spacer { width: 40px; }
+    
+    /* INTRO */
+    .intro-hero { height: 160px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .intro-hero span { font-size: 72px; position: relative; z-index: 1; }
+    .intro-hero .glow { position: absolute; width: 200px; height: 200px; background: rgba(255,255,255,0.2); border-radius: 50%; filter: blur(60px); }
+    .intro-body { padding: 20px; padding-bottom: 120px; display: flex; flex-direction: column; gap: 16px; }
+    .info-block { background: var(--bg-card); padding: 16px; border-radius: var(--radius); }
+    .info-block h4 { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text-2); margin-bottom: 12px; }
+    .info-block h4 span { font-size: 18px; }
+    .info-block p { font-size: 15px; line-height: 1.6; }
+    .info-block.success { background: rgba(34,197,94,0.15); border-left: 4px solid var(--green); }
+    .info-block.warning { background: rgba(245,158,11,0.15); border-left: 4px solid var(--orange); }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .steps-list li { display: flex; gap: 12px; }
+    .steps-list .num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .steps-list .txt { font-size: 15px; line-height: 1.5; }
+    .steps-list .txt strong { display: block; }
+    .steps-list .txt span { font-size: 13px; color: var(--text-2); }
+    .warn-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .warn-list li { font-size: 15px; padding-left: 20px; position: relative; }
+    .warn-list li::before { content: '✕'; position: absolute; left: 0; color: var(--orange); font-size: 12px; }
+    .intro-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(180deg, transparent, var(--bg) 30%); z-index: 20; display: flex; justify-content: center; }
+    .intro-footer > div { max-width: 430px; width: 100%; }
+    .btn { width: 100%; padding: 18px; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.15s; }
+    .btn:active { transform: scale(0.98); }
+    .btn svg { width: 20px; height: 20px; }
+    .btn-primary { background: var(--text); color: var(--bg); }
+    .btn-secondary { background: var(--bg-card); color: var(--text-2); }
+    
+    /* ACTIVE */
+    .active-screen { display: none; flex-direction: column; align-items: center; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); position: relative; }
+    .active-screen.show { display: flex; }
+    .active-bg { position: absolute; top: 0; left: 0; right: 0; height: 50%; pointer-events: none; }
+    
+    /* TIMER */
+    .timer { display: flex; flex-direction: column; align-items: center; gap: 32px; position: relative; z-index: 1; }
+    .timer-ring { position: relative; width: 220px; height: 220px; }
+    .timer-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .timer-ring .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
+    .timer-ring .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.3s; }
+    .timer-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .timer-time { font-size: 52px; font-weight: 800; letter-spacing: -2px; }
+    .timer-label { font-size: 14px; color: var(--text-2); }
+    .timer-btns { display: flex; gap: 16px; }
+    .timer-btn { border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .timer-btn:active { transform: scale(0.95); }
+    .timer-btn.main { width: 72px; height: 72px; }
+    .timer-btn.main svg { width: 28px; height: 28px; }
+    .timer-btn.sec { width: 52px; height: 52px; background: var(--bg-card); color: var(--text-2); }
+    .timer-btn.sec svg { width: 22px; height: 22px; }
+    
+    /* REP COUNTER */
+    .rep-counter { display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; z-index: 1; }
+    .side-switch { display: flex; gap: 8px; background: var(--bg-card); padding: 4px; border-radius: var(--radius); }
+    .side-btn { padding: 10px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--text-3); border: none; background: none; cursor: pointer; }
+    .side-btn.active { background: var(--text); color: var(--bg); }
+    .set-info { font-size: 14px; color: var(--text-2); }
+    .rep-circle { width: 200px; height: 200px; position: relative; cursor: pointer; }
+    .rep-circle:active { transform: scale(0.98); }
+    .rep-circle svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+    .rep-circle .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
+    .rep-circle .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dasharray 0.3s; }
+    .rep-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .rep-num { font-size: 64px; font-weight: 800; }
+    .rep-num .sep { font-size: 28px; color: var(--text-3); margin: 0 4px; }
+    .rep-num .tot { font-size: 28px; color: var(--text-2); font-weight: 600; }
+    .rep-hint { font-size: 13px; color: var(--text-3); }
+    .hold-num { font-size: 72px; font-weight: 800; color: var(--orange); }
+    .hold-txt { font-size: 16px; color: var(--orange); font-weight: 600; }
+    .rep-circle.holding { animation: pulse 1s infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+    .hold-ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--orange); animation: ringPulse 1s infinite; pointer-events: none; }
+    @keyframes ringPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.15); opacity: 0; } }
+    .hold-info { font-size: 14px; color: var(--text-2); margin-top: 8px; }
+    
+    .tip-box { margin-top: 32px; padding: 16px 20px; background: var(--bg-card); border-radius: var(--radius); display: flex; align-items: center; gap: 12px; max-width: 320px; }
+    .tip-box span { font-size: 20px; }
+    .tip-box p { font-size: 14px; color: var(--text-2); line-height: 1.4; }
+    
+    /* FEEDBACK */
+    .feedback-screen { display: none; flex-direction: column; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); }
+    .feedback-screen.show { display: flex; }
+    .fb-top { text-align: center; margin-bottom: 40px; }
+    .fb-top span { font-size: 72px; display: block; margin-bottom: 16px; animation: bounce 0.6s; }
+    @keyframes bounce { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.3); } 60% { transform: scale(0.9); } }
+    .fb-top h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+    .fb-top p { color: var(--text-2); }
+    .fb-title { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 8px; }
+    .fb-sub { text-align: center; color: var(--text-2); font-size: 14px; margin-bottom: 24px; }
+    .fb-options { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .fb-opt { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border: 2px solid transparent; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
+    .fb-opt:active { transform: scale(0.98); }
+    .fb-opt.selected { border-color: var(--green); }
+    .fb-opt.selected.orange { border-color: var(--orange); }
+    .fb-opt.selected.red { border-color: var(--red); }
+    .fb-opt .icon { font-size: 28px; margin-right: 16px; }
+    .fb-opt .txt { flex: 1; }
+    .fb-opt .txt strong { font-size: 16px; display: block; }
+    .fb-opt .txt span { font-size: 13px; color: var(--text-2); }
+    .fb-opt .check { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; }
+    .fb-opt.selected .check { opacity: 1; }
+    .fb-opt .check svg { width: 16px; height: 16px; fill: white; }
   </style>
 </head>
 <body>
-  <h1>🏋️ Protocole Rééducation</h1>
-
-  <div class="selectors">
-    <div class="selector">
-      <label>Phase</label>
-      <select id="phase-select" onchange="updateProgram()">
-        <option value="1">Phase 1 — Fondation</option>
-        <option value="2">Phase 2 — Renforcement</option>
-        <option value="3">Phase 3 — Consolidation</option>
-      </select>
-    </div>
-    <div class="selector">
-      <label>Jour</label>
-      <select id="day-select" onchange="updateProgram()">
-        <option value="1">Lundi</option>
-        <option value="2">Mardi</option>
-        <option value="3">Mercredi</option>
-        <option value="4">Jeudi</option>
-        <option value="5">Vendredi</option>
-        <option value="6">Samedi</option>
-        <option value="0">Dimanche</option>
-      </select>
-    </div>
-  </div>
-
-  <div id="program-container"></div>
+  <div id="app"></div>
+  <div id="exercise-screen" class="ex-screen"></div>
 
   <script>
     // ============================================
-    // DONNÉES — EXERCICES
+    // DONNÉES
     // ============================================
     const EXERCISES = {
       E0: {
-        id: 'E0', name: 'Reset anti-bracing', icon: '🌬️',
-        params: '2 × 6 respirations',
-        desc: 'Respiration + micro-bascule du bassin pour relâcher les tensions.',
-        position: 'Sur le dos, genoux pliés, pieds au sol. Ou sur le côté si engourdissement cuisse.',
-        execution: [
-          'Inspire lentement par le nez (4s), ventre se gonfle',
-          'Expire doucement par la bouche (6s), ventre se creuse',
-          'Sur l\'expiration : micro-bascule du bassin vers l\'arrière (pubis monte, lombaires s\'aplatissent)',
-          'Sur l\'inspiration : relâche, reviens neutre',
-          '6 respirations = 1 série. Faire 2 séries.'
+        id: 'E0', name: 'Reset anti-bracing', shortName: 'Reset', icon: '🌬️',
+        duration: null, reps: 6, sets: 2, holdTime: null, perSide: false,
+        category: 'Respiration',
+        description: 'Respiration diaphragmatique + micro-bascule du bassin',
+        position: 'Sur le dos, genoux pliés, pieds au sol. Alternative : sur le côté avec coussin.',
+        steps: [
+          { text: 'Inspire par le nez 3-4 secondes', detail: 'Laisse les côtes s\'ouvrir' },
+          { text: 'Expire par la bouche 6-8 secondes', detail: 'Comme souffler sur une vitre' },
+          { text: 'Micro-bascule du bassin en fin d\'expiration', detail: 'Aplatis légèrement le bas du dos' },
+          { text: 'Reviens en position neutre', detail: 'Amplitude minuscule' }
         ],
-        sensation: 'Détente progressive du bas du dos. Pas de douleur.',
-        erreurs: ['Forcer la bascule', 'Bloquer la respiration', 'Contracter les abdos fort']
+        feel: 'Relâchement progressif de la zone lombaire',
+        warnings: ['Ne rentre pas le ventre', 'Ne bloque pas ta respiration', 'Garde une amplitude minime'],
+        gradient: ['#6366F1', '#8B5CF6']
       },
       E1: {
-        id: 'E1', name: 'Dead Bug modifié', icon: '🪲',
-        params: '2 × 8 (4/côté) — maintien 5s',
-        desc: 'Activation transverse + contrôle lombaire. Fondation anti-bracing.',
-        position: 'Sur le dos, genoux pliés à 90°, tibias horizontaux, bras vers le plafond.',
-        execution: [
-          'Expire et aplatis légèrement le bas du dos (micro-engagement transverse)',
-          'Tends une jambe vers l\'avant sans toucher le sol, maintiens 5s',
-          'Reviens, change de côté',
-          'Le bas du dos ne doit PAS se cambrer'
+        id: 'E1', name: 'Abduction assise', shortName: 'Abduction', icon: '🪑',
+        duration: null, reps: 5, sets: 1, holdTime: 5, perSide: false,
+        category: 'Activation',
+        description: 'Activation du gluteus medius en position stable',
+        position: 'Assis sur chaise, pieds au sol (largeur bassin), élastique au-dessus des genoux, dos soutenu.',
+        steps: [
+          { text: 'Grandis-toi sur la chaise', detail: 'Cage thoracique au-dessus du bassin' },
+          { text: 'Pousse les genoux vers l\'extérieur', detail: 'Contre l\'élastique, effort 20-40%' },
+          { text: 'Maintiens 5 secondes', detail: 'Sans te pencher, sans serrer le ventre' },
+          { text: 'Relâche complètement', detail: 'Repos 5 secondes' }
         ],
-        sensation: 'Légère tension dans le bas-ventre. Pas de tension dans le dos.',
-        erreurs: ['Cambrer le dos', 'Retenir sa respiration', 'Aller trop vite']
+        feel: 'Activation sur le côté de la fesse (partie arrière-latérale)',
+        warnings: ['Ne te penche pas', 'Évite le serrage abdominal', 'N\'utilise pas trop de force'],
+        gradient: ['#10B981', '#34D399']
       },
       E2: {
-        id: 'E2', name: 'Clam Shell', icon: '🐚',
-        params: '2 × 12/côté — tempo lent',
-        desc: 'Activation moyen fessier. Corrige la faiblesse latérale de hanche.',
-        position: 'Sur le côté, genoux pliés à 45°, pieds joints, tête posée sur le bras.',
-        execution: [
-          'Garde les pieds collés',
-          'Ouvre le genou du dessus en rotation externe de hanche',
-          'Monte jusqu\'à sentir le fessier, sans basculer le bassin en arrière',
-          'Redescends lentement (2s)'
+        id: 'E2', name: 'Clamshell micro', shortName: 'Clamshell', icon: '🐚',
+        duration: null, reps: 5, sets: 1, holdTime: null, perSide: true,
+        category: 'Activation',
+        description: 'Activation du glute med avec micro-amplitude',
+        position: 'Couché sur le côté, tête sur coussin, genoux fléchis à 45°, talons ensemble.',
+        steps: [
+          { text: 'Stabilise ton bassin', detail: 'Imagine un verre d\'eau posé dessus' },
+          { text: 'Ouvre le genou du dessus', detail: 'Seulement 3-5 cm, pas plus !' },
+          { text: 'Redescends lentement', detail: 'Contrôle la descente' }
         ],
-        sensation: 'Brûlure légère sur le côté de la fesse (moyen fessier).',
-        erreurs: ['Basculer le bassin', 'Utiliser le dos', 'Aller trop haut']
+        feel: 'Le muscle sur le côté de la fesse qui travaille',
+        warnings: ['Ne roule pas le bassin en arrière', 'N\'ouvre pas trop haut'],
+        gradient: ['#F59E0B', '#FBBF24']
       },
       E3: {
-        id: 'E3', name: 'Pont fessier', icon: '🌉',
-        params: '2 × 10 — maintien 3s en haut',
-        desc: 'Activation grand fessier + chaîne postérieure.',
-        position: 'Sur le dos, genoux pliés, pieds à plat largeur bassin, bras le long du corps.',
-        execution: [
-          'Pousse dans les talons',
-          'Monte le bassin jusqu\'à alignement genoux-hanches-épaules',
-          'Serre les fessiers en haut, maintiens 3s',
-          'Redescends vertèbre par vertèbre (contrôle)'
+        id: 'E3', name: 'Appui unipodal', shortName: 'Unipodal', icon: '🦩',
+        duration: 15, reps: null, sets: 2, holdTime: null, perSide: true,
+        category: 'Stabilité',
+        description: 'Stabilité latérale sans solliciter le dos',
+        position: 'Debout près d\'un mur, 1-2 doigts en appui léger. Pied en trépied.',
+        steps: [
+          { text: 'Décolle l\'autre pied de 2-3 cm', detail: 'Pas besoin de lever haut' },
+          { text: 'Aligne ton genou d\'appui', detail: 'Au-dessus du 2e-3e orteil' },
+          { text: 'Garde le bassin à niveau', detail: 'La hanche du côté levé ne tombe pas' },
+          { text: 'Respire normalement', detail: 'Tiens 15 secondes' }
         ],
-        sensation: 'Contraction franche des fessiers. Pas de tension lombaire.',
-        erreurs: ['Monter trop haut (hyperlordose)', 'Pousser avec les lombaires', 'Écarter les genoux']
+        feel: 'Le fessier de la jambe d\'appui qui stabilise',
+        warnings: ['Ne te penche pas sur la jambe d\'appui', 'Ne griffe pas le sol'],
+        gradient: ['#EC4899', '#F472B6']
       },
       E4: {
-        id: 'E4', name: 'Bird Dog', icon: '🐕',
-        params: '2 × 8 (4/côté) — maintien 5s',
-        desc: 'Contrôle lombaire + coordination bras-jambe opposés.',
-        position: 'À quatre pattes, mains sous les épaules, genoux sous les hanches.',
-        execution: [
-          'Engage légèrement le transverse (nombril vers colonne)',
-          'Tends simultanément bras droit + jambe gauche',
-          'Garde le dos parfaitement plat (pas de rotation)',
-          'Maintiens 5s, reviens, change de côté'
+        id: 'E4', name: 'Sit-to-Stand', shortName: 'Sit-Stand', icon: '🏋️',
+        duration: null, reps: 4, sets: 2, holdTime: null, perSide: false,
+        category: 'Renforcement',
+        description: 'Quadriceps + fessiers en pattern fonctionnel',
+        position: 'Assis sur chaise haute, pieds sous les genoux, largeur bassin.',
+        steps: [
+          { text: 'Adopte un "dos long"', detail: 'Ne cambre pas le dos' },
+          { text: 'Penche légèrement le buste', detail: 'Charnière au niveau des hanches' },
+          { text: 'Lève-toi en poussant le sol', detail: 'Utilise tes jambes, pas ton dos' },
+          { text: 'Redescends en 3 secondes', detail: 'Contrôle, touche, remonte' }
         ],
-        sensation: 'Stabilité du tronc. Léger travail fessier et épaule.',
-        erreurs: ['Cambrer le dos', 'Tourner le bassin', 'Monter trop haut']
+        feel: 'Cuisses et fessiers qui travaillent ensemble',
+        warnings: ['Pas de coup de rein', 'Genou aligné (pas vers l\'intérieur)', 'Ne descends pas trop bas'],
+        gradient: ['#EF4444', '#F87171']
       },
       E5: {
-        id: 'E5', name: 'Vélo stationnaire', icon: '🚴',
-        params: 'Phase 1: 10min | Phase 2: 15min | Phase 3: 20min',
-        desc: 'Cardio basse intensité, décompression discale, lubrification articulaire.',
-        position: 'Selle réglée : jambe presque tendue en bas de pédale, dos neutre.',
-        execution: [
-          'Pédale à résistance légère à modérée',
-          'Cadence confortable (60-80 rpm)',
-          'Dos neutre, pas vouté ni cambré',
-          'Si douleur/tension : réduire durée ou résistance'
+        id: 'E5', name: 'Vélo d\'appartement', shortName: 'Vélo', icon: '🚴',
+        duration: 5, reps: null, sets: 1, holdTime: null, perSide: false,
+        category: 'Cardio',
+        description: 'Reconditionnement cardiovasculaire doux',
+        position: 'Selle haute (genou légèrement fléchi en bas), soutien lombaire, résistance minimale.',
+        steps: [
+          { text: 'Règle ta selle correctement', detail: 'Genou légèrement fléchi en bas de pédale' },
+          { text: 'Pédale à rythme confortable', detail: 'Tu dois pouvoir parler facilement (RPE 2-3)' },
+          { text: 'Fais des pauses si besoin', detail: 'Lève-toi quelques secondes si inconfort' }
         ],
-        sensation: 'Aisance respiratoire. Légère chaleur dans les jambes. Pas de douleur lombaire.',
-        erreurs: ['Résistance trop forte', 'Dos vouté', 'Forcer si douleur']
+        feel: 'Effort léger, jambes qui chauffent doucement',
+        warnings: ['Évite l\'intensité trop forte', 'Ne te penche pas en avant'],
+        gradient: ['#0EA5E9', '#38BDF8']
       },
       E6: {
-        id: 'E6', name: 'Squat assisté', icon: '🏋️',
-        params: '2 × 10 — tempo contrôlé',
-        desc: 'Pattern de squat avec appui pour contrôler la descente.',
-        position: 'Debout face à un support stable (table, dossier de chaise), pieds largeur épaules.',
-        execution: [
-          'Tiens le support pour l\'équilibre',
-          'Descends en poussant les fesses en arrière (comme s\'asseoir)',
-          'Genoux alignés avec les pieds (pas vers l\'intérieur)',
-          'Descends jusqu\'où tu contrôles, remonte en poussant dans les talons'
+        id: 'E6', name: 'Step-down contrôlé', shortName: 'Step-down', icon: '🪜',
+        duration: null, reps: 5, sets: 2, holdTime: null, perSide: true,
+        category: 'Renforcement',
+        description: 'Contrôle hanche/genou anti-valgus',
+        position: 'Debout sur une marche basse (10-15 cm).',
+        steps: [
+          { text: 'Monte sur la marche', detail: 'Avec la jambe à travailler' },
+          { text: 'Descends l\'autre talon vers le sol', detail: 'En 3 secondes, contrôle total' },
+          { text: 'Garde le genou d\'appui aligné', detail: 'Au-dessus du 2e-3e orteil' },
+          { text: 'Remonte sans à-coups', detail: 'Pousse avec la jambe d\'appui' }
         ],
-        sensation: 'Travail des cuisses et fessiers. Pas de douleur au genou ni au dos.',
-        erreurs: ['Genoux qui rentrent', 'Dos qui s\'arrondit', 'Descendre trop vite']
+        feel: 'La cuisse de la jambe d\'appui qui contrôle le mouvement',
+        warnings: ['Le genou ne doit pas s\'effondrer', 'Le bassin reste stable'],
+        gradient: ['#F97316', '#FB923C']
       },
       E7: {
-        id: 'E7', name: 'Planche modifiée', icon: '📐',
-        params: '2 × 20s — sur genoux',
-        desc: 'Gainage global, renforcement stabilisateurs du tronc.',
-        position: 'Sur les avant-bras et les genoux, coudes sous les épaules.',
-        execution: [
-          'Aligne tête-épaules-hanches-genoux',
-          'Engage le transverse (nombril rentré)',
-          'Ne creuse PAS le dos, ne monte pas les fesses',
-          'Maintiens 20s en respirant normalement'
+        id: 'E7', name: 'Mini-pont fessier', shortName: 'Mini-pont', icon: '🌉',
+        duration: null, reps: 5, sets: 1, holdTime: 2, perSide: false,
+        category: 'Optionnel',
+        description: 'Activation du grand fessier (prudence)',
+        position: 'Allongé sur le dos, genoux pliés, pieds proches des fesses.',
+        steps: [
+          { text: 'Pré-contracte légèrement les fesses', detail: 'Avant tout mouvement' },
+          { text: 'Monte le bassin de 2-5 cm MAX', detail: 'Pas plus haut !' },
+          { text: 'Maintiens 2 secondes', detail: 'En gardant la contraction' },
+          { text: 'Redescends très lentement', detail: 'Contrôle total' }
         ],
-        sensation: 'Tension dans les abdos. Pas de douleur lombaire.',
-        erreurs: ['Creuser le dos', 'Monter les fesses', 'Bloquer la respiration']
-      },
-      E8: {
-        id: 'E8', name: 'Fente arrière assistée', icon: '🦵',
-        params: '2 × 8/côté — avec appui',
-        desc: 'Renforcement unilatéral cuisses/fessiers, équilibre.',
-        position: 'Debout à côté d\'un mur ou support, pieds joints.',
-        execution: [
-          'Fais un grand pas en arrière avec une jambe',
-          'Descends le genou arrière vers le sol (sans toucher)',
-          'Garde le buste droit, tronc engagé',
-          'Remonte en poussant avec la jambe avant',
-          'Alterne les côtés'
-        ],
-        sensation: 'Travail du quadriceps avant et fessier. Étirement fléchisseur arrière.',
-        erreurs: ['Genou avant qui dépasse les orteils', 'Buste penché', 'Perte d\'équilibre']
-      },
-      E9: {
-        id: 'E9', name: 'Étirement psoas', icon: '🧘',
-        params: '2 × 30s/côté',
-        desc: 'Allongement du psoas, réduit la tension sur les lombaires.',
-        position: 'Position de chevalier servant (un genou au sol, l\'autre pied devant à 90°).',
-        execution: [
-          'Genou arrière sur un coussin',
-          'Bascule légèrement le bassin vers l\'arrière (rétroversion)',
-          'Avance doucement les hanches jusqu\'à sentir l\'étirement devant la hanche arrière',
-          'Maintiens 30s, respire',
-          'Change de côté'
-        ],
-        sensation: 'Étirement devant la hanche/cuisse de la jambe arrière.',
-        erreurs: ['Cambrer le dos', 'Avancer trop vite', 'Oublier la rétroversion']
+        feel: 'Les fessiers qui se contractent, pas le bas du dos',
+        warnings: ['Ne monte pas trop haut', 'Ne cambre pas le dos', 'Stop si douleur lombaire'],
+        gradient: ['#14B8A6', '#2DD4BF']
       }
     };
 
-    // ============================================
-    // DONNÉES — PROGRAMMES PAR PHASE
-    // ============================================
-    const PROGRAMS = {
-      1: { // Phase 1 — Fondation (Semaines 1-2)
-        name: 'Fondation',
-        duration: 'Semaines 1-2',
-        color: 'phase-1',
-        schedule: {
-          1: { type: 'Séance A', exercises: ['E0', 'E1', 'E2', 'E3', 'E5'] },  // Lundi
-          2: { type: 'Repos actif', exercises: [] },                            // Mardi
-          3: { type: 'Séance B', exercises: ['E0', 'E4', 'E2', 'E3', 'E5'] },  // Mercredi
-          4: { type: 'Repos actif', exercises: [] },                            // Jeudi
-          5: { type: 'Séance A', exercises: ['E0', 'E1', 'E2', 'E3', 'E5'] },  // Vendredi
-          6: { type: 'Repos actif', exercises: [] },                            // Samedi
-          0: { type: 'Repos complet', exercises: [] }                           // Dimanche
-        }
-      },
-      2: { // Phase 2 — Renforcement (Semaines 3-4)
-        name: 'Renforcement',
-        duration: 'Semaines 3-4',
-        color: 'phase-2',
-        schedule: {
-          1: { type: 'Séance A', exercises: ['E0', 'E1', 'E4', 'E3', 'E6', 'E5'] },
-          2: { type: 'Repos actif', exercises: [] },
-          3: { type: 'Séance B', exercises: ['E0', 'E7', 'E2', 'E3', 'E6', 'E5'] },
-          4: { type: 'Repos actif', exercises: [] },
-          5: { type: 'Séance A', exercises: ['E0', 'E1', 'E4', 'E3', 'E6', 'E5'] },
-          6: { type: 'Séance B', exercises: ['E0', 'E7', 'E2', 'E3', 'E6', 'E5'] },
-          0: { type: 'Repos complet', exercises: [] }
-        }
-      },
-      3: { // Phase 3 — Consolidation (Semaines 5-6)
-        name: 'Consolidation',
-        duration: 'Semaines 5-6',
-        color: 'phase-3',
-        schedule: {
-          1: { type: 'Séance complète', exercises: ['E0', 'E1', 'E4', 'E7', 'E3', 'E8', 'E5', 'E9'] },
-          2: { type: 'Repos actif', exercises: [] },
-          3: { type: 'Séance complète', exercises: ['E0', 'E1', 'E4', 'E7', 'E3', 'E8', 'E5', 'E9'] },
-          4: { type: 'Repos actif', exercises: [] },
-          5: { type: 'Séance complète', exercises: ['E0', 'E1', 'E4', 'E7', 'E3', 'E8', 'E5', 'E9'] },
-          6: { type: 'Séance légère', exercises: ['E0', 'E3', 'E5', 'E9'] },
-          0: { type: 'Repos complet', exercises: [] }
-        }
-      }
+    const PHASES = {
+      1: { name: 'Phase 1', title: 'Désensibilisation', icon: '🌱', gradient: ['#10B981', '#34D399'] },
+      2: { name: 'Phase 2', title: 'Activation prudente', icon: '🌿', gradient: ['#6366F1', '#8B5CF6'] },
+      3: { name: 'Phase 3', title: 'Renforcement', icon: '🌳', gradient: ['#F59E0B', '#FBBF24'] },
+      4: { name: 'Phase 4', title: 'Retour course', icon: '🏃', gradient: ['#EC4899', '#F472B6'] }
     };
 
+    const SCHEDULE = {
+      1: { 0: ['E0','E1','E2','E5'], 1: ['E0','E1','E2','E5'], 2: ['E0','E1','E5'], 3: ['E0','E1','E2','E5'], 4: ['E0','E1','E5'], 5: ['E0','E1','E2','E5'], 6: ['E0','E1','E5'] },
+      2: { 0: ['E0','E1'], 1: ['E0','E1','E3','E4','E5'], 2: ['E0','E1','E3','E5'], 3: ['E0','E1','E3','E4','E5'], 4: ['E0','E1','E3','E5'], 5: ['E0','E1','E3','E4','E5'], 6: ['E0','E1','E5'] },
+      3: { 0: ['E1'], 1: ['E1','E4','E6','E5'], 2: ['E5'], 3: ['E1','E4','E5'], 4: ['E5'], 5: ['E1','E4','E6','E5'], 6: ['E5'] },
+      4: { 0: ['E1'], 1: ['E1','E4','E6'], 2: ['E5'], 3: ['E1','E4'], 4: ['E5'], 5: ['E1','E4','E6'], 6: ['E5'] }
+    };
+
+    const DAYS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+
     // ============================================
-    // RENDU
+    // STATE
     // ============================================
-    function updateProgram() {
-      const phase = document.getElementById('phase-select').value;
-      const day = document.getElementById('day-select').value;
-      const container = document.getElementById('program-container');
+    let phase = 1;
+    let dayOfWeek = new Date().getDay();
+    let completed = {};
+    let currentEx = null;
+    let exStep = 'intro'; // intro, active, feedback
+    let feedback = null;
+    let timerVal = 0;
+    let timerRunning = false;
+    let timerInterval = null;
+    let repCount = 0;
+    let setCount = 1;
+    let side = 'left';
+    let holding = false;
+    let holdTime = 0;
+    let holdInterval = null;
+
+    // ============================================
+    // RENDER
+    // ============================================
+    function render() {
+      const exercises = SCHEDULE[phase]?.[dayOfWeek] || [];
+      const p = PHASES[phase];
+      const completedCount = Object.keys(completed).filter(id => exercises.includes(id)).length;
       
-      const program = PROGRAMS[phase];
-      const dayProgram = program.schedule[day];
-      
-      let html = `
-        <div class="phase-card">
-          <div class="phase-header">
-            <span class="phase-badge ${program.color}">Phase ${phase}</span>
-            <div>
-              <div class="phase-title">${program.name}</div>
-              <div class="phase-duration">${program.duration}</div>
-            </div>
+      document.getElementById('app').innerHTML = `
+        <div class="selectors">
+          <div class="selector">
+            <label>Phase</label>
+            <select id="phase-select" onchange="setPhase(this.value)">
+              ${[1,2,3,4].map(n => `<option value="${n}" ${n===phase?'selected':''}>${PHASES[n].icon} Phase ${n}</option>`).join('')}
+            </select>
           </div>
-          <div class="day-type">${dayProgram.type}</div>
-      `;
-      
-      if (dayProgram.exercises.length === 0) {
-        // Jour de repos
-        const isActive = dayProgram.type === 'Repos actif';
-        html += `
-          <div class="rest-day">
-            <div class="rest-icon">${isActive ? '🚶' : '😴'}</div>
-            <div class="rest-title">${isActive ? 'Repos actif' : 'Repos complet'}</div>
-            <div class="rest-desc">
-              ${isActive 
-                ? 'Marche légère 20-30 min. Étirements doux si besoin. Pas d\'exercices de renforcement.' 
-                : 'Journée off complète. Récupération passive. Hydratation et sommeil.'}
-            </div>
+          <div class="selector">
+            <label>Jour</label>
+            <select id="day-select" onchange="setDay(this.value)">
+              ${DAYS.map((d,i) => `<option value="${i}" ${i===dayOfWeek?'selected':''}>${d}</option>`).join('')}
+            </select>
           </div>
-        `;
-      } else {
-        // Jour d'entraînement
-        html += `<div class="exercises-title">Programme du jour</div>`;
+        </div>
         
-        dayProgram.exercises.forEach(exId => {
-          const ex = EXERCISES[exId];
-          html += `
-            <div class="exercise" onclick="this.classList.toggle('open')">
-              <div class="exercise-header">
-                <div class="exercise-icon">${ex.icon}</div>
-                <div>
-                  <div class="exercise-name">${ex.name}</div>
-                  <div class="exercise-params">${ex.params}</div>
-                </div>
-              </div>
-              <div class="exercise-desc">${ex.desc}</div>
-              <div class="exercise-detail">
-                <div class="detail-section">
-                  <div class="detail-label">Position de départ</div>
-                  <div class="detail-content">${ex.position}</div>
-                </div>
-                <div class="detail-section">
-                  <div class="detail-label">Exécution</div>
-                  <div class="detail-content">
-                    <ul>
-                      ${ex.execution.map(step => `<li>${step}</li>`).join('')}
-                    </ul>
-                  </div>
-                </div>
-                <div class="detail-section">
-                  <div class="detail-label">Sensation attendue</div>
-                  <div class="detail-content tip">${ex.sensation}</div>
-                </div>
-                <div class="detail-section">
-                  <div class="detail-label">Erreurs à éviter</div>
-                  <div class="detail-content warning">
-                    <ul>
-                      ${ex.erreurs.map(err => `<li>${err}</li>`).join('')}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-        });
-      }
-      
-      html += `</div>`;
-      container.innerHTML = html;
+        <div class="header">
+          <h1>Programme du jour</h1>
+          <p>${completedCount}/${exercises.length} exercices complétés</p>
+          <div class="phase-badge" style="background: linear-gradient(135deg, ${p.gradient[0]}, ${p.gradient[1]})">
+            ${p.icon} ${p.name} — ${p.title}
+          </div>
+        </div>
+        
+        ${exercises.length === 0 ? `
+          <div class="empty-state">
+            <span>😴</span>
+            <p>Jour de repos ou programme non défini pour cette combinaison.</p>
+          </div>
+        ` : `
+          <div class="ex-list">
+            ${exercises.map(id => renderCard(id)).join('')}
+          </div>
+        `}
+      `;
     }
 
-    // Init
-    updateProgram();
+    function renderCard(id) {
+      const ex = EXERCISES[id];
+      const done = !!completed[id];
+      return `
+        <div class="ex-card ${done ? 'done' : ''}" onclick="openExercise('${id}')">
+          <div class="ex-card-accent" style="background: linear-gradient(180deg, ${ex.gradient[0]}, ${ex.gradient[1]})"></div>
+          <div class="ex-card-icon" style="background: linear-gradient(135deg, ${ex.gradient[0]}40, ${ex.gradient[1]}40)">${ex.icon}</div>
+          <div class="ex-card-body">
+            <div class="ex-card-top">
+              <h3>${ex.shortName}</h3>
+              <span class="ex-card-cat">${ex.category}</span>
+            </div>
+            <p class="ex-card-desc">${ex.description}</p>
+            <div class="ex-card-meta">
+              ${ex.duration ? `<span>⏱ ${ex.duration} min</span>` : ''}
+              ${ex.reps ? `<span>🔄 ${ex.sets}×${ex.reps}</span>` : ''}
+              ${ex.perSide ? `<span>↔️ Chaque côté</span>` : ''}
+              ${ex.holdTime ? `<span>⏸ ${ex.holdTime}s</span>` : ''}
+            </div>
+          </div>
+          <div class="ex-card-action">
+            ${done ? `<div class="ex-card-check"><svg viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>` : `<svg class="ex-card-arrow" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>`}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderExerciseScreen() {
+      const ex = EXERCISES[currentEx];
+      const screen = document.getElementById('exercise-screen');
+      
+      screen.innerHTML = `
+        <div class="ex-header">
+          <button class="hdr-btn" onclick="closeExercise()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button>
+          <h2><span>${ex.icon}</span> ${ex.name}</h2>
+          <div class="hdr-spacer"></div>
+        </div>
+        
+        <!-- INTRO -->
+        <div class="intro-body" style="display: ${exStep === 'intro' ? 'flex' : 'none'}">
+          <div class="intro-hero" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})">
+            <span>${ex.icon}</span>
+            <div class="glow"></div>
+          </div>
+          
+          <div class="info-block">
+            <h4><span>📍</span> Position de départ</h4>
+            <p>${ex.position}</p>
+          </div>
+          
+          <div class="info-block">
+            <h4><span>▶️</span> Exécution</h4>
+            <ol class="steps-list">
+              ${ex.steps.map((s,i) => `<li><div class="num">${i+1}</div><div class="txt"><strong>${s.text}</strong><span>${s.detail}</span></div></li>`).join('')}
+            </ol>
+          </div>
+          
+          <div class="info-block success">
+            <h4><span>✅</span> Tu dois sentir</h4>
+            <p>${ex.feel}</p>
+          </div>
+          
+          <div class="info-block warning">
+            <h4><span>⚠️</span> Évite</h4>
+            <ul class="warn-list">${ex.warnings.map(w => `<li>${w}</li>`).join('')}</ul>
+          </div>
+        </div>
+        
+        <!-- ACTIVE -->
+        <div class="active-screen ${exStep === 'active' ? 'show' : ''}">
+          <div class="active-bg" style="background: linear-gradient(180deg, ${ex.gradient[0]}20, transparent)"></div>
+          ${ex.duration ? renderTimer(ex) : renderRepCounter(ex)}
+          <div class="tip-box"><span>💡</span><p>${ex.feel}</p></div>
+        </div>
+        
+        <!-- FEEDBACK -->
+        <div class="feedback-screen ${exStep === 'feedback' ? 'show' : ''}">
+          <div class="fb-top">
+            <span>🎉</span>
+            <h2>Bravo !</h2>
+            <p>Exercice terminé</p>
+          </div>
+          <h3 class="fb-title">Comment te sens-tu ?</h3>
+          <p class="fb-sub">Évalue ta réponse à cet exercice</p>
+          <div class="fb-options">
+            <div class="fb-opt ${feedback === 'green' ? 'selected' : ''}" onclick="selectFeedback('green')">
+              <span class="icon">🟢</span>
+              <div class="txt"><strong>Vert</strong><span>Douleur ≤ 2/10, OK</span></div>
+              <div class="check" style="background: var(--green)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+            </div>
+            <div class="fb-opt ${feedback === 'orange' ? 'selected orange' : ''}" onclick="selectFeedback('orange')">
+              <span class="icon">🟠</span>
+              <div class="txt"><strong>Orange</strong><span>Douleur 3-4/10</span></div>
+              <div class="check" style="background: var(--orange)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+            </div>
+            <div class="fb-opt ${feedback === 'red' ? 'selected red' : ''}" onclick="selectFeedback('red')">
+              <span class="icon">🔴</span>
+              <div class="txt"><strong>Rouge</strong><span>Douleur ≥ 5/10</span></div>
+              <div class="check" style="background: var(--red)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="intro-footer">
+          <div>
+            ${exStep === 'intro' ? `
+              <button class="btn btn-primary" onclick="startActive()" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})">
+                Commencer <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            ` : exStep === 'active' ? `
+              <button class="btn btn-secondary" onclick="finishExercise()">Terminer l'exercice</button>
+            ` : `
+              <button class="btn btn-primary" onclick="completeExercise()" ${!feedback ? 'disabled style="opacity:0.4"' : ''}>Continuer</button>
+            `}
+          </div>
+        </div>
+      `;
+      
+      screen.classList.add('active');
+    }
+
+    function renderTimer(ex) {
+      const total = ex.duration * 60;
+      const elapsed = total - timerVal;
+      const pct = (elapsed / total) * 100;
+      const circ = 2 * Math.PI * 46;
+      const offset = circ - (pct / 100) * circ;
+      const mins = Math.floor(timerVal / 60);
+      const secs = timerVal % 60;
+      
+      return `
+        <div class="timer">
+          <div class="timer-ring">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="46" class="track"/>
+              <circle cx="50" cy="50" r="46" class="progress" stroke="${ex.gradient[1]}" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
+            </svg>
+            <div class="timer-center">
+              <div class="timer-time">${mins}:${secs.toString().padStart(2,'0')}</div>
+              <div class="timer-label">${timerRunning ? 'En cours' : 'Pause'}</div>
+            </div>
+          </div>
+          <div class="timer-btns">
+            <button class="timer-btn sec" onclick="resetTimer()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button>
+            <button class="timer-btn main" onclick="toggleTimer()" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})">
+              ${timerRunning ? '<svg viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>' : '<svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>'}
+            </button>
+            <button class="timer-btn sec" onclick="finishExercise()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderRepCounter(ex) {
+      const total = ex.reps || 1;
+      const pct = (repCount / total) * 100;
+      
+      return `
+        <div class="rep-counter">
+          ${ex.perSide ? `
+            <div class="side-switch">
+              <button class="side-btn ${side === 'left' ? 'active' : ''}">← Gauche</button>
+              <button class="side-btn ${side === 'right' ? 'active' : ''}">Droit →</button>
+            </div>
+          ` : ''}
+          <div class="set-info">Série ${setCount} sur ${ex.sets}</div>
+          <div class="rep-circle ${holding ? 'holding' : ''}" onclick="tapRep()">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="46" class="track"/>
+              <circle cx="50" cy="50" r="46" class="progress" stroke="${ex.gradient[1]}" stroke-dasharray="${pct * 2.89} 289"/>
+            </svg>
+            <div class="rep-inner">
+              ${holding ? `
+                <div class="hold-num">${holdTime}</div>
+                <div class="hold-txt">Maintiens</div>
+              ` : `
+                <div class="rep-num">${repCount}<span class="sep">/</span><span class="tot">${total}</span></div>
+                <div class="rep-hint">Tap pour compter</div>
+              `}
+            </div>
+            ${holding ? '<div class="hold-ring"></div>' : ''}
+          </div>
+          ${ex.holdTime && !holding ? `<div class="hold-info">💡 Maintiens ${ex.holdTime}s par rep</div>` : ''}
+        </div>
+      `;
+    }
+
+    // ============================================
+    // ACTIONS
+    // ============================================
+    function setPhase(val) {
+      phase = parseInt(val);
+      completed = {};
+      render();
+    }
+
+    function setDay(val) {
+      dayOfWeek = parseInt(val);
+      completed = {};
+      render();
+    }
+
+    function openExercise(id) {
+      const ex = EXERCISES[id];
+      currentEx = id;
+      exStep = 'intro';
+      feedback = null;
+      timerVal = ex.duration ? ex.duration * 60 : 0;
+      timerRunning = false;
+      repCount = 0;
+      setCount = 1;
+      side = 'left';
+      holding = false;
+      holdTime = ex.holdTime || 0;
+      renderExerciseScreen();
+    }
+
+    function closeExercise() {
+      clearInterval(timerInterval);
+      clearInterval(holdInterval);
+      document.getElementById('exercise-screen').classList.remove('active');
+      currentEx = null;
+    }
+
+    function startActive() {
+      exStep = 'active';
+      renderExerciseScreen();
+    }
+
+    function toggleTimer() {
+      timerRunning = !timerRunning;
+      if (timerRunning) {
+        timerInterval = setInterval(() => {
+          timerVal--;
+          if (timerVal <= 0) {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            vibrate([100,50,100,50,100]);
+            finishExercise();
+          } else {
+            renderExerciseScreen();
+          }
+        }, 1000);
+      } else {
+        clearInterval(timerInterval);
+      }
+      renderExerciseScreen();
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerVal = EXERCISES[currentEx].duration * 60;
+      timerRunning = false;
+      renderExerciseScreen();
+    }
+
+    function tapRep() {
+      vibrate(30);
+      const ex = EXERCISES[currentEx];
+      
+      if (ex.holdTime && !holding) {
+        holding = true;
+        holdTime = ex.holdTime;
+        renderExerciseScreen();
+        holdInterval = setInterval(() => {
+          holdTime--;
+          if (holdTime <= 0) {
+            clearInterval(holdInterval);
+            holding = false;
+            vibrate(100);
+            completeRep();
+          } else {
+            renderExerciseScreen();
+          }
+        }, 1000);
+      } else if (!ex.holdTime) {
+        completeRep();
+      }
+    }
+
+    function completeRep() {
+      const ex = EXERCISES[currentEx];
+      const total = ex.reps || 1;
+      repCount++;
+      
+      if (repCount >= total) {
+        if (ex.perSide && side === 'left') {
+          side = 'right';
+          repCount = 0;
+        } else if (setCount < ex.sets) {
+          setCount++;
+          repCount = 0;
+          if (ex.perSide) side = 'left';
+        } else {
+          vibrate([100,50,100,50,100]);
+          finishExercise();
+          return;
+        }
+      }
+      holdTime = ex.holdTime || 0;
+      renderExerciseScreen();
+    }
+
+    function finishExercise() {
+      clearInterval(timerInterval);
+      clearInterval(holdInterval);
+      exStep = 'feedback';
+      timerRunning = false;
+      holding = false;
+      renderExerciseScreen();
+    }
+
+    function selectFeedback(val) {
+      feedback = val;
+      renderExerciseScreen();
+    }
+
+    function completeExercise() {
+      if (!feedback) return;
+      completed[currentEx] = feedback;
+      closeExercise();
+      render();
+    }
+
+    function vibrate(pattern) {
+      if (navigator.vibrate) navigator.vibrate(pattern);
+    }
+
+    // ============================================
+    // INIT
+    // ============================================
+    render();
   </script>
 </body>
 </html>
