@@ -31,6 +31,7 @@
     .header h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
     .header p { font-size: 14px; color: var(--text-2); }
     .phase-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 30px; font-size: 14px; font-weight: 600; margin-top: 12px; }
+    .phase-info { margin-top: 8px; font-size: 13px; color: var(--text-2); }
     
     /* EXERCISE LIST */
     .ex-list { display: flex; flex-direction: column; gap: 12px; }
@@ -74,6 +75,7 @@
     .info-block p { font-size: 15px; line-height: 1.6; }
     .info-block.success { background: rgba(34,197,94,0.15); border-left: 4px solid var(--green); }
     .info-block.warning { background: rgba(245,158,11,0.15); border-left: 4px solid var(--orange); }
+    .info-block.dosage { background: rgba(99,102,241,0.15); border-left: 4px solid #6366F1; }
     .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
     .steps-list li { display: flex; gap: 12px; }
     .steps-list .num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
@@ -83,6 +85,10 @@
     .warn-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
     .warn-list li { font-size: 15px; padding-left: 20px; position: relative; }
     .warn-list li::before { content: '✕'; position: absolute; left: 0; color: var(--orange); font-size: 12px; }
+    .dosage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .dosage-item { text-align: center; padding: 12px; background: var(--bg); border-radius: 12px; }
+    .dosage-item .val { font-size: 24px; font-weight: 800; color: #6366F1; }
+    .dosage-item .lbl { font-size: 12px; color: var(--text-2); margin-top: 4px; }
     .intro-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(180deg, transparent, var(--bg) 30%); z-index: 20; display: flex; justify-content: center; }
     .intro-footer > div { max-width: 430px; width: 100%; }
     .btn { width: 100%; padding: 18px; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.15s; }
@@ -172,12 +178,11 @@
 
   <script>
     // ============================================
-    // DONNÉES
+    // DONNÉES AVEC DOSAGES PAR PHASE
     // ============================================
     const EXERCISES = {
       E0: {
         id: 'E0', name: 'Reset anti-bracing', shortName: 'Reset', icon: '🌬️',
-        duration: null, reps: 6, sets: 2, holdTime: null, perSide: false,
         category: 'Respiration',
         description: 'Respiration diaphragmatique + micro-bascule du bassin',
         position: 'Sur le dos, genoux pliés, pieds au sol. Alternative : sur le côté avec coussin.',
@@ -189,42 +194,52 @@
         ],
         feel: 'Relâchement progressif de la zone lombaire',
         warnings: ['Ne rentre pas le ventre', 'Ne bloque pas ta respiration', 'Garde une amplitude minime'],
-        gradient: ['#6366F1', '#8B5CF6']
+        gradient: ['#6366F1', '#8B5CF6'],
+        dosageByPhase: {
+          1: { reps: 6, sets: 2, holdTime: null, duration: null, perSide: false, freq: '2×/jour', note: '6 cycles respiration + 2×6 micro-bascule' },
+          2: { reps: 6, sets: 2, holdTime: null, duration: null, perSide: false, freq: '1×/jour', note: '2× si journée stressante' }
+        }
       },
       E1: {
         id: 'E1', name: 'Abduction assise', shortName: 'Abduction', icon: '🪑',
-        duration: null, reps: 5, sets: 1, holdTime: 5, perSide: false,
         category: 'Activation',
         description: 'Activation du gluteus medius en position stable',
         position: 'Assis sur chaise, pieds au sol (largeur bassin), élastique au-dessus des genoux, dos soutenu.',
         steps: [
           { text: 'Grandis-toi sur la chaise', detail: 'Cage thoracique au-dessus du bassin' },
           { text: 'Pousse les genoux vers l\'extérieur', detail: 'Contre l\'élastique, effort 20-40%' },
-          { text: 'Maintiens 5 secondes', detail: 'Sans te pencher, sans serrer le ventre' },
+          { text: 'Maintiens X secondes', detail: 'Sans te pencher, sans serrer le ventre' },
           { text: 'Relâche complètement', detail: 'Repos 5 secondes' }
         ],
         feel: 'Activation sur le côté de la fesse (partie arrière-latérale)',
         warnings: ['Ne te penche pas', 'Évite le serrage abdominal', 'N\'utilise pas trop de force'],
-        gradient: ['#10B981', '#34D399']
+        gradient: ['#10B981', '#34D399'],
+        dosageByPhase: {
+          1: { reps: 5, sets: 1, holdTime: 5, duration: null, perSide: false, freq: '1×/jour', note: 'Tenue 5s, repos 5s' },
+          2: { reps: 6, sets: 2, holdTime: 8, duration: null, perSide: false, freq: '5-6×/sem', note: 'Tenue 6-8s. +1 rep/série tous les 4j si vert' },
+          3: { reps: 10, sets: 2, holdTime: 8, duration: null, perSide: false, freq: '3-4×/sem', note: 'Tenue 6-10s (maintenance)' },
+          4: { reps: 10, sets: 2, holdTime: 8, duration: null, perSide: false, freq: '2×/sem', note: 'Maintenance' }
+        }
       },
       E2: {
         id: 'E2', name: 'Clamshell micro', shortName: 'Clamshell', icon: '🐚',
-        duration: null, reps: 5, sets: 1, holdTime: null, perSide: true,
         category: 'Activation',
-        description: 'Activation du glute med avec micro-amplitude',
-        position: 'Couché sur le côté, tête sur coussin, genoux fléchis à 45°, talons ensemble.',
+        description: 'Activation du glute med avec micro-amplitude (3-5 cm)',
+        position: 'Couché sur le côté, tête sur coussin, genoux fléchis ~45°, talons ensemble.',
         steps: [
           { text: 'Stabilise ton bassin', detail: 'Imagine un verre d\'eau posé dessus' },
           { text: 'Ouvre le genou du dessus', detail: 'Seulement 3-5 cm, pas plus !' },
           { text: 'Redescends lentement', detail: 'Contrôle la descente' }
         ],
         feel: 'Le muscle sur le côté de la fesse qui travaille',
-        warnings: ['Ne roule pas le bassin en arrière', 'N\'ouvre pas trop haut'],
-        gradient: ['#F59E0B', '#FBBF24']
+        warnings: ['Ne roule pas le bassin en arrière', 'N\'ouvre pas trop haut (TFL prend le relais)'],
+        gradient: ['#F59E0B', '#FBBF24'],
+        dosageByPhase: {
+          1: { reps: 5, sets: 1, holdTime: null, duration: null, perSide: true, freq: '4×/sem (L-Me-V-D)', note: 'Amplitude 3-5 cm max' }
+        }
       },
       E3: {
         id: 'E3', name: 'Appui unipodal', shortName: 'Unipodal', icon: '🦩',
-        duration: 15, reps: null, sets: 2, holdTime: null, perSide: true,
         category: 'Stabilité',
         description: 'Stabilité latérale sans solliciter le dos',
         position: 'Debout près d\'un mur, 1-2 doigts en appui léger. Pied en trépied.',
@@ -232,15 +247,17 @@
           { text: 'Décolle l\'autre pied de 2-3 cm', detail: 'Pas besoin de lever haut' },
           { text: 'Aligne ton genou d\'appui', detail: 'Au-dessus du 2e-3e orteil' },
           { text: 'Garde le bassin à niveau', detail: 'La hanche du côté levé ne tombe pas' },
-          { text: 'Respire normalement', detail: 'Tiens 15 secondes' }
+          { text: 'Respire normalement', detail: 'Tiens X secondes' }
         ],
         feel: 'Le fessier de la jambe d\'appui qui stabilise',
         warnings: ['Ne te penche pas sur la jambe d\'appui', 'Ne griffe pas le sol'],
-        gradient: ['#EC4899', '#F472B6']
+        gradient: ['#EC4899', '#F472B6'],
+        dosageByPhase: {
+          2: { reps: null, sets: 2, holdTime: null, duration: 20, perSide: true, freq: '5-6×/sem', note: '2×15-20s/côté. +5s/sem si vert' }
+        }
       },
       E4: {
         id: 'E4', name: 'Sit-to-Stand', shortName: 'Sit-Stand', icon: '🏋️',
-        duration: null, reps: 4, sets: 2, holdTime: null, perSide: false,
         category: 'Renforcement',
         description: 'Quadriceps + fessiers en pattern fonctionnel',
         position: 'Assis sur chaise haute, pieds sous les genoux, largeur bassin.',
@@ -252,11 +269,15 @@
         ],
         feel: 'Cuisses et fessiers qui travaillent ensemble',
         warnings: ['Pas de coup de rein', 'Genou aligné (pas vers l\'intérieur)', 'Ne descends pas trop bas'],
-        gradient: ['#EF4444', '#F87171']
+        gradient: ['#EF4444', '#F87171'],
+        dosageByPhase: {
+          2: { reps: 4, sets: 2, holdTime: null, duration: null, perSide: false, freq: '3×/sem (L-Me-V)', note: 'Descente 3s. +1 rep/série tous les 4-7j si vert' },
+          3: { reps: 9, sets: 3, holdTime: null, duration: null, perSide: false, freq: '3×/sem', note: '3×8-10 reps. Option: +2kg/main après 2 sem vertes' },
+          4: { reps: 9, sets: 3, holdTime: null, duration: null, perSide: false, freq: '2×/sem', note: 'Maintenance avec charge optionnelle' }
+        }
       },
       E5: {
         id: 'E5', name: 'Vélo d\'appartement', shortName: 'Vélo', icon: '🚴',
-        duration: 5, reps: null, sets: 1, holdTime: null, perSide: false,
         category: 'Cardio',
         description: 'Reconditionnement cardiovasculaire doux',
         position: 'Selle haute (genou légèrement fléchi en bas), soutien lombaire, résistance minimale.',
@@ -267,13 +288,18 @@
         ],
         feel: 'Effort léger, jambes qui chauffent doucement',
         warnings: ['Évite l\'intensité trop forte', 'Ne te penche pas en avant'],
-        gradient: ['#0EA5E9', '#38BDF8']
+        gradient: ['#0EA5E9', '#38BDF8'],
+        dosageByPhase: {
+          1: { reps: null, sets: 1, holdTime: null, duration: 5, perSide: false, freq: '5-7×/sem', note: 'Départ 5 min, RPE 2-3. +1 min tous les 3j si vert' },
+          2: { reps: null, sets: 1, holdTime: null, duration: 22, perSide: false, freq: '4-6×/sem', note: '20-25 min RPE 2-3. +2-3 min/sem si vert' },
+          3: { reps: null, sets: 1, holdTime: null, duration: 30, perSide: false, freq: '4-5×/sem', note: '25-35 min RPE 2-3' },
+          4: { reps: null, sets: 1, holdTime: null, duration: 30, perSide: false, freq: '3-4×/sem', note: 'Complément aux séances course' }
+        }
       },
       E6: {
         id: 'E6', name: 'Step-down contrôlé', shortName: 'Step-down', icon: '🪜',
-        duration: null, reps: 5, sets: 2, holdTime: null, perSide: true,
         category: 'Renforcement',
-        description: 'Contrôle hanche/genou anti-valgus',
+        description: 'Contrôle hanche/genou anti-valgus (prépa course)',
         position: 'Debout sur une marche basse (10-15 cm).',
         steps: [
           { text: 'Monte sur la marche', detail: 'Avec la jambe à travailler' },
@@ -282,14 +308,17 @@
           { text: 'Remonte sans à-coups', detail: 'Pousse avec la jambe d\'appui' }
         ],
         feel: 'La cuisse de la jambe d\'appui qui contrôle le mouvement',
-        warnings: ['Le genou ne doit pas s\'effondrer', 'Le bassin reste stable'],
-        gradient: ['#F97316', '#FB923C']
+        warnings: ['Le genou ne doit pas s\'effondrer vers l\'intérieur', 'Le bassin reste stable'],
+        gradient: ['#F97316', '#FB923C'],
+        dosageByPhase: {
+          3: { reps: 5, sets: 2, holdTime: null, duration: null, perSide: true, freq: '2-3×/sem', note: 'Départ 2×5/côté. +1 rep/série/sem. Objectif 2×10' },
+          4: { reps: 10, sets: 2, holdTime: null, duration: null, perSide: true, freq: '2×/sem', note: 'Maintenance 2×10/côté' }
+        }
       },
       E7: {
         id: 'E7', name: 'Mini-pont fessier', shortName: 'Mini-pont', icon: '🌉',
-        duration: null, reps: 5, sets: 1, holdTime: 2, perSide: false,
         category: 'Optionnel',
-        description: 'Activation du grand fessier (prudence)',
+        description: 'Activation du grand fessier (prudence, optionnel)',
         position: 'Allongé sur le dos, genoux pliés, pieds proches des fesses.',
         steps: [
           { text: 'Pré-contracte légèrement les fesses', detail: 'Avant tout mouvement' },
@@ -297,23 +326,27 @@
           { text: 'Maintiens 2 secondes', detail: 'En gardant la contraction' },
           { text: 'Redescends très lentement', detail: 'Contrôle total' }
         ],
-        feel: 'Les fessiers qui se contractent, pas le bas du dos',
-        warnings: ['Ne monte pas trop haut', 'Ne cambre pas le dos', 'Stop si douleur lombaire'],
-        gradient: ['#14B8A6', '#2DD4BF']
+        feel: 'Les fessiers qui se contractent, PAS le bas du dos',
+        warnings: ['Ne monte pas trop haut', 'Ne cambre pas le dos', 'STOP si douleur lombaire'],
+        gradient: ['#14B8A6', '#2DD4BF'],
+        dosageByPhase: {
+          3: { reps: 5, sets: 1, holdTime: 2, duration: null, perSide: false, freq: '2-3×/sem (optionnel)', note: 'Départ 5 reps (2-5cm). +1 rep/sem si vert. Si rebond → STOP' }
+        }
       }
     };
 
     const PHASES = {
-      1: { name: 'Phase 1', title: 'Désensibilisation', icon: '🌱', gradient: ['#10B981', '#34D399'] },
-      2: { name: 'Phase 2', title: 'Activation prudente', icon: '🌿', gradient: ['#6366F1', '#8B5CF6'] },
-      3: { name: 'Phase 3', title: 'Renforcement', icon: '🌳', gradient: ['#F59E0B', '#FBBF24'] },
-      4: { name: 'Phase 4', title: 'Retour course', icon: '🏃', gradient: ['#EC4899', '#F472B6'] }
+      1: { name: 'Phase 1', title: 'Désensibilisation', duration: '2-4 semaines', icon: '🌱', gradient: ['#10B981', '#34D399'], objective: 'Zéro flambée, confiance, routine stable' },
+      2: { name: 'Phase 2', title: 'Activation prudente', duration: '4-6 semaines', icon: '🌿', gradient: ['#6366F1', '#8B5CF6'], objective: 'Hanche stable, quads, moins de bracing' },
+      3: { name: 'Phase 3', title: 'Renforcement fonctionnel', duration: '4-6 semaines', icon: '🌳', gradient: ['#F59E0B', '#FBBF24'], objective: 'Contrôle dynamique, prépa course' },
+      4: { name: 'Phase 4', title: 'Retour course', duration: '6-12+ semaines', icon: '🏃', gradient: ['#EC4899', '#F472B6'], objective: 'Tolérer l\'impact sans réveiller lombaires/genou' }
     };
 
+    // Planning par phase et jour de semaine
     const SCHEDULE = {
       1: { 0: ['E0','E1','E2','E5'], 1: ['E0','E1','E2','E5'], 2: ['E0','E1','E5'], 3: ['E0','E1','E2','E5'], 4: ['E0','E1','E5'], 5: ['E0','E1','E2','E5'], 6: ['E0','E1','E5'] },
       2: { 0: ['E0','E1'], 1: ['E0','E1','E3','E4','E5'], 2: ['E0','E1','E3','E5'], 3: ['E0','E1','E3','E4','E5'], 4: ['E0','E1','E3','E5'], 5: ['E0','E1','E3','E4','E5'], 6: ['E0','E1','E5'] },
-      3: { 0: ['E1'], 1: ['E1','E4','E6','E5'], 2: ['E5'], 3: ['E1','E4','E5'], 4: ['E5'], 5: ['E1','E4','E6','E5'], 6: ['E5'] },
+      3: { 0: ['E1'], 1: ['E1','E4','E6','E5'], 2: ['E5'], 3: ['E1','E4','E7','E5'], 4: ['E5'], 5: ['E1','E4','E6','E5'], 6: ['E5'] },
       4: { 0: ['E1'], 1: ['E1','E4','E6'], 2: ['E5'], 3: ['E1','E4'], 4: ['E5'], 5: ['E1','E4','E6'], 6: ['E5'] }
     };
 
@@ -326,7 +359,7 @@
     let dayOfWeek = new Date().getDay();
     let completed = {};
     let currentEx = null;
-    let exStep = 'intro'; // intro, active, feedback
+    let exStep = 'intro';
     let feedback = null;
     let timerVal = 0;
     let timerRunning = false;
@@ -337,6 +370,24 @@
     let holding = false;
     let holdTime = 0;
     let holdInterval = null;
+
+    // ============================================
+    // HELPER: Get dosage for current phase
+    // ============================================
+    function getDosage(exId) {
+      const ex = EXERCISES[exId];
+      // Trouver le dosage de la phase actuelle ou la phase la plus proche inférieure
+      let dosage = ex.dosageByPhase[phase];
+      if (!dosage) {
+        for (let p = phase - 1; p >= 1; p--) {
+          if (ex.dosageByPhase[p]) {
+            dosage = ex.dosageByPhase[p];
+            break;
+          }
+        }
+      }
+      return dosage || { reps: 5, sets: 1, holdTime: null, duration: null, perSide: false, freq: '', note: '' };
+    }
 
     // ============================================
     // RENDER
@@ -364,16 +415,17 @@
         
         <div class="header">
           <h1>Programme du jour</h1>
-          <p>${completedCount}/${exercises.length} exercices complétés</p>
+          <p>${completedCount}/${exercises.length} exercices</p>
           <div class="phase-badge" style="background: linear-gradient(135deg, ${p.gradient[0]}, ${p.gradient[1]})">
             ${p.icon} ${p.name} — ${p.title}
           </div>
+          <div class="phase-info">⏱ Durée : <strong>${p.duration}</strong> — ${p.objective}</div>
         </div>
         
         ${exercises.length === 0 ? `
           <div class="empty-state">
             <span>😴</span>
-            <p>Jour de repos ou programme non défini pour cette combinaison.</p>
+            <p>Jour de repos ou programme non défini.</p>
           </div>
         ` : `
           <div class="ex-list">
@@ -385,7 +437,9 @@
 
     function renderCard(id) {
       const ex = EXERCISES[id];
+      const dosage = getDosage(id);
       const done = !!completed[id];
+      
       return `
         <div class="ex-card ${done ? 'done' : ''}" onclick="openExercise('${id}')">
           <div class="ex-card-accent" style="background: linear-gradient(180deg, ${ex.gradient[0]}, ${ex.gradient[1]})"></div>
@@ -397,10 +451,10 @@
             </div>
             <p class="ex-card-desc">${ex.description}</p>
             <div class="ex-card-meta">
-              ${ex.duration ? `<span>⏱ ${ex.duration} min</span>` : ''}
-              ${ex.reps ? `<span>🔄 ${ex.sets}×${ex.reps}</span>` : ''}
-              ${ex.perSide ? `<span>↔️ Chaque côté</span>` : ''}
-              ${ex.holdTime ? `<span>⏸ ${ex.holdTime}s</span>` : ''}
+              ${dosage.duration ? `<span>⏱ ${dosage.duration} min</span>` : ''}
+              ${dosage.reps ? `<span>🔄 ${dosage.sets}×${dosage.reps}</span>` : ''}
+              ${dosage.perSide ? `<span>↔️ Chaque côté</span>` : ''}
+              ${dosage.holdTime ? `<span>⏸ ${dosage.holdTime}s</span>` : ''}
             </div>
           </div>
           <div class="ex-card-action">
@@ -412,6 +466,7 @@
 
     function renderExerciseScreen() {
       const ex = EXERCISES[currentEx];
+      const dosage = getDosage(currentEx);
       const screen = document.getElementById('exercise-screen');
       
       screen.innerHTML = `
@@ -426,6 +481,17 @@
           <div class="intro-hero" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})">
             <span>${ex.icon}</span>
             <div class="glow"></div>
+          </div>
+          
+          <div class="info-block dosage">
+            <h4><span>📊</span> Dosage Phase ${phase}</h4>
+            <div class="dosage-grid">
+              ${dosage.duration ? `<div class="dosage-item"><div class="val">${dosage.duration}</div><div class="lbl">minutes</div></div>` : ''}
+              ${dosage.sets ? `<div class="dosage-item"><div class="val">${dosage.sets}</div><div class="lbl">séries</div></div>` : ''}
+              ${dosage.reps ? `<div class="dosage-item"><div class="val">${dosage.reps}</div><div class="lbl">répétitions</div></div>` : ''}
+              ${dosage.holdTime ? `<div class="dosage-item"><div class="val">${dosage.holdTime}s</div><div class="lbl">tenue</div></div>` : ''}
+            </div>
+            <p style="margin-top: 12px; font-size: 13px; color: var(--text-2);">${dosage.note}</p>
           </div>
           
           <div class="info-block">
@@ -454,7 +520,7 @@
         <!-- ACTIVE -->
         <div class="active-screen ${exStep === 'active' ? 'show' : ''}">
           <div class="active-bg" style="background: linear-gradient(180deg, ${ex.gradient[0]}20, transparent)"></div>
-          ${ex.duration ? renderTimer(ex) : renderRepCounter(ex)}
+          ${dosage.duration ? renderTimer(ex, dosage) : renderRepCounter(ex, dosage)}
           <div class="tip-box"><span>💡</span><p>${ex.feel}</p></div>
         </div>
         
@@ -470,17 +536,17 @@
           <div class="fb-options">
             <div class="fb-opt ${feedback === 'green' ? 'selected' : ''}" onclick="selectFeedback('green')">
               <span class="icon">🟢</span>
-              <div class="txt"><strong>Vert</strong><span>Douleur ≤ 2/10, OK</span></div>
+              <div class="txt"><strong>Vert</strong><span>Douleur ≤ 2/10 → ON PROGRESSE</span></div>
               <div class="check" style="background: var(--green)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
             </div>
             <div class="fb-opt ${feedback === 'orange' ? 'selected orange' : ''}" onclick="selectFeedback('orange')">
               <span class="icon">🟠</span>
-              <div class="txt"><strong>Orange</strong><span>Douleur 3-4/10</span></div>
+              <div class="txt"><strong>Orange</strong><span>Douleur 3-4/10 → Garder mais -30-50%</span></div>
               <div class="check" style="background: var(--orange)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
             </div>
             <div class="fb-opt ${feedback === 'red' ? 'selected red' : ''}" onclick="selectFeedback('red')">
               <span class="icon">🔴</span>
-              <div class="txt"><strong>Rouge</strong><span>Douleur ≥ 5/10</span></div>
+              <div class="txt"><strong>Rouge</strong><span>Douleur ≥ 5/10 → STOP, phase précédente</span></div>
               <div class="check" style="background: var(--red)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
             </div>
           </div>
@@ -505,8 +571,8 @@
       screen.classList.add('active');
     }
 
-    function renderTimer(ex) {
-      const total = ex.duration * 60;
+    function renderTimer(ex, dosage) {
+      const total = dosage.duration * 60;
       const elapsed = total - timerVal;
       const pct = (elapsed / total) * 100;
       const circ = 2 * Math.PI * 46;
@@ -537,19 +603,19 @@
       `;
     }
 
-    function renderRepCounter(ex) {
-      const total = ex.reps || 1;
+    function renderRepCounter(ex, dosage) {
+      const total = dosage.reps || 1;
       const pct = (repCount / total) * 100;
       
       return `
         <div class="rep-counter">
-          ${ex.perSide ? `
+          ${dosage.perSide ? `
             <div class="side-switch">
               <button class="side-btn ${side === 'left' ? 'active' : ''}">← Gauche</button>
               <button class="side-btn ${side === 'right' ? 'active' : ''}">Droit →</button>
             </div>
           ` : ''}
-          <div class="set-info">Série ${setCount} sur ${ex.sets}</div>
+          <div class="set-info">Série ${setCount} sur ${dosage.sets}</div>
           <div class="rep-circle ${holding ? 'holding' : ''}" onclick="tapRep()">
             <svg viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="46" class="track"/>
@@ -566,7 +632,7 @@
             </div>
             ${holding ? '<div class="hold-ring"></div>' : ''}
           </div>
-          ${ex.holdTime && !holding ? `<div class="hold-info">💡 Maintiens ${ex.holdTime}s par rep</div>` : ''}
+          ${dosage.holdTime && !holding ? `<div class="hold-info">💡 Maintiens ${dosage.holdTime}s par rep</div>` : ''}
         </div>
       `;
     }
@@ -587,17 +653,17 @@
     }
 
     function openExercise(id) {
-      const ex = EXERCISES[id];
+      const dosage = getDosage(id);
       currentEx = id;
       exStep = 'intro';
       feedback = null;
-      timerVal = ex.duration ? ex.duration * 60 : 0;
+      timerVal = dosage.duration ? dosage.duration * 60 : 0;
       timerRunning = false;
       repCount = 0;
       setCount = 1;
       side = 'left';
       holding = false;
-      holdTime = ex.holdTime || 0;
+      holdTime = dosage.holdTime || 0;
       renderExerciseScreen();
     }
 
@@ -609,6 +675,8 @@
     }
 
     function startActive() {
+      const dosage = getDosage(currentEx);
+      timerVal = dosage.duration ? dosage.duration * 60 : 0;
       exStep = 'active';
       renderExerciseScreen();
     }
@@ -635,18 +703,19 @@
 
     function resetTimer() {
       clearInterval(timerInterval);
-      timerVal = EXERCISES[currentEx].duration * 60;
+      const dosage = getDosage(currentEx);
+      timerVal = dosage.duration * 60;
       timerRunning = false;
       renderExerciseScreen();
     }
 
     function tapRep() {
       vibrate(30);
-      const ex = EXERCISES[currentEx];
+      const dosage = getDosage(currentEx);
       
-      if (ex.holdTime && !holding) {
+      if (dosage.holdTime && !holding) {
         holding = true;
-        holdTime = ex.holdTime;
+        holdTime = dosage.holdTime;
         renderExerciseScreen();
         holdInterval = setInterval(() => {
           holdTime--;
@@ -659,31 +728,31 @@
             renderExerciseScreen();
           }
         }, 1000);
-      } else if (!ex.holdTime) {
+      } else if (!dosage.holdTime) {
         completeRep();
       }
     }
 
     function completeRep() {
-      const ex = EXERCISES[currentEx];
-      const total = ex.reps || 1;
+      const dosage = getDosage(currentEx);
+      const total = dosage.reps || 1;
       repCount++;
       
       if (repCount >= total) {
-        if (ex.perSide && side === 'left') {
+        if (dosage.perSide && side === 'left') {
           side = 'right';
           repCount = 0;
-        } else if (setCount < ex.sets) {
+        } else if (setCount < dosage.sets) {
           setCount++;
           repCount = 0;
-          if (ex.perSide) side = 'left';
+          if (dosage.perSide) side = 'left';
         } else {
           vibrate([100,50,100,50,100]);
           finishExercise();
           return;
         }
       }
-      holdTime = ex.holdTime || 0;
+      holdTime = dosage.holdTime || 0;
       renderExerciseScreen();
     }
 
