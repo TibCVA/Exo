@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -19,161 +18,162 @@
     }
     body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; min-height: 100dvh; -webkit-font-smoothing: antialiased; }
     #app { max-width: 430px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; position: relative; padding: 20px; padding-top: 60px; padding-bottom: 40px; }
-
-```
-/* SELECTORS */
-.selectors { display: flex; gap: 12px; margin-bottom: 24px; }
-.selector { flex: 1; }
-.selector label { display: block; font-size: 12px; color: var(--text-2); margin-bottom: 8px; font-weight: 500; }
-.selector select { width: 100%; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 15px; font-weight: 600; appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23A1A1AA'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
-.selector select:focus { outline: none; border-color: var(--text-2); }
-
-/* HEADER */
-.header { text-align: center; margin-bottom: 28px; }
-.header h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
-.header p { font-size: 14px; color: var(--text-2); }
-.phase-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 30px; font-size: 14px; font-weight: 600; margin-top: 12px; }
-.phase-info { margin-top: 8px; font-size: 13px; color: var(--text-2); }
-
-/* EXERCISE LIST */
-.ex-list { display: flex; flex-direction: column; gap: 12px; }
-.ex-card { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border-radius: var(--radius); cursor: pointer; position: relative; overflow: hidden; transition: transform 0.15s, background 0.15s; }
-.ex-card:active { transform: scale(0.98); background: var(--bg-card-hover); }
-.ex-card.done { opacity: 0.5; }
-.ex-card-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
-.ex-card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-right: 14px; flex-shrink: 0; }
-.ex-card-body { flex: 1; min-width: 0; }
-.ex-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
-.ex-card-top h3 { font-size: 16px; font-weight: 700; }
-.ex-card-cat { font-size: 11px; padding: 3px 8px; background: var(--bg); border-radius: 20px; color: var(--text-2); }
-.ex-card-desc { font-size: 13px; color: var(--text-2); margin-bottom: 8px; }
-.ex-card-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--text-3); }
-.ex-card-action { margin-left: 12px; flex-shrink: 0; }
-.ex-card-check { width: 32px; height: 32px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; }
-.ex-card-check svg { width: 18px; height: 18px; }
-.ex-card-arrow { width: 20px; height: 20px; color: var(--text-3); }
-
-/* EMPTY STATE */
-.empty-state { text-align: center; padding: 60px 20px; color: var(--text-2); }
-.empty-state span { font-size: 48px; display: block; margin-bottom: 16px; }
-
-/* EXERCISE SCREEN */
-.ex-screen { position: fixed; inset: 0; background: var(--bg); z-index: 100; overflow-y: auto; display: none; }
-.ex-screen.active { display: block; }
-.ex-header { display: flex; align-items: center; padding: 56px 20px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
-.ex-header h2 { flex: 1; text-align: center; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
-.hdr-btn { width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.hdr-btn svg { width: 22px; height: 22px; }
-.hdr-spacer { width: 40px; }
-
-/* INTRO */
-.intro-hero { height: 160px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.intro-hero span { font-size: 72px; position: relative; z-index: 1; }
-.intro-hero .glow { position: absolute; width: 200px; height: 200px; background: rgba(255,255,255,0.2); border-radius: 50%; filter: blur(60px); }
-.intro-body { padding: 20px; padding-bottom: 120px; display: flex; flex-direction: column; gap: 16px; }
-.info-block { background: var(--bg-card); padding: 16px; border-radius: var(--radius); }
-.info-block h4 { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text-2); margin-bottom: 12px; }
-.info-block h4 span { font-size: 18px; }
-.info-block p { font-size: 15px; line-height: 1.6; }
-.info-block.success { background: rgba(34,197,94,0.15); border-left: 4px solid var(--green); }
-.info-block.warning { background: rgba(245,158,11,0.15); border-left: 4px solid var(--orange); }
-.info-block.dosage { background: rgba(99,102,241,0.15); border-left: 4px solid #6366F1; }
-.steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.steps-list li { display: flex; gap: 12px; }
-.steps-list .num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-.steps-list .txt { font-size: 15px; line-height: 1.5; }
-.steps-list .txt strong { display: block; }
-.steps-list .txt span { font-size: 13px; color: var(--text-2); }
-.warn-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.warn-list li { font-size: 15px; padding-left: 20px; position: relative; }
-.warn-list li::before { content: '✕'; position: absolute; left: 0; color: var(--orange); font-size: 12px; }
-.dosage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.dosage-item { text-align: center; padding: 12px; background: var(--bg); border-radius: 12px; }
-.dosage-item .val { font-size: 24px; font-weight: 800; color: #6366F1; }
-.dosage-item .lbl { font-size: 12px; color: var(--text-2); margin-top: 4px; }
-.intro-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(180deg, transparent, var(--bg) 30%); z-index: 20; display: flex; justify-content: center; }
-.intro-footer > div { max-width: 430px; width: 100%; }
-.btn { width: 100%; padding: 18px; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.15s; }
-.btn:active { transform: scale(0.98); }
-.btn svg { width: 20px; height: 20px; }
-.btn-primary { background: var(--text); color: var(--bg); }
-.btn-secondary { background: var(--bg-card); color: var(--text-2); }
-
-/* ACTIVE */
-.active-screen { display: none; flex-direction: column; align-items: center; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); position: relative; }
-.active-screen.show { display: flex; }
-.active-bg { position: absolute; top: 0; left: 0; right: 0; height: 50%; pointer-events: none; }
-
-/* TIMER */
-.timer { display: flex; flex-direction: column; align-items: center; gap: 32px; position: relative; z-index: 1; }
-.timer-ring { position: relative; width: 220px; height: 220px; }
-.timer-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.timer-ring .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
-.timer-ring .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.3s; }
-.timer-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.timer-time { font-size: 52px; font-weight: 800; letter-spacing: -2px; }
-.timer-label { font-size: 14px; color: var(--text-2); }
-.timer-btns { display: flex; gap: 16px; }
-.timer-btn { border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.timer-btn:active { transform: scale(0.95); }
-.timer-btn.main { width: 72px; height: 72px; }
-.timer-btn.main svg { width: 28px; height: 28px; }
-.timer-btn.sec { width: 52px; height: 52px; background: var(--bg-card); color: var(--text-2); }
-.timer-btn.sec svg { width: 22px; height: 22px; }
-
-/* REP COUNTER */
-.rep-counter { display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; z-index: 1; }
-.side-switch { display: flex; gap: 8px; background: var(--bg-card); padding: 4px; border-radius: var(--radius); }
-.side-btn { padding: 10px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--text-3); border: none; background: none; cursor: pointer; }
-.side-btn.active { background: var(--text); color: var(--bg); }
-.set-info { font-size: 14px; color: var(--text-2); }
-.rep-circle { width: 200px; height: 200px; position: relative; cursor: pointer; }
-.rep-circle:active { transform: scale(0.98); }
-.rep-circle svg { position: absolute; inset: 0; transform: rotate(-90deg); }
-.rep-circle .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
-.rep-circle .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dasharray 0.3s; }
-.rep-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.rep-num { font-size: 64px; font-weight: 800; }
-.rep-num .sep { font-size: 28px; color: var(--text-3); margin: 0 4px; }
-.rep-num .tot { font-size: 28px; color: var(--text-2); font-weight: 600; }
-.rep-hint { font-size: 13px; color: var(--text-3); }
-.hold-num { font-size: 72px; font-weight: 800; color: var(--orange); }
-.hold-txt { font-size: 16px; color: var(--orange); font-weight: 600; }
-.rep-circle.holding { animation: pulse 1s infinite; }
-@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
-.hold-ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--orange); animation: ringPulse 1s infinite; pointer-events: none; }
-@keyframes ringPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.15); opacity: 0; } }
-.hold-info { font-size: 14px; color: var(--text-2); margin-top: 8px; }
-
-.tip-box { margin-top: 32px; padding: 16px 20px; background: var(--bg-card); border-radius: var(--radius); display: flex; align-items: center; gap: 12px; max-width: 320px; }
-.tip-box span { font-size: 20px; }
-.tip-box p { font-size: 14px; color: var(--text-2); line-height: 1.4; }
-
-/* FEEDBACK */
-.feedback-screen { display: none; flex-direction: column; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); }
-.feedback-screen.show { display: flex; }
-.fb-top { text-align: center; margin-bottom: 40px; }
-.fb-top span { font-size: 72px; display: block; margin-bottom: 16px; animation: bounce 0.6s; }
-@keyframes bounce { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.3); } 60% { transform: scale(0.9); } }
-.fb-top h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
-.fb-top p { color: var(--text-2); }
-.fb-title { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 8px; }
-.fb-sub { text-align: center; color: var(--text-2); font-size: 14px; margin-bottom: 24px; }
-.fb-options { display: flex; flex-direction: column; gap: 12px; flex: 1; }
-.fb-opt { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border: 2px solid transparent; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
-.fb-opt:active { transform: scale(0.98); }
-.fb-opt.selected { border-color: var(--green); }
-.fb-opt.selected.orange { border-color: var(--orange); }
-.fb-opt.selected.red { border-color: var(--red); }
-.fb-opt .icon { font-size: 28px; margin-right: 16px; }
-.fb-opt .txt { flex: 1; }
-.fb-opt .txt strong { font-size: 16px; display: block; }
-.fb-opt .txt span { font-size: 13px; color: var(--text-2); }
-.fb-opt .check { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; }
-.fb-opt.selected .check { opacity: 1; }
-.fb-opt .check svg { width: 16px; height: 16px; fill: white; }
-```
-
+    
+    /* SELECTORS */
+    .selectors { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+    .selector { flex: 1; min-width: 80px; }
+    .selector.full { flex: 100%; }
+    .selector label { display: block; font-size: 12px; color: var(--text-2); margin-bottom: 8px; font-weight: 500; }
+    .selector select { width: 100%; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 15px; font-weight: 600; appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23A1A1AA'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+    .selector select:focus { outline: none; border-color: var(--text-2); }
+    .day-indicator { text-align: center; padding: 12px; background: linear-gradient(135deg, #6366F120, #8B5CF620); border-radius: var(--radius); margin-bottom: 16px; }
+    .day-indicator strong { color: #8B5CF6; }
+    
+    /* HEADER */
+    .header { text-align: center; margin-bottom: 28px; }
+    .header h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .header p { font-size: 14px; color: var(--text-2); }
+    .phase-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 30px; font-size: 14px; font-weight: 600; margin-top: 12px; }
+    .phase-info { margin-top: 8px; font-size: 13px; color: var(--text-2); }
+    
+    /* EXERCISE LIST */
+    .ex-list { display: flex; flex-direction: column; gap: 12px; }
+    .ex-card { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border-radius: var(--radius); cursor: pointer; position: relative; overflow: hidden; transition: transform 0.15s, background 0.15s; }
+    .ex-card:active { transform: scale(0.98); background: var(--bg-card-hover); }
+    .ex-card.done { opacity: 0.5; }
+    .ex-card-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+    .ex-card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-right: 14px; flex-shrink: 0; }
+    .ex-card-body { flex: 1; min-width: 0; }
+    .ex-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+    .ex-card-top h3 { font-size: 16px; font-weight: 700; }
+    .ex-card-cat { font-size: 11px; padding: 3px 8px; background: var(--bg); border-radius: 20px; color: var(--text-2); }
+    .ex-card-desc { font-size: 13px; color: var(--text-2); margin-bottom: 8px; }
+    .ex-card-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--text-3); }
+    .ex-card-action { margin-left: 12px; flex-shrink: 0; }
+    .ex-card-check { width: 32px; height: 32px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; }
+    .ex-card-check svg { width: 18px; height: 18px; }
+    .ex-card-arrow { width: 20px; height: 20px; color: var(--text-3); }
+    
+    /* EMPTY STATE */
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-2); }
+    .empty-state span { font-size: 48px; display: block; margin-bottom: 16px; }
+    
+    /* EXERCISE SCREEN */
+    .ex-screen { position: fixed; inset: 0; background: var(--bg); z-index: 100; overflow-y: auto; display: none; }
+    .ex-screen.active { display: block; }
+    .ex-header { display: flex; align-items: center; padding: 56px 20px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+    .ex-header h2 { flex: 1; text-align: center; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .hdr-btn { width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .hdr-btn svg { width: 22px; height: 22px; }
+    .hdr-spacer { width: 40px; }
+    
+    /* INTRO */
+    .intro-hero { height: 160px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .intro-hero span { font-size: 72px; position: relative; z-index: 1; }
+    .intro-hero .glow { position: absolute; width: 200px; height: 200px; background: rgba(255,255,255,0.2); border-radius: 50%; filter: blur(60px); }
+    .intro-body { padding: 20px; padding-bottom: 120px; display: flex; flex-direction: column; gap: 16px; }
+    .info-block { background: var(--bg-card); padding: 16px; border-radius: var(--radius); }
+    .info-block h4 { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text-2); margin-bottom: 12px; }
+    .info-block h4 span { font-size: 18px; }
+    .info-block p { font-size: 15px; line-height: 1.6; }
+    .info-block.success { background: rgba(34,197,94,0.15); border-left: 4px solid var(--green); }
+    .info-block.warning { background: rgba(245,158,11,0.15); border-left: 4px solid var(--orange); }
+    .info-block.dosage { background: rgba(99,102,241,0.15); border-left: 4px solid #6366F1; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .steps-list li { display: flex; gap: 12px; }
+    .steps-list .num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .steps-list .txt { font-size: 15px; line-height: 1.5; }
+    .steps-list .txt strong { display: block; }
+    .steps-list .txt span { font-size: 13px; color: var(--text-2); }
+    .warn-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .warn-list li { font-size: 15px; padding-left: 20px; position: relative; }
+    .warn-list li::before { content: '✕'; position: absolute; left: 0; color: var(--orange); font-size: 12px; }
+    .dosage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .dosage-item { text-align: center; padding: 12px; background: var(--bg); border-radius: 12px; }
+    .dosage-item .val { font-size: 24px; font-weight: 800; color: #6366F1; }
+    .dosage-item .lbl { font-size: 12px; color: var(--text-2); margin-top: 4px; }
+    .progression-note { margin-top: 12px; padding: 10px; background: rgba(34,197,94,0.1); border-radius: 8px; font-size: 13px; color: var(--green); text-align: center; }
+    .intro-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(180deg, transparent, var(--bg) 30%); z-index: 20; display: flex; justify-content: center; }
+    .intro-footer > div { max-width: 430px; width: 100%; }
+    .btn { width: 100%; padding: 18px; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.15s; }
+    .btn:active { transform: scale(0.98); }
+    .btn svg { width: 20px; height: 20px; }
+    .btn-primary { background: var(--text); color: var(--bg); }
+    .btn-secondary { background: var(--bg-card); color: var(--text-2); }
+    
+    /* ACTIVE */
+    .active-screen { display: none; flex-direction: column; align-items: center; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); position: relative; }
+    .active-screen.show { display: flex; }
+    .active-bg { position: absolute; top: 0; left: 0; right: 0; height: 50%; pointer-events: none; }
+    
+    /* TIMER */
+    .timer { display: flex; flex-direction: column; align-items: center; gap: 32px; position: relative; z-index: 1; }
+    .timer-ring { position: relative; width: 220px; height: 220px; }
+    .timer-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .timer-ring .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
+    .timer-ring .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.3s; }
+    .timer-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .timer-time { font-size: 52px; font-weight: 800; letter-spacing: -2px; }
+    .timer-label { font-size: 14px; color: var(--text-2); }
+    .timer-btns { display: flex; gap: 16px; }
+    .timer-btn { border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .timer-btn:active { transform: scale(0.95); }
+    .timer-btn.main { width: 72px; height: 72px; }
+    .timer-btn.main svg { width: 28px; height: 28px; }
+    .timer-btn.sec { width: 52px; height: 52px; background: var(--bg-card); color: var(--text-2); }
+    .timer-btn.sec svg { width: 22px; height: 22px; }
+    
+    /* REP COUNTER */
+    .rep-counter { display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; z-index: 1; }
+    .side-switch { display: flex; gap: 8px; background: var(--bg-card); padding: 4px; border-radius: var(--radius); }
+    .side-btn { padding: 10px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--text-3); border: none; background: none; cursor: pointer; }
+    .side-btn.active { background: var(--text); color: var(--bg); }
+    .set-info { font-size: 14px; color: var(--text-2); }
+    .rep-circle { width: 200px; height: 200px; position: relative; cursor: pointer; }
+    .rep-circle:active { transform: scale(0.98); }
+    .rep-circle svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+    .rep-circle .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
+    .rep-circle .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dasharray 0.3s; }
+    .rep-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .rep-num { font-size: 64px; font-weight: 800; }
+    .rep-num .sep { font-size: 28px; color: var(--text-3); margin: 0 4px; }
+    .rep-num .tot { font-size: 28px; color: var(--text-2); font-weight: 600; }
+    .rep-hint { font-size: 13px; color: var(--text-3); }
+    .hold-num { font-size: 72px; font-weight: 800; color: var(--orange); }
+    .hold-txt { font-size: 16px; color: var(--orange); font-weight: 600; }
+    .rep-circle.holding { animation: pulse 1s infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+    .hold-ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--orange); animation: ringPulse 1s infinite; pointer-events: none; }
+    @keyframes ringPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.15); opacity: 0; } }
+    .hold-info { font-size: 14px; color: var(--text-2); margin-top: 8px; }
+    
+    .tip-box { margin-top: 32px; padding: 16px 20px; background: var(--bg-card); border-radius: var(--radius); display: flex; align-items: center; gap: 12px; max-width: 320px; }
+    .tip-box span { font-size: 20px; }
+    .tip-box p { font-size: 14px; color: var(--text-2); line-height: 1.4; }
+    
+    /* FEEDBACK */
+    .feedback-screen { display: none; flex-direction: column; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); }
+    .feedback-screen.show { display: flex; }
+    .fb-top { text-align: center; margin-bottom: 40px; }
+    .fb-top span { font-size: 72px; display: block; margin-bottom: 16px; animation: bounce 0.6s; }
+    @keyframes bounce { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.3); } 60% { transform: scale(0.9); } }
+    .fb-top h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+    .fb-top p { color: var(--text-2); }
+    .fb-title { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 8px; }
+    .fb-sub { text-align: center; color: var(--text-2); font-size: 14px; margin-bottom: 24px; }
+    .fb-options { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .fb-opt { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border: 2px solid transparent; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
+    .fb-opt:active { transform: scale(0.98); }
+    .fb-opt.selected { border-color: var(--green); }
+    .fb-opt.selected.orange { border-color: var(--orange); }
+    .fb-opt.selected.red { border-color: var(--red); }
+    .fb-opt .icon { font-size: 28px; margin-right: 16px; }
+    .fb-opt .txt { flex: 1; }
+    .fb-opt .txt strong { font-size: 16px; display: block; }
+    .fb-opt .txt span { font-size: 13px; color: var(--text-2); }
+    .fb-opt .check { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; }
+    .fb-opt.selected .check { opacity: 1; }
+    .fb-opt .check svg { width: 16px; height: 16px; fill: white; }
   </style>
 </head>
 <body>
@@ -182,7 +182,7 @@
 
   <script>
     // ============================================
-    // DONNÉES - 3 PHASES SELON PROTOCOLE RÉVISÉ
+    // DONNÉES - 3 PHASES AVEC PROGRESSION AUTOMATIQUE
     // ============================================
     
     const EXERCISES = {
@@ -200,9 +200,8 @@
         feel: 'Relâchement progressif de la zone lombaire',
         warnings: ['Ne rentre pas le ventre', 'Ne bloque pas ta respiration', 'Garde une amplitude minime'],
         gradient: ['#6366F1', '#8B5CF6'],
-        // Phase 1 : 2×6 micro-bascule, 1×/jour (2× si stress)
         dosageByPhase: {
-          1: { reps: 6, sets: 2, holdTime: null, durationMin: null, perSide: false, freq: '1×/jour (2× si stress)', note: '6 cycles respiration + 2×6 micro-bascule' }
+          1: { baseReps: 6, sets: 2, holdTime: null, durationMin: null, perSide: false, freq: '1×/jour', progressionRule: null }
         }
       },
       
@@ -221,12 +220,12 @@
         warnings: ['Ne te penche pas', 'Évite le serrage abdominal', 'N\'utilise pas trop de force'],
         gradient: ['#10B981', '#34D399'],
         dosageByPhase: {
-          // Phase 1 : 2×6 reps, tenue 6-8s, 5-6×/sem
-          1: { reps: 6, sets: 2, holdTime: 8, durationMin: null, perSide: false, freq: '5-6×/sem', note: 'Tenue 6-8s. Progression : +1 rep/série tous les 4j si vert' },
-          // Phase 2 : 2×8-12 reps, tenue 6-10s, 3-4×/sem
-          2: { reps: 10, sets: 2, holdTime: 10, durationMin: null, perSide: false, freq: '3-4×/sem', note: 'Tenue 6-10s (8-12 reps selon tolérance)' },
-          // Phase 3 : 2×10 maintenance, 2×/sem
-          3: { reps: 10, sets: 2, holdTime: 10, durationMin: null, perSide: false, freq: '2×/sem', note: 'Maintenance' }
+          // Phase 1 : 2×6 reps base, tenue 8s, +1 rep tous les 4j
+          1: { baseReps: 6, sets: 2, holdTime: 8, durationMin: null, perSide: false, freq: '5-6×/sem', progressionRule: { type: 'reps', perDays: 4 } },
+          // Phase 2 : 2×10 reps base, tenue 10s
+          2: { baseReps: 10, sets: 2, holdTime: 10, durationMin: null, perSide: false, freq: '3-4×/sem', progressionRule: null },
+          // Phase 3 : maintenance
+          3: { baseReps: 10, sets: 2, holdTime: 10, durationMin: null, perSide: false, freq: '2×/sem', progressionRule: null }
         }
       },
       
@@ -239,14 +238,14 @@
           { text: 'Décolle l\'autre pied de 2-3 cm', detail: 'Pas besoin de lever haut' },
           { text: 'Aligne ton genou d\'appui', detail: 'Au-dessus du 2e-3e orteil' },
           { text: 'Garde le bassin à niveau', detail: 'La hanche du côté levé ne tombe pas' },
-          { text: 'Respire normalement', detail: 'Tiens 15-20 secondes' }
+          { text: 'Respire normalement', detail: 'Tiens X secondes' }
         ],
         feel: 'Le fessier de la jambe d\'appui qui stabilise',
         warnings: ['Ne te penche pas sur la jambe d\'appui', 'Ne griffe pas le sol'],
         gradient: ['#EC4899', '#F472B6'],
         dosageByPhase: {
-          // Phase 1 : 2×15-20s/côté, 5-6×/sem. +5s/sem si vert
-          1: { reps: 1, sets: 2, holdTime: 20, durationMin: null, perSide: true, freq: '5-6×/sem', note: '2×15-20s par côté. Progression : +5s/sem si vert' }
+          // Phase 1 : 2×15s base/côté, +5s par semaine
+          1: { baseReps: 1, sets: 2, holdTime: 15, durationMin: null, perSide: true, freq: '5-6×/sem', progressionRule: { type: 'holdTime', perDays: 7, increment: 5 } }
         }
       },
       
@@ -265,12 +264,12 @@
         warnings: ['Pas de coup de rein', 'Genou aligné (pas vers l\'intérieur)', 'Ne descends pas trop bas'],
         gradient: ['#EF4444', '#F87171'],
         dosageByPhase: {
-          // Phase 1 : 2×4 reps, descente 3s, 3×/sem (L-Me-V). +1 rep/série tous les 4-7j si vert
-          1: { reps: 4, sets: 2, holdTime: null, durationMin: null, perSide: false, freq: '3×/sem (L-Me-V)', note: 'Descente 3s. Progression : +1 rep/série tous les 4-7j si vert' },
-          // Phase 2 : 3×8-10 reps, 3×/sem. Option +2kg/main après 2 sem vertes
-          2: { reps: 9, sets: 3, holdTime: null, durationMin: null, perSide: false, freq: '3×/sem', note: '3×8-10 reps. Option : +2kg/main après 2 sem vertes' },
+          // Phase 1 : 2×4 reps base, +1 rep tous les 4j
+          1: { baseReps: 4, sets: 2, holdTime: null, durationMin: null, perSide: false, freq: '3×/sem', progressionRule: { type: 'reps', perDays: 4 } },
+          // Phase 2 : 3×8 reps base, +1 rep tous les 4j
+          2: { baseReps: 8, sets: 3, holdTime: null, durationMin: null, perSide: false, freq: '3×/sem', progressionRule: { type: 'reps', perDays: 4 } },
           // Phase 3 : maintenance
-          3: { reps: 9, sets: 3, holdTime: null, durationMin: null, perSide: false, freq: '2×/sem', note: 'Maintenance avec charge optionnelle' }
+          3: { baseReps: 10, sets: 3, holdTime: null, durationMin: null, perSide: false, freq: '2×/sem', progressionRule: null }
         }
       },
       
@@ -288,12 +287,12 @@
         warnings: ['Évite l\'intensité trop forte', 'Ne te penche pas en avant'],
         gradient: ['#0EA5E9', '#38BDF8'],
         dosageByPhase: {
-          // Phase 1 : 10 min (MODIFIÉ), 4-6×/sem
-          1: { reps: null, sets: 1, holdTime: null, durationMin: 10, perSide: false, freq: '4-6×/sem', note: '10 min RPE 2-3. Progression : +2-3 min/sem si vert' },
-          // Phase 2 : 25-35 min, 4-5×/sem
-          2: { reps: null, sets: 1, holdTime: null, durationMin: 30, perSide: false, freq: '4-5×/sem', note: '25-35 min RPE 2-3' },
-          // Phase 3 : 30 min, complément course
-          3: { reps: null, sets: 1, holdTime: null, durationMin: 30, perSide: false, freq: '3-4×/sem', note: 'Complément aux séances course' }
+          // Phase 1 : 10 min base, +2 min par semaine
+          1: { baseReps: null, sets: 1, holdTime: null, durationMin: 10, perSide: false, freq: '4-6×/sem', progressionRule: { type: 'duration', perDays: 7, increment: 2 } },
+          // Phase 2 : 25 min base, +2 min par semaine
+          2: { baseReps: null, sets: 1, holdTime: null, durationMin: 25, perSide: false, freq: '4-5×/sem', progressionRule: { type: 'duration', perDays: 7, increment: 2 } },
+          // Phase 3 : 30 min
+          3: { baseReps: null, sets: 1, holdTime: null, durationMin: 30, perSide: false, freq: '3-4×/sem', progressionRule: null }
         }
       },
       
@@ -312,10 +311,10 @@
         warnings: ['Le genou ne doit pas s\'effondrer vers l\'intérieur', 'Le bassin reste stable'],
         gradient: ['#F97316', '#FB923C'],
         dosageByPhase: {
-          // Phase 2 : 2×5/côté, +1 rep/sem, objectif 2×10
-          2: { reps: 5, sets: 2, holdTime: null, durationMin: null, perSide: true, freq: '2-3×/sem', note: 'Départ 2×5/côté. +1 rep/série/sem si vert. Objectif 2×10' },
+          // Phase 2 : 2×5/côté base, +1 rep par semaine
+          2: { baseReps: 5, sets: 2, holdTime: null, durationMin: null, perSide: true, freq: '2-3×/sem', progressionRule: { type: 'reps', perDays: 7 } },
           // Phase 3 : 2×10/côté maintenance
-          3: { reps: 10, sets: 2, holdTime: null, durationMin: null, perSide: true, freq: '2×/sem', note: '2×10/côté maintenance' }
+          3: { baseReps: 10, sets: 2, holdTime: null, durationMin: null, perSide: true, freq: '2×/sem', progressionRule: null }
         }
       },
       
@@ -334,8 +333,51 @@
         warnings: ['Ne monte pas trop haut', 'Ne cambre pas le dos', 'STOP si douleur lombaire → retirer l\'exercice'],
         gradient: ['#14B8A6', '#2DD4BF'],
         dosageByPhase: {
-          // Phase 2 seulement, optionnel : 1×5 reps, 2s tenue, +1 rep/sem
-          2: { reps: 5, sets: 1, holdTime: 2, durationMin: null, perSide: false, freq: '2-3×/sem (optionnel)', note: '2-5cm amplitude. +1 rep/sem si vert. Si rebond → STOP' }
+          // Phase 2 : 1×5 reps base, +1 rep par semaine
+          2: { baseReps: 5, sets: 1, holdTime: 2, durationMin: null, perSide: false, freq: '2-3×/sem (optionnel)', progressionRule: { type: 'reps', perDays: 7 } }
+        }
+      },
+      
+      E8: {
+        id: 'E8', name: 'Marche', shortName: 'Marche', icon: '🚶',
+        category: 'Cardio',
+        description: 'Marche à rythme confortable, terrain plat',
+        position: 'Extérieur ou tapis de marche, chaussures confortables.',
+        steps: [
+          { text: 'Adopte une posture droite', detail: 'Regard devant, épaules relâchées' },
+          { text: 'Marche à allure confortable', detail: 'Tu dois pouvoir parler (RPE 2-3)' },
+          { text: 'Évite les pentes au début', detail: 'Terrain plat de préférence' },
+          { text: 'Fais des pauses si besoin', detail: 'Assieds-toi quelques minutes si tension' }
+        ],
+        feel: 'Effort léger, sensation de mouvement global',
+        warnings: ['Évite les descentes longues', 'Ne force pas l\'allure'],
+        gradient: ['#84CC16', '#A3E635'],
+        dosageByPhase: {
+          1: { baseReps: null, sets: 1, holdTime: null, durationMin: 30, perSide: false, freq: 'Tous les jours', progressionRule: null },
+          2: { baseReps: null, sets: 1, holdTime: null, durationMin: 30, perSide: false, freq: 'Tous les jours', progressionRule: null },
+          3: { baseReps: null, sets: 1, holdTime: null, durationMin: 30, perSide: false, freq: 'Tous les jours', progressionRule: null }
+        }
+      },
+      
+      E9: {
+        id: 'E9', name: 'Élévation scapulaire', shortName: 'Altères', icon: '🏋️‍♂️',
+        category: 'Renforcement',
+        description: 'Renforcement épaules/haut du dos, altères 2kg',
+        position: 'Debout, pieds largeur bassin, altères 2kg en main, bras le long du corps.',
+        steps: [
+          { text: 'Tiens les altères bras tendus', detail: 'Coudes légèrement déverrouillés' },
+          { text: 'Lève les bras devant toi', detail: 'Dans le plan de la scapula (angle 130-140° avec le torse)' },
+          { text: 'Monte jusqu\'à hauteur d\'épaules', detail: 'Pas plus haut' },
+          { text: 'Redescends lentement', detail: 'Contrôle sur 2-3 secondes' }
+        ],
+        feel: 'Travail des épaules et stabilisateurs du haut du dos',
+        warnings: ['Ne cambre pas le dos', 'Ne monte pas trop haut', 'Garde les épaules basses'],
+        gradient: ['#8B5CF6', '#A78BFA'],
+        dosageByPhase: {
+          // Toutes phases : 2×5 reps base, +1 rep tous les 4j
+          1: { baseReps: 5, sets: 2, holdTime: null, durationMin: null, perSide: false, freq: 'Tous les jours', progressionRule: { type: 'reps', perDays: 4 } },
+          2: { baseReps: 5, sets: 2, holdTime: null, durationMin: null, perSide: false, freq: 'Tous les jours', progressionRule: { type: 'reps', perDays: 4 } },
+          3: { baseReps: 5, sets: 2, holdTime: null, durationMin: null, perSide: false, freq: 'Tous les jours', progressionRule: { type: 'reps', perDays: 4 } }
         }
       }
     };
@@ -348,8 +390,7 @@
         duration: '4-6 semaines', 
         icon: '🌿', 
         gradient: ['#6366F1', '#8B5CF6'], 
-        objective: 'Hanche stable, quads, moins de bracing',
-        criteria: ['Assise +30-50% ou moins de crispation', 'E3 : 30s/côté assistance minimale', 'E4 : 3×6-8 reps propres sans rebond >24h', 'Vélo : 20-25 min faciles']
+        objective: 'Hanche stable, quads, moins de bracing'
       },
       2: { 
         name: 'Phase 2', 
@@ -357,8 +398,7 @@
         duration: '4-6 semaines', 
         icon: '🌳', 
         gradient: ['#F59E0B', '#FBBF24'], 
-        objective: 'Contrôle dynamique, préparation course',
-        criteria: ['Marche 45-60 min sans flambée', 'E6 : 2×10/côté propre (anti-valgus OK)', 'Symptômes stables 2 semaines', 'Assise >60-90 min avec pauses']
+        objective: 'Contrôle dynamique, préparation course'
       },
       3: { 
         name: 'Phase 3', 
@@ -366,42 +406,41 @@
         duration: '6-12+ semaines', 
         icon: '🏃', 
         gradient: ['#EC4899', '#F472B6'], 
-        objective: 'Tolérer l\'impact sans réveiller lombaires/genou',
-        criteria: ['Jog progressif toléré (intervalles)', 'Pas de rouge pendant 2 semaines', 'Renfo maintenance OK']
+        objective: 'Tolérer l\'impact sans réveiller lombaires/genou'
       }
     };
 
     // PLANNING HEBDOMADAIRE PAR PHASE
     const SCHEDULE = {
-      // Phase 1 (ex-Phase 2) : E0 + E1 + E3 + E4 + E5
+      // Phase 1 : E0 + E1 + E3 + E4 + E5 + E8 + E9
       1: { 
-        0: ['E0', 'E1'],  // Dimanche
-        1: ['E0', 'E1', 'E3', 'E4', 'E5'],  // Lundi
-        2: ['E0', 'E1', 'E3', 'E5'],  // Mardi
-        3: ['E0', 'E1', 'E3', 'E4', 'E5'],  // Mercredi
-        4: ['E0', 'E1', 'E3', 'E5'],  // Jeudi
-        5: ['E0', 'E1', 'E3', 'E4', 'E5'],  // Vendredi
-        6: ['E0', 'E1', 'E5']  // Samedi
+        0: ['E0', 'E1', 'E8', 'E9'],  // Dimanche
+        1: ['E0', 'E1', 'E3', 'E4', 'E5', 'E8', 'E9'],  // Lundi
+        2: ['E0', 'E1', 'E3', 'E5', 'E8', 'E9'],  // Mardi
+        3: ['E0', 'E1', 'E3', 'E4', 'E5', 'E8', 'E9'],  // Mercredi
+        4: ['E0', 'E1', 'E3', 'E5', 'E8', 'E9'],  // Jeudi
+        5: ['E0', 'E1', 'E3', 'E4', 'E5', 'E8', 'E9'],  // Vendredi
+        6: ['E0', 'E1', 'E5', 'E8', 'E9']  // Samedi
       },
-      // Phase 2 (ex-Phase 3) : E1 + E4 + E5 + E6 + E7(opt)
+      // Phase 2 : E1 + E4 + E5 + E6 + E7 + E8 + E9
       2: { 
-        0: ['E1'],  // Dimanche - repos actif
-        1: ['E1', 'E4', 'E6', 'E5'],  // Lundi
-        2: ['E5'],  // Mardi
-        3: ['E1', 'E4', 'E7', 'E5'],  // Mercredi (E7 optionnel)
-        4: ['E5'],  // Jeudi
-        5: ['E1', 'E4', 'E6', 'E5'],  // Vendredi
-        6: ['E5']  // Samedi
+        0: ['E1', 'E8', 'E9'],  // Dimanche - repos actif
+        1: ['E1', 'E4', 'E6', 'E5', 'E8', 'E9'],  // Lundi
+        2: ['E5', 'E8', 'E9'],  // Mardi
+        3: ['E1', 'E4', 'E7', 'E5', 'E8', 'E9'],  // Mercredi
+        4: ['E5', 'E8', 'E9'],  // Jeudi
+        5: ['E1', 'E4', 'E6', 'E5', 'E8', 'E9'],  // Vendredi
+        6: ['E5', 'E8', 'E9']  // Samedi
       },
-      // Phase 3 (ex-Phase 4) : maintenance + course
+      // Phase 3 : maintenance + E8 + E9
       3: { 
-        0: ['E1'],  // Dimanche
-        1: ['E1', 'E4', 'E6'],  // Lundi
-        2: ['E5'],  // Mardi - course ou vélo
-        3: ['E1', 'E4'],  // Mercredi
-        4: ['E5'],  // Jeudi - course ou vélo
-        5: ['E1', 'E4', 'E6'],  // Vendredi
-        6: ['E5']  // Samedi - course ou vélo
+        0: ['E1', 'E8', 'E9'],  // Dimanche
+        1: ['E1', 'E4', 'E6', 'E8', 'E9'],  // Lundi
+        2: ['E5', 'E8', 'E9'],  // Mardi
+        3: ['E1', 'E4', 'E8', 'E9'],  // Mercredi
+        4: ['E5', 'E8', 'E9'],  // Jeudi
+        5: ['E1', 'E4', 'E6', 'E8', 'E9'],  // Vendredi
+        6: ['E5', 'E8', 'E9']  // Samedi
       }
     };
 
@@ -411,6 +450,7 @@
     // STATE
     // ============================================
     let phase = 1;
+    let weekInPhase = 1;  // Semaine 1 à 6 dans la phase
     let dayOfWeek = new Date().getDay();
     let completed = {};
     let currentEx = null;
@@ -427,22 +467,78 @@
     let holdInterval = null;
 
     // ============================================
-    // HELPER: Get dosage for current phase
+    // CALCUL DU JOUR DANS LA PHASE
+    // ============================================
+    function getDayInPhase() {
+      // Dimanche = 0, donc on ajuste pour que Lundi = jour 1
+      const dayIndex = dayOfWeek === 0 ? 7 : dayOfWeek;
+      return (weekInPhase - 1) * 7 + dayIndex;
+    }
+
+    // ============================================
+    // CALCUL DU DOSAGE AVEC PROGRESSION
     // ============================================
     function getDosage(exId) {
       const ex = EXERCISES[exId];
-      let dosage = ex.dosageByPhase[phase];
-      if (!dosage) {
-        // Chercher la phase la plus proche inférieure
+      let baseDosage = ex.dosageByPhase[phase];
+      
+      // Si pas de dosage pour cette phase, chercher la phase inférieure
+      if (!baseDosage) {
         for (let p = phase - 1; p >= 1; p--) {
           if (ex.dosageByPhase[p]) {
-            dosage = ex.dosageByPhase[p];
+            baseDosage = ex.dosageByPhase[p];
             break;
           }
         }
       }
-      // Fallback
-      return dosage || { reps: 5, sets: 1, holdTime: null, durationMin: null, perSide: false, freq: '', note: '' };
+      
+      if (!baseDosage) {
+        return { reps: 5, sets: 1, holdTime: null, durationMin: null, perSide: false, freq: '', progressionText: '' };
+      }
+
+      const dayInPhase = getDayInPhase();
+      let reps = baseDosage.baseReps;
+      let holdTimeSec = baseDosage.holdTime;
+      let durationMin = baseDosage.durationMin;
+      let progressionText = '';
+
+      // Appliquer la progression si règle définie
+      if (baseDosage.progressionRule) {
+        const rule = baseDosage.progressionRule;
+        const increment = rule.increment || 1;
+        const progressionSteps = Math.floor((dayInPhase - 1) / rule.perDays);
+
+        if (rule.type === 'reps' && reps !== null) {
+          const addedReps = progressionSteps * increment;
+          reps = baseDosage.baseReps + addedReps;
+          if (addedReps > 0) {
+            progressionText = `+${addedReps} rep${addedReps > 1 ? 's' : ''} (progression J${dayInPhase})`;
+          }
+        } else if (rule.type === 'holdTime' && holdTimeSec !== null) {
+          const addedSeconds = progressionSteps * increment;
+          holdTimeSec = baseDosage.holdTime + addedSeconds;
+          if (addedSeconds > 0) {
+            progressionText = `+${addedSeconds}s (progression J${dayInPhase})`;
+          }
+        } else if (rule.type === 'duration' && durationMin !== null) {
+          const addedMinutes = progressionSteps * increment;
+          durationMin = baseDosage.durationMin + addedMinutes;
+          if (addedMinutes > 0) {
+            progressionText = `+${addedMinutes} min (progression J${dayInPhase})`;
+          }
+        }
+      }
+
+      return {
+        reps: reps,
+        sets: baseDosage.sets,
+        holdTime: holdTimeSec,
+        durationMin: durationMin,
+        perSide: baseDosage.perSide,
+        freq: baseDosage.freq,
+        progressionText: progressionText,
+        progressionRule: baseDosage.progressionRule
+      };
     }
 
     // ============================================
@@ -452,6 +548,7 @@
       const exercises = SCHEDULE[phase]?.[dayOfWeek] || [];
       const p = PHASES[phase];
       const completedCount = Object.keys(completed).filter(id => exercises.includes(id)).length;
+      const dayInPhase = getDayInPhase();
       
       document.getElementById('app').innerHTML = `
         <div class="selectors">
@@ -462,11 +559,21 @@
             </select>
           </div>
           <div class="selector">
-            <label>Jour</label>
-            <select id="day-select" onchange="setDay(this.value)">
-              ${DAYS.map((d,i) => `<option value="${i}" ${i===dayOfWeek?'selected':''}>${d}</option>`).join('')}
+            <label>Semaine</label>
+            <select id="week-select" onchange="setWeek(this.value)">
+              ${[1,2,3,4,5,6].map(n => `<option value="${n}" ${n===weekInPhase?'selected':''}>Sem. ${n}</option>`).join('')}
             </select>
           </div>
+          <div class="selector">
+            <label>Jour</label>
+            <select id="day-select" onchange="setDay(this.value)">
+              ${DAYS.map((d,i) => `<option value="${i}" ${i===dayOfWeek?'selected':''}>${d.slice(0,3)}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        
+        <div class="day-indicator">
+          📅 <strong>Jour ${dayInPhase}</strong> de la phase (sur ~42 jours)
         </div>
         
         <div class="header">
@@ -481,7 +588,7 @@
         ${exercises.length === 0 ? `
           <div class="empty-state">
             <span>😴</span>
-            <p>Jour de repos ou programme non défini.</p>
+            <p>Jour de repos.</p>
           </div>
         ` : `
           <div class="ex-list">
@@ -509,8 +616,9 @@
             <div class="ex-card-meta">
               ${dosage.durationMin ? `<span>⏱ ${dosage.durationMin} min</span>` : ''}
               ${dosage.reps && dosage.sets ? `<span>🔄 ${dosage.sets}×${dosage.reps}</span>` : ''}
-              ${dosage.perSide ? `<span>↔️ Chaque côté</span>` : ''}
+              ${dosage.perSide ? `<span>↔️ /côté</span>` : ''}
               ${dosage.holdTime ? `<span>⏸ ${dosage.holdTime}s</span>` : ''}
+              ${dosage.progressionText ? `<span style="color: var(--green)">📈</span>` : ''}
             </div>
           </div>
           <div class="ex-card-action">
@@ -524,6 +632,19 @@
       const ex = EXERCISES[currentEx];
       const dosage = getDosage(currentEx);
       const screen = document.getElementById('exercise-screen');
+      
+      // Texte de progression
+      let progressionRuleText = '';
+      if (dosage.progressionRule) {
+        const rule = dosage.progressionRule;
+        if (rule.type === 'reps') {
+          progressionRuleText = `+1 rep tous les ${rule.perDays} jours`;
+        } else if (rule.type === 'holdTime') {
+          progressionRuleText = `+${rule.increment}s tous les ${rule.perDays} jours`;
+        } else if (rule.type === 'duration') {
+          progressionRuleText = `+${rule.increment} min tous les ${rule.perDays} jours`;
+        }
+      }
       
       screen.innerHTML = `
         <div class="ex-header">
@@ -540,15 +661,16 @@
           </div>
           
           <div class="info-block dosage">
-            <h4><span>📊</span> Dosage Phase ${phase}</h4>
+            <h4><span>📊</span> Dosage Jour ${getDayInPhase()}</h4>
             <div class="dosage-grid">
               ${dosage.durationMin ? `<div class="dosage-item"><div class="val">${dosage.durationMin}</div><div class="lbl">minutes</div></div>` : ''}
               ${dosage.sets ? `<div class="dosage-item"><div class="val">${dosage.sets}</div><div class="lbl">séries</div></div>` : ''}
-              ${dosage.reps ? `<div class="dosage-item"><div class="val">${dosage.reps}</div><div class="lbl">${dosage.holdTime && !dosage.durationMin ? 'maintien' : 'reps'}</div></div>` : ''}
+              ${dosage.reps ? `<div class="dosage-item"><div class="val">${dosage.reps}</div><div class="lbl">reps</div></div>` : ''}
               ${dosage.holdTime ? `<div class="dosage-item"><div class="val">${dosage.holdTime}s</div><div class="lbl">tenue</div></div>` : ''}
             </div>
             ${dosage.perSide ? '<p style="margin-top: 8px; text-align: center; font-size: 13px;">↔️ Chaque côté</p>' : ''}
-            <p style="margin-top: 12px; font-size: 13px; color: var(--text-2);">${dosage.note}</p>
+            ${dosage.progressionText ? `<div class="progression-note">📈 ${dosage.progressionText}</div>` : ''}
+            ${progressionRuleText ? `<p style="margin-top: 8px; font-size: 12px; color: var(--text-3); text-align: center;">Règle : ${progressionRuleText}</p>` : ''}
           </div>
           
           <div class="info-block">
@@ -699,6 +821,13 @@
     // ============================================
     function setPhase(val) {
       phase = parseInt(val);
+      weekInPhase = 1;  // Reset à semaine 1
+      completed = {};
+      render();
+    }
+
+    function setWeek(val) {
+      weekInPhase = parseInt(val);
       completed = {};
       render();
     }
@@ -843,6 +972,5 @@
     // ============================================
     render();
   </script>
-
 </body>
 </html>
