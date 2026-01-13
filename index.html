@@ -138,6 +138,9 @@
 
 /* REP COUNTER */
 .rep-counter { display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; z-index: 1; }
+.side-switch { display: flex; gap: 8px; background: var(--bg-card); padding: 4px; border-radius: var(--radius); }
+.side-btn { padding: 10px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--text-3); border: none; background: none; cursor: pointer; }
+.side-btn.active { background: var(--text); color: var(--bg); }
 .set-info { font-size: 14px; color: var(--text-2); }
 .rep-circle { width: 200px; height: 200px; position: relative; cursor: pointer; }
 .rep-circle:active { transform: scale(0.98); }
@@ -195,196 +198,243 @@
   <script>
     // ============================================
     // DONNÉES DE PROGRESSION PAR PÉRIODE (4 jours)
-    // Début: 14 janvier 2026
+    // Début: 13 janvier 2026 (corrigé)
     // ============================================
     
-    const START_DATE = new Date(2026, 0, 14); // 14 janvier 2026
+    const START_DATE = new Date(2026, 0, 13); // 13 janvier 2026
     const END_DATE = new Date(2026, 3, 14);   // 14 avril 2026
     
-    // Format: [adductions, squats, chaiseMur, scapula, velo]
-    // Chaque élément: { sets, reps, holdTime, extra } ou { durationMin } pour vélo
+    // 7 exercices avec progression
+    // Respiration: fixe 2×6 cycles
+    // Unipodal: progression durée comme chaise mur
     const PROGRESSION = [
-      // Période 0: 14-17 janv
+      // Période 0: 13-16 janv
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 6, holdTime: 8 },
         squats: { sets: 2, reps: 6, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 15 },
+        unipodal: { sets: 2, holdTime: 15 },
         scapula: { sets: 2, reps: 5 },
         velo: { durationMin: 10 }
       },
-      // Période 1: 18-21 janv
+      // Période 1: 17-20 janv
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 6, holdTime: 8 },
         squats: { sets: 2, reps: 6, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 15 },
+        unipodal: { sets: 2, holdTime: 15 },
         scapula: { sets: 2, reps: 6 },
         velo: { durationMin: 10 }
       },
-      // Période 2: 22-25 janv
+      // Période 2: 21-24 janv
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 7, holdTime: 8 },
         squats: { sets: 2, reps: 7, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 20 },
+        unipodal: { sets: 2, holdTime: 20 },
         scapula: { sets: 2, reps: 7 },
         velo: { durationMin: 12 }
       },
-      // Période 3: 26-29 janv
+      // Période 3: 25-28 janv
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 7, holdTime: 8 },
         squats: { sets: 2, reps: 7, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 20 },
+        unipodal: { sets: 2, holdTime: 20 },
         scapula: { sets: 2, reps: 8 },
         velo: { durationMin: 12 }
       },
-      // Période 4: 30 janv - 2 fév
+      // Période 4: 29 janv - 1 fév
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 8, holdTime: 8 },
         squats: { sets: 2, reps: 8, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 25 },
+        unipodal: { sets: 2, holdTime: 25 },
         scapula: { sets: 2, reps: 9 },
         velo: { durationMin: 14 }
       },
-      // Période 5: 3-6 fév
+      // Période 5: 2-5 fév
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 8, holdTime: 8 },
         squats: { sets: 2, reps: 8, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 25 },
+        unipodal: { sets: 2, holdTime: 25 },
         scapula: { sets: 2, reps: 10 },
         velo: { durationMin: 14 }
       },
-      // Période 6: 7-10 fév
+      // Période 6: 6-9 fév
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 9, holdTime: 8 },
         squats: { sets: 2, reps: 9, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 30 },
+        unipodal: { sets: 2, holdTime: 30 },
         scapula: { sets: 2, reps: 11 },
         velo: { durationMin: 16 }
       },
-      // Période 7: 11-14 fév
+      // Période 7: 10-13 fév
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 9, holdTime: 8 },
         squats: { sets: 2, reps: 9, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 30 },
+        unipodal: { sets: 2, holdTime: 30 },
         scapula: { sets: 2, reps: 12 },
         velo: { durationMin: 16 }
       },
-      // Période 8: 15-18 fév
+      // Période 8: 14-17 fév
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 10, holdTime: 8 },
         squats: { sets: 2, reps: 10, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 35 },
+        unipodal: { sets: 2, holdTime: 35 },
         scapula: { sets: 2, reps: 13 },
         velo: { durationMin: 18 }
       },
-      // Période 9: 19-22 fév
+      // Période 9: 18-21 fév
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 10, holdTime: 8 },
         squats: { sets: 2, reps: 10, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 35 },
+        unipodal: { sets: 2, holdTime: 35 },
         scapula: { sets: 2, reps: 14 },
         velo: { durationMin: 18 }
       },
-      // Période 10: 23-26 fév
+      // Période 10: 22-25 fév
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 11, holdTime: 8 },
         squats: { sets: 2, reps: 11, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 40 },
+        unipodal: { sets: 2, holdTime: 40 },
         scapula: { sets: 2, reps: 15 },
         velo: { durationMin: 20 }
       },
-      // Période 11: 27 fév - 2 mars
+      // Période 11: 26 fév - 1 mars
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8 },
         squats: { sets: 2, reps: 12, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 40 },
+        unipodal: { sets: 2, holdTime: 40 },
         scapula: { sets: 2, reps: 16 },
         velo: { durationMin: 20 }
       },
-      // Période 12: 3-6 mars (début série 3)
+      // Période 12: 2-5 mars (début série 3)
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 4 },
         squats: { sets: 2, reps: 12, descente: 3 },
         chaiseMur: { sets: 2, holdTime: 45 },
+        unipodal: { sets: 2, holdTime: 45 },
         scapula: { sets: 2, reps: 17 },
         velo: { durationMin: 22 }
       },
-      // Période 13: 7-10 mars
+      // Période 13: 6-9 mars
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 5 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 4 },
         chaiseMur: { sets: 2, holdTime: 45 },
+        unipodal: { sets: 2, holdTime: 45 },
         scapula: { sets: 2, reps: 18 },
         velo: { durationMin: 22 }
       },
-      // Période 14: 11-14 mars
+      // Période 14: 10-13 mars
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 6 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 5 },
         chaiseMur: { sets: 2, holdTime: 45 },
+        unipodal: { sets: 2, holdTime: 45 },
         scapula: { sets: 2, reps: 20 },
         velo: { durationMin: 24 }
       },
-      // Période 15: 15-18 mars (début chaise mur série 3)
+      // Période 15: 14-17 mars (début chaise/unipodal série 3)
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 7 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 6 },
         chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 10 },
+        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 10 },
         scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 6 },
         velo: { durationMin: 24 }
       },
-      // Période 16: 19-22 mars
+      // Période 16: 18-21 mars
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 8 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 7 },
         chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 15 },
+        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 15 },
         scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 8 },
         velo: { durationMin: 26 }
       },
-      // Période 17: 23-26 mars
+      // Période 17: 22-25 mars
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 9 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 8 },
         chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 20 },
+        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 20 },
         scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 10 },
         velo: { durationMin: 26 }
       },
-      // Période 18: 27-30 mars
+      // Période 18: 26-29 mars
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 10 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 9 },
         chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 25 },
+        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 25 },
         scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 12 },
         velo: { durationMin: 28 }
       },
-      // Période 19: 31 mars - 3 avr
+      // Période 19: 30 mars - 2 avr
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 11 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 10 },
         chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 30 },
+        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 30 },
         scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 14 },
         velo: { durationMin: 28 }
       },
-      // Période 20: 4-7 avr
+      // Période 20: 3-6 avr
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 11 },
         chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 35 },
+        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 35 },
         scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 16 },
         velo: { durationMin: 30 }
       },
-      // Période 21: 8-11 avr
+      // Période 21: 7-10 avr
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 12 },
         chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 40 },
+        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 40 },
         scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 18 },
         velo: { durationMin: 30 }
       },
-      // Période 22: 12-14 avr (finale)
+      // Période 22: 11-14 avr (finale)
       {
+        respiration: { sets: 2, reps: 6 },
         adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 },
         squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 12 },
         chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 45 },
+        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 45 },
         scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 20 },
         velo: { durationMin: 30 }
       }
@@ -392,6 +442,21 @@
 
     // Définition des exercices
     const EXERCISES = {
+      respiration: {
+        id: 'respiration',
+        name: 'Relâchement / Respiration',
+        icon: '🌬️',
+        gradient: ['#6366F1', '#8B5CF6'],
+        position: 'Sur le dos, genoux pliés, pieds au sol. Alternative : sur le côté avec coussin.',
+        steps: [
+          { text: 'Inspire par le nez 3-4 secondes', detail: 'Laisse les côtes s\'ouvrir' },
+          { text: 'Expire par la bouche 6-8 secondes', detail: 'Comme souffler sur une vitre' },
+          { text: 'Micro-bascule du bassin en fin d\'expiration', detail: 'Aplatis légèrement le bas du dos' },
+          { text: 'Reviens en position neutre', detail: 'Amplitude minuscule' }
+        ],
+        feel: 'Relâchement progressif de la zone lombaire',
+        warnings: ['Ne rentre pas le ventre', 'Ne bloque pas ta respiration', 'Garde une amplitude minime']
+      },
       adductions: {
         id: 'adductions',
         name: 'Adductions élastique',
@@ -436,6 +501,21 @@
         ],
         feel: 'Quadriceps qui brûlent, pas de tension lombaire',
         warnings: ['Stop si lombaires se crispent', 'Stop si ventre se serre', 'Angle confortable suffit']
+      },
+      unipodal: {
+        id: 'unipodal',
+        name: 'Station unipodale',
+        icon: '🦩',
+        gradient: ['#EC4899', '#F472B6'],
+        position: 'Debout près d\'un mur, 1-2 doigts en appui léger. Pied en trépied.',
+        steps: [
+          { text: 'Décolle l\'autre pied de 2-3 cm', detail: 'Pas besoin de lever haut' },
+          { text: 'Aligne ton genou d\'appui', detail: 'Au-dessus du 2e-3e orteil' },
+          { text: 'Garde le bassin à niveau', detail: 'La hanche du côté levé ne tombe pas' },
+          { text: 'Respire normalement', detail: 'Tiens X secondes par côté' }
+        ],
+        feel: 'Le fessier de la jambe d\'appui qui stabilise',
+        warnings: ['Ne te penche pas sur la jambe d\'appui', 'Ne griffe pas le sol']
       },
       scapula: {
         id: 'scapula',
@@ -485,6 +565,7 @@
     let timerInterval = null;
     let repCount = 0;
     let setCount = 1;
+    let side = 'left';
     let holding = false;
     let holdTime = 0;
     let holdInterval = null;
@@ -493,7 +574,9 @@
     // HELPERS
     // ============================================
     function getDaysDiff(date) {
-      const diffTime = date.getTime() - START_DATE.getTime();
+      const d1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      const d2 = new Date(START_DATE.getFullYear(), START_DATE.getMonth(), START_DATE.getDate());
+      const diffTime = d1.getTime() - d2.getTime();
       return Math.floor(diffTime / (1000 * 60 * 60 * 24));
     }
 
@@ -518,11 +601,16 @@
         return `${dosage.durationMin} min`;
       }
       
-      if (exId === 'chaiseMur') {
+      if (exId === 'respiration') {
+        return `${dosage.sets}×${dosage.reps} cycles`;
+      }
+      
+      if (exId === 'chaiseMur' || exId === 'unipodal') {
         let text = `${dosage.sets}×${dosage.holdTime}s`;
         if (dosage.extraSets) {
           text += ` + ${dosage.extraSets}×${dosage.extraHoldTime}s`;
         }
+        if (exId === 'unipodal') text += ' /côté';
         return text;
       }
       
@@ -561,15 +649,28 @@
         return { sets: 1, reps: null, holdTime: null, durationMin: dosage.durationMin };
       }
       
+      if (exId === 'respiration') {
+        return { sets: dosage.sets, reps: dosage.reps, holdTime: null, durationMin: null };
+      }
+      
       if (exId === 'chaiseMur') {
         const totalSets = dosage.sets + (dosage.extraSets || 0);
-        // Pour chaise mur, on traite comme des sets avec holdTime
         const holdTimes = [];
         for (let i = 0; i < dosage.sets; i++) holdTimes.push(dosage.holdTime);
         if (dosage.extraSets) {
           for (let i = 0; i < dosage.extraSets; i++) holdTimes.push(dosage.extraHoldTime);
         }
-        return { sets: totalSets, reps: 1, holdTime: holdTimes, durationMin: null, isChaiseMur: true };
+        return { sets: totalSets, reps: 1, holdTime: holdTimes, durationMin: null, isHoldExercise: true, perSide: false };
+      }
+      
+      if (exId === 'unipodal') {
+        const totalSets = dosage.sets + (dosage.extraSets || 0);
+        const holdTimes = [];
+        for (let i = 0; i < dosage.sets; i++) holdTimes.push(dosage.holdTime);
+        if (dosage.extraSets) {
+          for (let i = 0; i < dosage.extraSets; i++) holdTimes.push(dosage.extraHoldTime);
+        }
+        return { sets: totalSets, reps: 1, holdTime: holdTimes, durationMin: null, isHoldExercise: true, perSide: true };
       }
       
       if (exId === 'adductions') {
@@ -582,17 +683,7 @@
         return { sets: totalSets, repsPerSet, holdTime: dosage.holdTime, durationMin: null };
       }
       
-      if (exId === 'squats') {
-        const totalSets = dosage.sets + (dosage.extraSets || 0);
-        const repsPerSet = [];
-        for (let i = 0; i < dosage.sets; i++) repsPerSet.push(dosage.reps);
-        if (dosage.extraSets) {
-          for (let i = 0; i < dosage.extraSets; i++) repsPerSet.push(dosage.extraReps);
-        }
-        return { sets: totalSets, repsPerSet, holdTime: null, durationMin: null };
-      }
-      
-      if (exId === 'scapula') {
+      if (exId === 'squats' || exId === 'scapula') {
         const totalSets = dosage.sets + (dosage.extraSets || 0);
         const repsPerSet = [];
         for (let i = 0; i < dosage.sets; i++) repsPerSet.push(dosage.reps);
@@ -622,16 +713,14 @@
       let content = '';
       
       if (periodIndex === -1) {
-        // Avant le début
         content = `
           <div class="out-of-range">
             <span>📅</span>
             <h2>Programme pas encore commencé</h2>
-            <p>Le programme débute le <strong>14 janvier 2026</strong>.<br>Reviens à cette date pour commencer !</p>
+            <p>Le programme débute le <strong>13 janvier 2026</strong>.<br>Reviens à cette date pour commencer !</p>
           </div>
         `;
       } else if (periodIndex === -2) {
-        // Après la fin
         content = `
           <div class="out-of-range">
             <span>🎉</span>
@@ -640,14 +729,13 @@
           </div>
         `;
       } else {
-        // Dans le programme
-        const exerciseOrder = ['adductions', 'squats', 'chaiseMur', 'scapula', 'velo'];
+        const exerciseOrder = ['respiration', 'adductions', 'squats', 'chaiseMur', 'unipodal', 'scapula', 'velo'];
         const completedCount = Object.keys(completed).filter(id => completed[id]).length;
         
         content = `
           <div class="header">
             <h1>Programme du jour</h1>
-            <p>${completedCount}/5 exercices complétés</p>
+            <p>${completedCount}/7 exercices complétés</p>
           </div>
           
           <div class="ex-list">
@@ -676,8 +764,8 @@
           </div>
           
           <div class="status-bar">
-            <div class="status-item ${completedCount === 5 ? 'done' : ''}">
-              ${completedCount === 5 ? '✓ Journée complète' : `${5 - completedCount} restant${5 - completedCount > 1 ? 's' : ''}`}
+            <div class="status-item ${completedCount === 7 ? 'done' : ''}">
+              ${completedCount === 7 ? '✓ Journée complète' : `${7 - completedCount} restant${7 - completedCount > 1 ? 's' : ''}`}
             </div>
           </div>
         `;
@@ -700,15 +788,15 @@
         <div class="progress-section">
           <div class="progress-header">
             <span>Progression globale</span>
-            <strong>${Math.round(progress)}%</strong>
+            <strong>${Math.round(Math.max(0, progress))}%</strong>
           </div>
           <div class="progress-bar">
-            <div class="progress-fill" style="width: ${progress}%"></div>
+            <div class="progress-fill" style="width: ${Math.max(0, progress)}%"></div>
           </div>
           ${periodIndex >= 0 ? `
             <div class="period-info">
               <div class="label">Période actuelle</div>
-              <div class="value">Jour ${daysDiff + 1} / 91 — Bloc ${periodIndex + 1}/23</div>
+              <div class="value">Jour ${daysDiff + 1} / 92 — Bloc ${periodIndex + 1}/23</div>
             </div>
           ` : ''}
         </div>
@@ -725,15 +813,13 @@
       const params = getTotalSetsAndReps(currentEx, dosage);
       const screen = document.getElementById('exercise-screen');
       
-      // Calcul du nombre de reps pour la série courante
-      let currentReps = 1;
+      let currentReps = params.reps || 1;
       if (params.repsPerSet) {
         currentReps = params.repsPerSet[setCount - 1] || 1;
       }
       
-      // Calcul du holdTime pour la série courante (chaise mur)
       let currentHoldTime = null;
-      if (params.isChaiseMur && Array.isArray(params.holdTime)) {
+      if (params.isHoldExercise && Array.isArray(params.holdTime)) {
         currentHoldTime = params.holdTime[setCount - 1] || 30;
       } else if (params.holdTime && !Array.isArray(params.holdTime)) {
         currentHoldTime = params.holdTime;
@@ -759,6 +845,7 @@
               <div class="main">${dosageText}</div>
               ${currentEx === 'squats' ? '<div class="sub">Descente contrôlée en 3 secondes</div>' : ''}
               ${currentEx === 'scapula' ? '<div class="sub">Altères 2kg — Plan scapulaire (130-140°)</div>' : ''}
+              ${currentEx === 'unipodal' ? '<div class="sub">Chaque côté — Appui léger au mur</div>' : ''}
             </div>
           </div>
           
@@ -877,6 +964,12 @@
       
       return `
         <div class="rep-counter">
+          ${params.perSide ? `
+            <div class="side-switch">
+              <button class="side-btn ${side === 'left' ? 'active' : ''}">← Gauche</button>
+              <button class="side-btn ${side === 'right' ? 'active' : ''}">Droit →</button>
+            </div>
+          ` : ''}
           <div class="set-info">Série ${setCount} sur ${params.sets}</div>
           <div class="rep-circle ${holding ? 'holding' : ''}" onclick="tapRep()">
             <svg viewBox="0 0 100 100">
@@ -894,7 +987,7 @@
             </div>
             ${holding ? '<div class="hold-ring"></div>' : ''}
           </div>
-          ${currentHoldTime && !holding ? `<div class="hold-info">💡 Maintiens ${currentHoldTime}s par rep</div>` : ''}
+          ${currentHoldTime && !holding ? `<div class="hold-info">💡 Maintiens ${currentHoldTime}s</div>` : ''}
         </div>
       `;
     }
@@ -904,7 +997,7 @@
     // ============================================
     function changeDate(delta) {
       currentDate = new Date(currentDate.getTime() + delta * 24 * 60 * 60 * 1000);
-      completed = {};  // Reset pour le nouveau jour
+      completed = {};
       render();
     }
 
@@ -920,10 +1013,10 @@
       timerRunning = false;
       repCount = 0;
       setCount = 1;
+      side = 'left';
       holding = false;
       
-      // Calcul holdTime initial
-      if (params.isChaiseMur && Array.isArray(params.holdTime)) {
+      if (params.isHoldExercise && Array.isArray(params.holdTime)) {
         holdTime = params.holdTime[0] || 30;
       } else if (params.holdTime && !Array.isArray(params.holdTime)) {
         holdTime = params.holdTime;
@@ -986,9 +1079,8 @@
       const dosage = dosages[currentEx];
       const params = getTotalSetsAndReps(currentEx, dosage);
       
-      // Calcul holdTime pour la série courante
       let currentHoldTime = null;
-      if (params.isChaiseMur && Array.isArray(params.holdTime)) {
+      if (params.isHoldExercise && Array.isArray(params.holdTime)) {
         currentHoldTime = params.holdTime[setCount - 1] || 30;
       } else if (params.holdTime && !Array.isArray(params.holdTime)) {
         currentHoldTime = params.holdTime;
@@ -1019,7 +1111,7 @@
       const dosage = dosages[currentEx];
       const params = getTotalSetsAndReps(currentEx, dosage);
       
-      let currentReps = 1;
+      let currentReps = params.reps || 1;
       if (params.repsPerSet) {
         currentReps = params.repsPerSet[setCount - 1] || 1;
       }
@@ -1027,11 +1119,16 @@
       repCount++;
       
       if (repCount >= currentReps) {
-        if (setCount < params.sets) {
+        // Gestion côté pour unipodal
+        if (params.perSide && side === 'left') {
+          side = 'right';
+          repCount = 0;
+        } else if (setCount < params.sets) {
           setCount++;
           repCount = 0;
-          // Update holdTime pour chaise mur
-          if (params.isChaiseMur && Array.isArray(params.holdTime)) {
+          if (params.perSide) side = 'left';
+          // Update holdTime pour exercices à hold variable
+          if (params.isHoldExercise && Array.isArray(params.holdTime)) {
             holdTime = params.holdTime[setCount - 1] || 30;
           }
         } else {
