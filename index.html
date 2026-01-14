@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -19,176 +18,166 @@
     }
     body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; min-height: 100dvh; -webkit-font-smoothing: antialiased; }
     #app { max-width: 430px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; position: relative; padding: 20px; padding-top: 40px; padding-bottom: 40px; }
-
-```
-/* DATE PICKER */
-.date-picker { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; }
-.date-btn { width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--bg-card); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.date-btn:active { background: var(--bg-card-hover); }
-.date-btn svg { width: 24px; height: 24px; }
-.date-display { text-align: center; }
-.date-display .day { font-size: 28px; font-weight: 800; }
-.date-display .month { font-size: 14px; color: var(--text-2); }
-
-/* PROGRESS BAR */
-.progress-section { margin-bottom: 24px; }
-.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.progress-header span { font-size: 13px; color: var(--text-2); }
-.progress-header strong { font-size: 13px; color: var(--green); }
-.progress-bar { height: 8px; background: var(--bg-card); border-radius: 4px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, #22C55E, #10B981); border-radius: 4px; transition: width 0.3s; }
-.period-info { text-align: center; margin-top: 12px; padding: 12px; background: var(--bg-card); border-radius: var(--radius); }
-.period-info .label { font-size: 12px; color: var(--text-3); }
-.period-info .value { font-size: 15px; font-weight: 600; margin-top: 4px; }
-
-/* HEADER */
-.header { text-align: center; margin-bottom: 24px; }
-.header h1 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
-.header p { font-size: 14px; color: var(--text-2); }
-
-/* EXERCISE LIST */
-.ex-list { display: flex; flex-direction: column; gap: 12px; }
-.ex-card { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border-radius: var(--radius); cursor: pointer; position: relative; overflow: hidden; transition: transform 0.15s, background 0.15s; }
-.ex-card:active { transform: scale(0.98); background: var(--bg-card-hover); }
-.ex-card.done { opacity: 0.5; }
-.ex-card-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
-.ex-card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-right: 14px; flex-shrink: 0; }
-.ex-card-body { flex: 1; min-width: 0; }
-.ex-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-.ex-card-top h3 { font-size: 16px; font-weight: 700; }
-.ex-card-dosage { font-size: 14px; color: var(--text); background: var(--bg); padding: 6px 12px; border-radius: 8px; display: inline-block; font-weight: 600; }
-.ex-card-action { margin-left: 12px; flex-shrink: 0; }
-.ex-card-check { width: 32px; height: 32px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; }
-.ex-card-check svg { width: 18px; height: 18px; }
-.ex-card-arrow { width: 20px; height: 20px; color: var(--text-3); }
-
-/* STATUS */
-.status-bar { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
-.status-item { padding: 8px 16px; background: var(--bg-card); border-radius: 20px; font-size: 13px; color: var(--text-2); }
-.status-item.done { background: rgba(34,197,94,0.2); color: var(--green); }
-
-/* OUT OF RANGE */
-.out-of-range { text-align: center; padding: 60px 20px; }
-.out-of-range span { font-size: 64px; display: block; margin-bottom: 16px; }
-.out-of-range h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-.out-of-range p { color: var(--text-2); font-size: 14px; line-height: 1.6; }
-
-/* EXERCISE SCREEN */
-.ex-screen { position: fixed; inset: 0; background: var(--bg); z-index: 100; overflow-y: auto; display: none; }
-.ex-screen.active { display: block; }
-.ex-header { display: flex; align-items: center; padding: 56px 20px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
-.ex-header h2 { flex: 1; text-align: center; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
-.hdr-btn { width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.hdr-btn svg { width: 22px; height: 22px; }
-.hdr-spacer { width: 40px; }
-
-/* INTRO */
-.intro-hero { height: 140px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.intro-hero span { font-size: 64px; position: relative; z-index: 1; }
-.intro-hero .glow { position: absolute; width: 180px; height: 180px; background: rgba(255,255,255,0.15); border-radius: 50%; filter: blur(50px); }
-.intro-body { padding: 20px; padding-bottom: 120px; display: flex; flex-direction: column; gap: 16px; }
-.info-block { background: var(--bg-card); padding: 16px; border-radius: var(--radius); }
-.info-block h4 { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text-2); margin-bottom: 12px; }
-.info-block h4 span { font-size: 18px; }
-.info-block p { font-size: 15px; line-height: 1.6; }
-.info-block.success { background: rgba(34,197,94,0.15); border-left: 4px solid var(--green); }
-.info-block.warning { background: rgba(245,158,11,0.15); border-left: 4px solid var(--orange); }
-.info-block.dosage { background: rgba(99,102,241,0.15); border-left: 4px solid #6366F1; }
-.steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.steps-list li { display: flex; gap: 12px; }
-.steps-list .num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-.steps-list .txt { font-size: 15px; line-height: 1.5; }
-.steps-list .txt strong { display: block; }
-.steps-list .txt span { font-size: 13px; color: var(--text-2); }
-.warn-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.warn-list li { font-size: 15px; padding-left: 20px; position: relative; }
-.warn-list li::before { content: '✕'; position: absolute; left: 0; color: var(--orange); font-size: 12px; }
-.dosage-display { text-align: center; padding: 20px; }
-.dosage-display .main { font-size: 36px; font-weight: 800; color: #6366F1; }
-.dosage-display .sub { font-size: 14px; color: var(--text-2); margin-top: 8px; }
-.intro-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(180deg, transparent, var(--bg) 30%); z-index: 20; display: flex; justify-content: center; }
-.intro-footer > div { max-width: 430px; width: 100%; }
-.btn { width: 100%; padding: 18px; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.15s; }
-.btn:active { transform: scale(0.98); }
-.btn svg { width: 20px; height: 20px; }
-.btn-primary { background: var(--text); color: var(--bg); }
-.btn-secondary { background: var(--bg-card); color: var(--text-2); }
-
-/* ACTIVE SCREEN */
-.active-screen { display: none; flex-direction: column; align-items: center; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); position: relative; }
-.active-screen.show { display: flex; }
-.active-bg { position: absolute; top: 0; left: 0; right: 0; height: 50%; pointer-events: none; }
-
-/* TIMER */
-.timer { display: flex; flex-direction: column; align-items: center; gap: 32px; position: relative; z-index: 1; }
-.timer-ring { position: relative; width: 220px; height: 220px; }
-.timer-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.timer-ring .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
-.timer-ring .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.3s; }
-.timer-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.timer-time { font-size: 52px; font-weight: 800; letter-spacing: -2px; }
-.timer-label { font-size: 14px; color: var(--text-2); }
-.timer-btns { display: flex; gap: 16px; }
-.timer-btn { border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.timer-btn:active { transform: scale(0.95); }
-.timer-btn.main { width: 72px; height: 72px; }
-.timer-btn.main svg { width: 28px; height: 28px; }
-.timer-btn.sec { width: 52px; height: 52px; background: var(--bg-card); color: var(--text-2); }
-.timer-btn.sec svg { width: 22px; height: 22px; }
-
-/* REP COUNTER */
-.rep-counter { display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; z-index: 1; }
-.side-switch { display: flex; gap: 8px; background: var(--bg-card); padding: 4px; border-radius: var(--radius); }
-.side-btn { padding: 10px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--text-3); border: none; background: none; cursor: pointer; }
-.side-btn.active { background: var(--text); color: var(--bg); }
-.set-info { font-size: 14px; color: var(--text-2); }
-.rep-circle { width: 200px; height: 200px; position: relative; cursor: pointer; }
-.rep-circle:active { transform: scale(0.98); }
-.rep-circle svg { position: absolute; inset: 0; transform: rotate(-90deg); }
-.rep-circle .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
-.rep-circle .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dasharray 0.3s; }
-.rep-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.rep-num { font-size: 64px; font-weight: 800; }
-.rep-num .sep { font-size: 28px; color: var(--text-3); margin: 0 4px; }
-.rep-num .tot { font-size: 28px; color: var(--text-2); font-weight: 600; }
-.rep-hint { font-size: 13px; color: var(--text-3); }
-.hold-num { font-size: 72px; font-weight: 800; color: var(--orange); }
-.hold-txt { font-size: 16px; color: var(--orange); font-weight: 600; }
-.rep-circle.holding { animation: pulse 1s infinite; }
-@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
-.hold-ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--orange); animation: ringPulse 1s infinite; pointer-events: none; }
-@keyframes ringPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.15); opacity: 0; } }
-.hold-info { font-size: 14px; color: var(--text-2); margin-top: 8px; }
-
-.tip-box { margin-top: 32px; padding: 16px 20px; background: var(--bg-card); border-radius: var(--radius); display: flex; align-items: center; gap: 12px; max-width: 320px; }
-.tip-box span { font-size: 20px; }
-.tip-box p { font-size: 14px; color: var(--text-2); line-height: 1.4; }
-
-/* FEEDBACK */
-.feedback-screen { display: none; flex-direction: column; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); }
-.feedback-screen.show { display: flex; }
-.fb-top { text-align: center; margin-bottom: 40px; }
-.fb-top span { font-size: 72px; display: block; margin-bottom: 16px; animation: bounce 0.6s; }
-@keyframes bounce { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.3); } 60% { transform: scale(0.9); } }
-.fb-top h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
-.fb-top p { color: var(--text-2); }
-.fb-title { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 8px; }
-.fb-sub { text-align: center; color: var(--text-2); font-size: 14px; margin-bottom: 24px; }
-.fb-options { display: flex; flex-direction: column; gap: 12px; flex: 1; }
-.fb-opt { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border: 2px solid transparent; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
-.fb-opt:active { transform: scale(0.98); }
-.fb-opt.selected { border-color: var(--green); }
-.fb-opt.selected.orange { border-color: var(--orange); }
-.fb-opt.selected.red { border-color: var(--red); }
-.fb-opt .icon { font-size: 28px; margin-right: 16px; }
-.fb-opt .txt { flex: 1; }
-.fb-opt .txt strong { font-size: 16px; display: block; }
-.fb-opt .txt span { font-size: 13px; color: var(--text-2); }
-.fb-opt .check { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; }
-.fb-opt.selected .check { opacity: 1; }
-.fb-opt .check svg { width: 16px; height: 16px; fill: white; }
-```
-
+    
+    .date-picker { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; }
+    .date-btn { width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--bg-card); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .date-btn:active { background: var(--bg-card-hover); }
+    .date-btn svg { width: 24px; height: 24px; }
+    .date-display { text-align: center; }
+    .date-display .day { font-size: 28px; font-weight: 800; }
+    .date-display .month { font-size: 14px; color: var(--text-2); }
+    
+    .progress-section { margin-bottom: 24px; }
+    .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .progress-header span { font-size: 13px; color: var(--text-2); }
+    .progress-header strong { font-size: 13px; color: var(--green); }
+    .progress-bar { height: 8px; background: var(--bg-card); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #22C55E, #10B981); border-radius: 4px; transition: width 0.3s; }
+    .period-info { text-align: center; margin-top: 12px; padding: 12px; background: var(--bg-card); border-radius: var(--radius); }
+    .period-info .label { font-size: 12px; color: var(--text-3); }
+    .period-info .value { font-size: 15px; font-weight: 600; margin-top: 4px; }
+    
+    .day-type { text-align: center; margin-bottom: 20px; padding: 10px 16px; border-radius: var(--radius); display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
+    .day-type.full { background: rgba(99,102,241,0.2); color: #818CF8; }
+    .day-type.light { background: rgba(34,197,94,0.2); color: var(--green); }
+    .day-type-container { text-align: center; }
+    
+    .header { text-align: center; margin-bottom: 24px; }
+    .header h1 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+    .header p { font-size: 14px; color: var(--text-2); }
+    
+    .ex-list { display: flex; flex-direction: column; gap: 12px; }
+    .ex-card { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border-radius: var(--radius); cursor: pointer; position: relative; overflow: hidden; transition: transform 0.15s, background 0.15s; }
+    .ex-card:active { transform: scale(0.98); background: var(--bg-card-hover); }
+    .ex-card.done { opacity: 0.5; }
+    .ex-card-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+    .ex-card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-right: 14px; flex-shrink: 0; }
+    .ex-card-body { flex: 1; min-width: 0; }
+    .ex-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .ex-card-top h3 { font-size: 16px; font-weight: 700; }
+    .ex-card-dosage { font-size: 14px; color: var(--text); background: var(--bg); padding: 6px 12px; border-radius: 8px; display: inline-block; font-weight: 600; }
+    .ex-card-action { margin-left: 12px; flex-shrink: 0; }
+    .ex-card-check { width: 32px; height: 32px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; }
+    .ex-card-check svg { width: 18px; height: 18px; }
+    .ex-card-arrow { width: 20px; height: 20px; color: var(--text-3); }
+    
+    .status-bar { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+    .status-item { padding: 8px 16px; background: var(--bg-card); border-radius: 20px; font-size: 13px; color: var(--text-2); }
+    .status-item.done { background: rgba(34,197,94,0.2); color: var(--green); }
+    
+    .out-of-range { text-align: center; padding: 60px 20px; }
+    .out-of-range span { font-size: 64px; display: block; margin-bottom: 16px; }
+    .out-of-range h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .out-of-range p { color: var(--text-2); font-size: 14px; line-height: 1.6; }
+    
+    .ex-screen { position: fixed; inset: 0; background: var(--bg); z-index: 100; overflow-y: auto; display: none; }
+    .ex-screen.active { display: block; }
+    .ex-header { display: flex; align-items: center; padding: 56px 20px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+    .ex-header h2 { flex: 1; text-align: center; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .hdr-btn { width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .hdr-btn svg { width: 22px; height: 22px; }
+    .hdr-spacer { width: 40px; }
+    
+    .intro-hero { height: 140px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .intro-hero span { font-size: 64px; position: relative; z-index: 1; }
+    .intro-hero .glow { position: absolute; width: 180px; height: 180px; background: rgba(255,255,255,0.15); border-radius: 50%; filter: blur(50px); }
+    .intro-body { padding: 20px; padding-bottom: 120px; display: flex; flex-direction: column; gap: 16px; }
+    .info-block { background: var(--bg-card); padding: 16px; border-radius: var(--radius); }
+    .info-block h4 { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text-2); margin-bottom: 12px; }
+    .info-block h4 span { font-size: 18px; }
+    .info-block p { font-size: 15px; line-height: 1.6; }
+    .info-block.success { background: rgba(34,197,94,0.15); border-left: 4px solid var(--green); }
+    .info-block.warning { background: rgba(245,158,11,0.15); border-left: 4px solid var(--orange); }
+    .info-block.dosage { background: rgba(99,102,241,0.15); border-left: 4px solid #6366F1; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .steps-list li { display: flex; gap: 12px; }
+    .steps-list .num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .steps-list .txt { font-size: 15px; line-height: 1.5; }
+    .steps-list .txt strong { display: block; }
+    .steps-list .txt span { font-size: 13px; color: var(--text-2); }
+    .warn-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .warn-list li { font-size: 15px; padding-left: 20px; position: relative; }
+    .warn-list li::before { content: '✕'; position: absolute; left: 0; color: var(--orange); font-size: 12px; }
+    .dosage-display { text-align: center; padding: 20px; }
+    .dosage-display .main { font-size: 36px; font-weight: 800; color: #6366F1; }
+    .dosage-display .sub { font-size: 14px; color: var(--text-2); margin-top: 8px; }
+    .intro-footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(180deg, transparent, var(--bg) 30%); z-index: 20; display: flex; justify-content: center; }
+    .intro-footer > div { max-width: 430px; width: 100%; }
+    .btn { width: 100%; padding: 18px; border: none; border-radius: var(--radius); font-size: 17px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.15s; }
+    .btn:active { transform: scale(0.98); }
+    .btn svg { width: 20px; height: 20px; }
+    .btn-primary { background: var(--text); color: var(--bg); }
+    .btn-secondary { background: var(--bg-card); color: var(--text-2); }
+    
+    .active-screen { display: none; flex-direction: column; align-items: center; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); position: relative; }
+    .active-screen.show { display: flex; }
+    .active-bg { position: absolute; top: 0; left: 0; right: 0; height: 50%; pointer-events: none; }
+    
+    .timer { display: flex; flex-direction: column; align-items: center; gap: 32px; position: relative; z-index: 1; }
+    .timer-ring { position: relative; width: 220px; height: 220px; }
+    .timer-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .timer-ring .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
+    .timer-ring .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 0.3s; }
+    .timer-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .timer-time { font-size: 52px; font-weight: 800; letter-spacing: -2px; }
+    .timer-label { font-size: 14px; color: var(--text-2); }
+    .timer-btns { display: flex; gap: 16px; }
+    .timer-btn { border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .timer-btn:active { transform: scale(0.95); }
+    .timer-btn.main { width: 72px; height: 72px; }
+    .timer-btn.main svg { width: 28px; height: 28px; }
+    .timer-btn.sec { width: 52px; height: 52px; background: var(--bg-card); color: var(--text-2); }
+    .timer-btn.sec svg { width: 22px; height: 22px; }
+    
+    .rep-counter { display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; z-index: 1; }
+    .side-switch { display: flex; gap: 8px; background: var(--bg-card); padding: 4px; border-radius: var(--radius); }
+    .side-btn { padding: 10px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--text-3); border: none; background: none; cursor: pointer; }
+    .side-btn.active { background: var(--text); color: var(--bg); }
+    .set-info { font-size: 14px; color: var(--text-2); }
+    .rep-circle { width: 200px; height: 200px; position: relative; cursor: pointer; }
+    .rep-circle:active { transform: scale(0.98); }
+    .rep-circle svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+    .rep-circle .track { fill: none; stroke: var(--bg-card); stroke-width: 10; }
+    .rep-circle .progress { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dasharray 0.3s; }
+    .rep-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .rep-num { font-size: 64px; font-weight: 800; }
+    .rep-num .sep { font-size: 28px; color: var(--text-3); margin: 0 4px; }
+    .rep-num .tot { font-size: 28px; color: var(--text-2); font-weight: 600; }
+    .rep-hint { font-size: 13px; color: var(--text-3); }
+    .hold-num { font-size: 72px; font-weight: 800; color: var(--orange); }
+    .hold-txt { font-size: 16px; color: var(--orange); font-weight: 600; }
+    .rep-circle.holding { animation: pulse 1s infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+    .hold-ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--orange); animation: ringPulse 1s infinite; pointer-events: none; }
+    @keyframes ringPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.15); opacity: 0; } }
+    .hold-info { font-size: 14px; color: var(--text-2); margin-top: 8px; }
+    
+    .tip-box { margin-top: 32px; padding: 16px 20px; background: var(--bg-card); border-radius: var(--radius); display: flex; align-items: center; gap: 12px; max-width: 320px; }
+    .tip-box span { font-size: 20px; }
+    .tip-box p { font-size: 14px; color: var(--text-2); line-height: 1.4; }
+    
+    .feedback-screen { display: none; flex-direction: column; padding: 40px 20px; padding-bottom: 120px; min-height: calc(100vh - 89px); }
+    .feedback-screen.show { display: flex; }
+    .fb-top { text-align: center; margin-bottom: 40px; }
+    .fb-top span { font-size: 72px; display: block; margin-bottom: 16px; animation: bounce 0.6s; }
+    @keyframes bounce { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.3); } 60% { transform: scale(0.9); } }
+    .fb-top h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+    .fb-top p { color: var(--text-2); }
+    .fb-title { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 8px; }
+    .fb-sub { text-align: center; color: var(--text-2); font-size: 14px; margin-bottom: 24px; }
+    .fb-options { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .fb-opt { display: flex; align-items: center; padding: 16px; background: var(--bg-card); border: 2px solid transparent; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
+    .fb-opt:active { transform: scale(0.98); }
+    .fb-opt.selected { border-color: var(--green); }
+    .fb-opt.selected.orange { border-color: var(--orange); }
+    .fb-opt.selected.red { border-color: var(--red); }
+    .fb-opt .icon { font-size: 28px; margin-right: 16px; }
+    .fb-opt .txt { flex: 1; }
+    .fb-opt .txt strong { font-size: 16px; display: block; }
+    .fb-opt .txt span { font-size: 13px; color: var(--text-2); }
+    .fb-opt .check { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; }
+    .fb-opt.selected .check { opacity: 1; }
+    .fb-opt .check svg { width: 16px; height: 16px; fill: white; }
   </style>
 </head>
 <body>
@@ -197,256 +186,106 @@
 
   <script>
     // ============================================
-    // DONNÉES DE PROGRESSION PAR PÉRIODE (4 jours)
-    // Début: 13 janvier 2026 (corrigé)
+    // CONFIGURATION
+    // Début: 13 janvier 2026
+    // Renforcement: 1 jour sur 2 (jours impairs du programme)
+    // Reset + Vélo: tous les jours
     // ============================================
     
-    const START_DATE = new Date(2026, 0, 13); // 13 janvier 2026
-    const END_DATE = new Date(2026, 3, 14);   // 14 avril 2026
+    const START_DATE = new Date(2026, 0, 13);
+    const END_DATE = new Date(2026, 3, 14);
     
-    // 7 exercices avec progression
-    // Respiration: fixe 2×6 cycles
-    // Unipodal: progression durée comme chaise mur
+    // Exercices quotidiens vs alternés
+    const DAILY_EXERCISES = ['reset', 'velo'];
+    const ALTERNATE_EXERCISES = ['adductions', 'squats', 'chaiseMur', 'unipodal', 'scapula'];
+    
+    // Progression par "séance de renforcement" (pas par jour calendaire)
+    // Séance 1 = Jour 1, Séance 2 = Jour 3, Séance 3 = Jour 5, etc.
+    // Environ 46 séances sur 91 jours
     const PROGRESSION = [
-      // Période 0: 13-16 janv
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 6, holdTime: 8 },
-        squats: { sets: 2, reps: 6, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 15 },
-        unipodal: { sets: 2, holdTime: 15 },
-        scapula: { sets: 2, reps: 5 },
-        velo: { durationMin: 10 }
-      },
-      // Période 1: 17-20 janv
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 6, holdTime: 8 },
-        squats: { sets: 2, reps: 6, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 15 },
-        unipodal: { sets: 2, holdTime: 15 },
-        scapula: { sets: 2, reps: 6 },
-        velo: { durationMin: 10 }
-      },
-      // Période 2: 21-24 janv
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 7, holdTime: 8 },
-        squats: { sets: 2, reps: 7, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 20 },
-        unipodal: { sets: 2, holdTime: 20 },
-        scapula: { sets: 2, reps: 7 },
-        velo: { durationMin: 12 }
-      },
-      // Période 3: 25-28 janv
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 7, holdTime: 8 },
-        squats: { sets: 2, reps: 7, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 20 },
-        unipodal: { sets: 2, holdTime: 20 },
-        scapula: { sets: 2, reps: 8 },
-        velo: { durationMin: 12 }
-      },
-      // Période 4: 29 janv - 1 fév
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 8, holdTime: 8 },
-        squats: { sets: 2, reps: 8, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 25 },
-        unipodal: { sets: 2, holdTime: 25 },
-        scapula: { sets: 2, reps: 9 },
-        velo: { durationMin: 14 }
-      },
-      // Période 5: 2-5 fév
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 8, holdTime: 8 },
-        squats: { sets: 2, reps: 8, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 25 },
-        unipodal: { sets: 2, holdTime: 25 },
-        scapula: { sets: 2, reps: 10 },
-        velo: { durationMin: 14 }
-      },
-      // Période 6: 6-9 fév
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 9, holdTime: 8 },
-        squats: { sets: 2, reps: 9, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 30 },
-        unipodal: { sets: 2, holdTime: 30 },
-        scapula: { sets: 2, reps: 11 },
-        velo: { durationMin: 16 }
-      },
-      // Période 7: 10-13 fév
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 9, holdTime: 8 },
-        squats: { sets: 2, reps: 9, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 30 },
-        unipodal: { sets: 2, holdTime: 30 },
-        scapula: { sets: 2, reps: 12 },
-        velo: { durationMin: 16 }
-      },
-      // Période 8: 14-17 fév
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 10, holdTime: 8 },
-        squats: { sets: 2, reps: 10, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 35 },
-        unipodal: { sets: 2, holdTime: 35 },
-        scapula: { sets: 2, reps: 13 },
-        velo: { durationMin: 18 }
-      },
-      // Période 9: 18-21 fév
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 10, holdTime: 8 },
-        squats: { sets: 2, reps: 10, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 35 },
-        unipodal: { sets: 2, holdTime: 35 },
-        scapula: { sets: 2, reps: 14 },
-        velo: { durationMin: 18 }
-      },
-      // Période 10: 22-25 fév
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 11, holdTime: 8 },
-        squats: { sets: 2, reps: 11, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 40 },
-        unipodal: { sets: 2, holdTime: 40 },
-        scapula: { sets: 2, reps: 15 },
-        velo: { durationMin: 20 }
-      },
-      // Période 11: 26 fév - 1 mars
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8 },
-        squats: { sets: 2, reps: 12, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 40 },
-        unipodal: { sets: 2, holdTime: 40 },
-        scapula: { sets: 2, reps: 16 },
-        velo: { durationMin: 20 }
-      },
-      // Période 12: 2-5 mars (début série 3)
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 4 },
-        squats: { sets: 2, reps: 12, descente: 3 },
-        chaiseMur: { sets: 2, holdTime: 45 },
-        unipodal: { sets: 2, holdTime: 45 },
-        scapula: { sets: 2, reps: 17 },
-        velo: { durationMin: 22 }
-      },
-      // Période 13: 6-9 mars
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 5 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 4 },
-        chaiseMur: { sets: 2, holdTime: 45 },
-        unipodal: { sets: 2, holdTime: 45 },
-        scapula: { sets: 2, reps: 18 },
-        velo: { durationMin: 22 }
-      },
-      // Période 14: 10-13 mars
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 6 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 5 },
-        chaiseMur: { sets: 2, holdTime: 45 },
-        unipodal: { sets: 2, holdTime: 45 },
-        scapula: { sets: 2, reps: 20 },
-        velo: { durationMin: 24 }
-      },
-      // Période 15: 14-17 mars (début chaise/unipodal série 3)
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 7 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 6 },
-        chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 10 },
-        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 10 },
-        scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 6 },
-        velo: { durationMin: 24 }
-      },
-      // Période 16: 18-21 mars
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 8 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 7 },
-        chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 15 },
-        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 15 },
-        scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 8 },
-        velo: { durationMin: 26 }
-      },
-      // Période 17: 22-25 mars
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 9 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 8 },
-        chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 20 },
-        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 20 },
-        scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 10 },
-        velo: { durationMin: 26 }
-      },
-      // Période 18: 26-29 mars
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 10 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 9 },
-        chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 25 },
-        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 25 },
-        scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 12 },
-        velo: { durationMin: 28 }
-      },
-      // Période 19: 30 mars - 2 avr
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 11 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 10 },
-        chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 30 },
-        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 30 },
-        scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 14 },
-        velo: { durationMin: 28 }
-      },
-      // Période 20: 3-6 avr
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 11 },
-        chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 35 },
-        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 35 },
-        scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 16 },
-        velo: { durationMin: 30 }
-      },
-      // Période 21: 7-10 avr
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 12 },
-        chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 40 },
-        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 40 },
-        scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 18 },
-        velo: { durationMin: 30 }
-      },
-      // Période 22: 11-14 avr (finale)
-      {
-        respiration: { sets: 2, reps: 6 },
-        adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 },
-        squats: { sets: 2, reps: 12, descente: 3, extraSets: 1, extraReps: 12 },
-        chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 45 },
-        unipodal: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 45 },
-        scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 20 },
-        velo: { durationMin: 30 }
-      }
+      // Séances 1-2 (jours 1,3)
+      { adductions: { sets: 2, reps: 6, holdTime: 8 }, squats: { sets: 2, reps: 6 }, chaiseMur: { sets: 2, holdTime: 15 }, unipodal: { sets: 2, holdTime: 15, perSide: true }, scapula: { sets: 2, reps: 5 }, velo: { durationMin: 10 } },
+      { adductions: { sets: 2, reps: 6, holdTime: 8 }, squats: { sets: 2, reps: 6 }, chaiseMur: { sets: 2, holdTime: 15 }, unipodal: { sets: 2, holdTime: 15, perSide: true }, scapula: { sets: 2, reps: 5 }, velo: { durationMin: 10 } },
+      // Séances 3-4 (jours 5,7)
+      { adductions: { sets: 2, reps: 6, holdTime: 8 }, squats: { sets: 2, reps: 6 }, chaiseMur: { sets: 2, holdTime: 15 }, unipodal: { sets: 2, holdTime: 15, perSide: true }, scapula: { sets: 2, reps: 6 }, velo: { durationMin: 10 } },
+      { adductions: { sets: 2, reps: 6, holdTime: 8 }, squats: { sets: 2, reps: 6 }, chaiseMur: { sets: 2, holdTime: 15 }, unipodal: { sets: 2, holdTime: 15, perSide: true }, scapula: { sets: 2, reps: 6 }, velo: { durationMin: 10 } },
+      // Séances 5-6
+      { adductions: { sets: 2, reps: 7, holdTime: 8 }, squats: { sets: 2, reps: 7 }, chaiseMur: { sets: 2, holdTime: 20 }, unipodal: { sets: 2, holdTime: 20, perSide: true }, scapula: { sets: 2, reps: 7 }, velo: { durationMin: 12 } },
+      { adductions: { sets: 2, reps: 7, holdTime: 8 }, squats: { sets: 2, reps: 7 }, chaiseMur: { sets: 2, holdTime: 20 }, unipodal: { sets: 2, holdTime: 20, perSide: true }, scapula: { sets: 2, reps: 7 }, velo: { durationMin: 12 } },
+      // Séances 7-8
+      { adductions: { sets: 2, reps: 7, holdTime: 8 }, squats: { sets: 2, reps: 7 }, chaiseMur: { sets: 2, holdTime: 20 }, unipodal: { sets: 2, holdTime: 20, perSide: true }, scapula: { sets: 2, reps: 8 }, velo: { durationMin: 12 } },
+      { adductions: { sets: 2, reps: 7, holdTime: 8 }, squats: { sets: 2, reps: 7 }, chaiseMur: { sets: 2, holdTime: 20 }, unipodal: { sets: 2, holdTime: 20, perSide: true }, scapula: { sets: 2, reps: 8 }, velo: { durationMin: 12 } },
+      // Séances 9-10
+      { adductions: { sets: 2, reps: 8, holdTime: 8 }, squats: { sets: 2, reps: 8 }, chaiseMur: { sets: 2, holdTime: 25 }, unipodal: { sets: 2, holdTime: 25, perSide: true }, scapula: { sets: 2, reps: 9 }, velo: { durationMin: 14 } },
+      { adductions: { sets: 2, reps: 8, holdTime: 8 }, squats: { sets: 2, reps: 8 }, chaiseMur: { sets: 2, holdTime: 25 }, unipodal: { sets: 2, holdTime: 25, perSide: true }, scapula: { sets: 2, reps: 9 }, velo: { durationMin: 14 } },
+      // Séances 11-12
+      { adductions: { sets: 2, reps: 8, holdTime: 8 }, squats: { sets: 2, reps: 8 }, chaiseMur: { sets: 2, holdTime: 25 }, unipodal: { sets: 2, holdTime: 25, perSide: true }, scapula: { sets: 2, reps: 10 }, velo: { durationMin: 14 } },
+      { adductions: { sets: 2, reps: 8, holdTime: 8 }, squats: { sets: 2, reps: 8 }, chaiseMur: { sets: 2, holdTime: 25 }, unipodal: { sets: 2, holdTime: 25, perSide: true }, scapula: { sets: 2, reps: 10 }, velo: { durationMin: 14 } },
+      // Séances 13-14
+      { adductions: { sets: 2, reps: 9, holdTime: 8 }, squats: { sets: 2, reps: 9 }, chaiseMur: { sets: 2, holdTime: 30 }, unipodal: { sets: 2, holdTime: 30, perSide: true }, scapula: { sets: 2, reps: 11 }, velo: { durationMin: 16 } },
+      { adductions: { sets: 2, reps: 9, holdTime: 8 }, squats: { sets: 2, reps: 9 }, chaiseMur: { sets: 2, holdTime: 30 }, unipodal: { sets: 2, holdTime: 30, perSide: true }, scapula: { sets: 2, reps: 11 }, velo: { durationMin: 16 } },
+      // Séances 15-16
+      { adductions: { sets: 2, reps: 9, holdTime: 8 }, squats: { sets: 2, reps: 9 }, chaiseMur: { sets: 2, holdTime: 30 }, unipodal: { sets: 2, holdTime: 30, perSide: true }, scapula: { sets: 2, reps: 12 }, velo: { durationMin: 16 } },
+      { adductions: { sets: 2, reps: 9, holdTime: 8 }, squats: { sets: 2, reps: 9 }, chaiseMur: { sets: 2, holdTime: 30 }, unipodal: { sets: 2, holdTime: 30, perSide: true }, scapula: { sets: 2, reps: 12 }, velo: { durationMin: 16 } },
+      // Séances 17-18
+      { adductions: { sets: 2, reps: 10, holdTime: 8 }, squats: { sets: 2, reps: 10 }, chaiseMur: { sets: 2, holdTime: 35 }, unipodal: { sets: 2, holdTime: 35, perSide: true }, scapula: { sets: 2, reps: 13 }, velo: { durationMin: 18 } },
+      { adductions: { sets: 2, reps: 10, holdTime: 8 }, squats: { sets: 2, reps: 10 }, chaiseMur: { sets: 2, holdTime: 35 }, unipodal: { sets: 2, holdTime: 35, perSide: true }, scapula: { sets: 2, reps: 13 }, velo: { durationMin: 18 } },
+      // Séances 19-20
+      { adductions: { sets: 2, reps: 10, holdTime: 8 }, squats: { sets: 2, reps: 10 }, chaiseMur: { sets: 2, holdTime: 35 }, unipodal: { sets: 2, holdTime: 35, perSide: true }, scapula: { sets: 2, reps: 14 }, velo: { durationMin: 18 } },
+      { adductions: { sets: 2, reps: 10, holdTime: 8 }, squats: { sets: 2, reps: 10 }, chaiseMur: { sets: 2, holdTime: 35 }, unipodal: { sets: 2, holdTime: 35, perSide: true }, scapula: { sets: 2, reps: 14 }, velo: { durationMin: 18 } },
+      // Séances 21-22
+      { adductions: { sets: 2, reps: 11, holdTime: 8 }, squats: { sets: 2, reps: 11 }, chaiseMur: { sets: 2, holdTime: 40 }, unipodal: { sets: 2, holdTime: 40, perSide: true }, scapula: { sets: 2, reps: 15 }, velo: { durationMin: 20 } },
+      { adductions: { sets: 2, reps: 11, holdTime: 8 }, squats: { sets: 2, reps: 11 }, chaiseMur: { sets: 2, holdTime: 40 }, unipodal: { sets: 2, holdTime: 40, perSide: true }, scapula: { sets: 2, reps: 15 }, velo: { durationMin: 20 } },
+      // Séances 23-24
+      { adductions: { sets: 2, reps: 12, holdTime: 8 }, squats: { sets: 2, reps: 12 }, chaiseMur: { sets: 2, holdTime: 40 }, unipodal: { sets: 2, holdTime: 40, perSide: true }, scapula: { sets: 2, reps: 16 }, velo: { durationMin: 20 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8 }, squats: { sets: 2, reps: 12 }, chaiseMur: { sets: 2, holdTime: 40 }, unipodal: { sets: 2, holdTime: 40, perSide: true }, scapula: { sets: 2, reps: 16 }, velo: { durationMin: 20 } },
+      // Séances 25-26 (début série 3)
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 4 }, squats: { sets: 2, reps: 12 }, chaiseMur: { sets: 2, holdTime: 45 }, unipodal: { sets: 2, holdTime: 45, perSide: true }, scapula: { sets: 2, reps: 17 }, velo: { durationMin: 22 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 4 }, squats: { sets: 2, reps: 12 }, chaiseMur: { sets: 2, holdTime: 45 }, unipodal: { sets: 2, holdTime: 45, perSide: true }, scapula: { sets: 2, reps: 17 }, velo: { durationMin: 22 } },
+      // Séances 27-28
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 5 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 4 }, chaiseMur: { sets: 2, holdTime: 45 }, unipodal: { sets: 2, holdTime: 45, perSide: true }, scapula: { sets: 2, reps: 18 }, velo: { durationMin: 22 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 5 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 4 }, chaiseMur: { sets: 2, holdTime: 45 }, unipodal: { sets: 2, holdTime: 45, perSide: true }, scapula: { sets: 2, reps: 18 }, velo: { durationMin: 22 } },
+      // Séances 29-30
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 6 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 5 }, chaiseMur: { sets: 2, holdTime: 45 }, unipodal: { sets: 2, holdTime: 45, perSide: true }, scapula: { sets: 2, reps: 20 }, velo: { durationMin: 24 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 6 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 5 }, chaiseMur: { sets: 2, holdTime: 45 }, unipodal: { sets: 2, holdTime: 45, perSide: true }, scapula: { sets: 2, reps: 20 }, velo: { durationMin: 24 } },
+      // Séances 31-32
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 7 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 6 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 10 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 10 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 6 }, velo: { durationMin: 24 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 7 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 6 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 10 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 10 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 6 }, velo: { durationMin: 24 } },
+      // Séances 33-34
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 8 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 7 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 15 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 15 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 8 }, velo: { durationMin: 26 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 8 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 7 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 15 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 15 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 8 }, velo: { durationMin: 26 } },
+      // Séances 35-36
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 9 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 8 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 20 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 20 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 10 }, velo: { durationMin: 26 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 9 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 8 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 20 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 20 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 10 }, velo: { durationMin: 26 } },
+      // Séances 37-38
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 10 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 9 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 25 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 25 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 12 }, velo: { durationMin: 28 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 10 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 9 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 25 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 25 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 12 }, velo: { durationMin: 28 } },
+      // Séances 39-40
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 11 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 10 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 30 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 30 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 14 }, velo: { durationMin: 28 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 11 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 10 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 30 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 30 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 14 }, velo: { durationMin: 28 } },
+      // Séances 41-42
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 11 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 35 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 35 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 16 }, velo: { durationMin: 30 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 11 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 35 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 35 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 16 }, velo: { durationMin: 30 } },
+      // Séances 43-44
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 12 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 40 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 40 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 18 }, velo: { durationMin: 30 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 12 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 40 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 40 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 18 }, velo: { durationMin: 30 } },
+      // Séances 45-46 (finale)
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 12 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 45 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 45 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 20 }, velo: { durationMin: 30 } },
+      { adductions: { sets: 2, reps: 12, holdTime: 8, extraSets: 1, extraReps: 12 }, squats: { sets: 2, reps: 12, extraSets: 1, extraReps: 12 }, chaiseMur: { sets: 2, holdTime: 45, extraSets: 1, extraHoldTime: 45 }, unipodal: { sets: 2, holdTime: 45, perSide: true, extraSets: 1, extraHoldTime: 45 }, scapula: { sets: 2, reps: 20, extraSets: 1, extraReps: 20 }, velo: { durationMin: 30 } }
     ];
+    
+    // Dosage vélo par jour (progression linéaire)
+    function getVeloDosage(dayNum) {
+      // Jour 1 = 10 min, Jour 91 = 30 min, progression linéaire
+      const minDuration = 10;
+      const maxDuration = 30;
+      const totalDays = 91;
+      const duration = Math.round(minDuration + (dayNum - 1) * (maxDuration - minDuration) / (totalDays - 1));
+      return { durationMin: Math.min(duration, maxDuration) };
+    }
 
-    // Définition des exercices
     const EXERCISES = {
-      respiration: {
-        id: 'respiration',
-        name: 'Relâchement / Respiration',
-        icon: '🌬️',
-        gradient: ['#6366F1', '#8B5CF6'],
+      reset: { id: 'reset', name: 'Reset / Respiration', icon: '🌬️', gradient: ['#6366F1', '#8B5CF6'],
         position: 'Sur le dos, genoux pliés, pieds au sol. Alternative : sur le côté avec coussin.',
         steps: [
           { text: 'Inspire par le nez 3-4 secondes', detail: 'Laisse les côtes s\'ouvrir' },
@@ -457,26 +296,18 @@
         feel: 'Relâchement progressif de la zone lombaire',
         warnings: ['Ne rentre pas le ventre', 'Ne bloque pas ta respiration', 'Garde une amplitude minime']
       },
-      adductions: {
-        id: 'adductions',
-        name: 'Adductions élastique',
-        icon: '🪑',
-        gradient: ['#10B981', '#34D399'],
+      adductions: { id: 'adductions', name: 'Adductions élastique', icon: '🪑', gradient: ['#10B981', '#34D399'],
         position: 'Assis sur chaise, pieds au sol (largeur bassin), élastique au-dessus des genoux, dos soutenu.',
         steps: [
           { text: 'Grandis-toi sur la chaise', detail: 'Cage thoracique au-dessus du bassin' },
           { text: 'Pousse les genoux vers l\'extérieur', detail: 'Contre l\'élastique, effort 20-40%' },
-          { text: 'Maintiens X secondes', detail: 'Sans te pencher, sans serrer le ventre' },
+          { text: 'Maintiens 8 secondes', detail: 'Sans te pencher, sans serrer le ventre' },
           { text: 'Relâche complètement', detail: 'Repos 5 secondes entre chaque rep' }
         ],
         feel: 'Activation sur le côté de la fesse (partie arrière-latérale)',
         warnings: ['Ne te penche pas', 'Évite le serrage abdominal', 'N\'utilise pas trop de force']
       },
-      squats: {
-        id: 'squats',
-        name: 'Squats chaise',
-        icon: '🏋️',
-        gradient: ['#EF4444', '#F87171'],
+      squats: { id: 'squats', name: 'Squats chaise', icon: '🏋️', gradient: ['#EF4444', '#F87171'],
         position: 'Assis sur chaise haute, pieds sous les genoux, largeur bassin.',
         steps: [
           { text: 'Adopte un "dos long"', detail: 'Ne cambre pas le dos' },
@@ -487,11 +318,7 @@
         feel: 'Cuisses et fessiers qui travaillent ensemble',
         warnings: ['Pas de coup de rein', 'Genou aligné (pas vers l\'intérieur)', 'Descente contrôlée 3s']
       },
-      chaiseMur: {
-        id: 'chaiseMur',
-        name: 'Chaise au mur',
-        icon: '🧱',
-        gradient: ['#F59E0B', '#FBBF24'],
+      chaiseMur: { id: 'chaiseMur', name: 'Chaise au mur', icon: '🧱', gradient: ['#F59E0B', '#FBBF24'],
         position: 'Dos plaqué contre le mur, pieds à 50cm du mur, largeur bassin.',
         steps: [
           { text: 'Descends en glissant le dos', detail: 'Jusqu\'à angle confortable (pas forcément 90°)' },
@@ -502,26 +329,18 @@
         feel: 'Quadriceps qui brûlent, pas de tension lombaire',
         warnings: ['Stop si lombaires se crispent', 'Stop si ventre se serre', 'Angle confortable suffit']
       },
-      unipodal: {
-        id: 'unipodal',
-        name: 'Station unipodale',
-        icon: '🦩',
-        gradient: ['#EC4899', '#F472B6'],
+      unipodal: { id: 'unipodal', name: 'Station unipodale', icon: '🦩', gradient: ['#EC4899', '#F472B6'],
         position: 'Debout près d\'un mur, 1-2 doigts en appui léger. Pied en trépied.',
         steps: [
           { text: 'Décolle l\'autre pied de 2-3 cm', detail: 'Pas besoin de lever haut' },
           { text: 'Aligne ton genou d\'appui', detail: 'Au-dessus du 2e-3e orteil' },
           { text: 'Garde le bassin à niveau', detail: 'La hanche du côté levé ne tombe pas' },
-          { text: 'Respire normalement', detail: 'Tiens X secondes par côté' }
+          { text: 'Respire normalement', detail: 'Tiens X secondes puis change de côté' }
         ],
         feel: 'Le fessier de la jambe d\'appui qui stabilise',
-        warnings: ['Ne te penche pas sur la jambe d\'appui', 'Ne griffe pas le sol']
+        warnings: ['Ne te penche pas sur la jambe d\'appui', 'Ne griffe pas le sol', 'Diminue l\'appui mur progressivement']
       },
-      scapula: {
-        id: 'scapula',
-        name: 'Plan scapula (2kg)',
-        icon: '🏋️‍♂️',
-        gradient: ['#8B5CF6', '#A78BFA'],
+      scapula: { id: 'scapula', name: 'Plan scapula (2kg)', icon: '🏋️‍♂️', gradient: ['#8B5CF6', '#A78BFA'],
         position: 'Debout, pieds largeur bassin, altères 2kg en main, bras le long du corps.',
         steps: [
           { text: 'Tiens les altères bras tendus', detail: 'Coudes légèrement déverrouillés' },
@@ -532,11 +351,7 @@
         feel: 'Travail des épaules et stabilisateurs du haut du dos',
         warnings: ['Ne cambre pas le dos', 'Ne monte pas trop haut', 'Garde les épaules basses']
       },
-      velo: {
-        id: 'velo',
-        name: 'Vélo (modéré)',
-        icon: '🚴',
-        gradient: ['#0EA5E9', '#38BDF8'],
+      velo: { id: 'velo', name: 'Vélo (modéré)', icon: '🚴', gradient: ['#0EA5E9', '#38BDF8'],
         position: 'Selle haute (genou légèrement fléchi en bas), soutien lombaire, résistance modérée.',
         steps: [
           { text: 'Règle ta selle correctement', detail: 'Genou légèrement fléchi en bas de pédale' },
@@ -552,9 +367,6 @@
     const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
     const DAYS_SHORT = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
 
-    // ============================================
-    // STATE
-    // ============================================
     let currentDate = new Date();
     let completed = {};
     let currentEx = null;
@@ -570,260 +382,184 @@
     let holdTime = 0;
     let holdInterval = null;
 
-    // ============================================
-    // HELPERS
-    // ============================================
     function getDaysDiff(date) {
-      const d1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      const d2 = new Date(START_DATE.getFullYear(), START_DATE.getMonth(), START_DATE.getDate());
-      const diffTime = d1.getTime() - d2.getTime();
-      return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const d1 = new Date(START_DATE.getFullYear(), START_DATE.getMonth(), START_DATE.getDate());
+      const d2 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24));
     }
 
-    function getPeriodIndex(date) {
+    function isInRange(date) {
       const days = getDaysDiff(date);
-      if (days < 0) return -1;
-      const period = Math.floor(days / 4);
-      if (period >= PROGRESSION.length) return -2;
-      return period;
+      return days >= 0 && days <= getDaysDiff(END_DATE);
     }
 
-    function getCurrentDosages() {
-      const periodIndex = getPeriodIndex(currentDate);
-      if (periodIndex < 0) return null;
-      return PROGRESSION[periodIndex];
+    function isReinforcementDay(date) {
+      // Jour 1, 3, 5, 7... = renforcement (jours impairs du programme, index 0, 2, 4...)
+      const dayNum = getDaysDiff(date) + 1;
+      return dayNum % 2 === 1;
+    }
+
+    function getSessionNumber(date) {
+      // Calcule le numéro de séance de renforcement
+      const dayNum = getDaysDiff(date) + 1;
+      return Math.ceil(dayNum / 2);
+    }
+
+    function getCurrentDosages(date) {
+      const dayNum = getDaysDiff(date) + 1;
+      const sessionNum = getSessionNumber(date);
+      const sessionIndex = Math.min(sessionNum - 1, PROGRESSION.length - 1);
+      
+      const dosages = { ...PROGRESSION[sessionIndex] };
+      // Reset toujours fixe
+      dosages.reset = { sets: 2, reps: 6 };
+      // Vélo progression linéaire quotidienne
+      dosages.velo = getVeloDosage(dayNum);
+      
+      return dosages;
     }
 
     function formatDosage(exId, dosage) {
       if (!dosage) return '';
-      
-      if (exId === 'velo') {
-        return `${dosage.durationMin} min`;
-      }
-      
-      if (exId === 'respiration') {
-        return `${dosage.sets}×${dosage.reps} cycles`;
-      }
-      
+      if (exId === 'velo') return `${dosage.durationMin} min`;
+      if (exId === 'reset') return `${dosage.sets}×${dosage.reps} cycles`;
       if (exId === 'chaiseMur' || exId === 'unipodal') {
         let text = `${dosage.sets}×${dosage.holdTime}s`;
-        if (dosage.extraSets) {
-          text += ` + ${dosage.extraSets}×${dosage.extraHoldTime}s`;
-        }
+        if (dosage.extraSets) text += ` + ${dosage.extraSets}×${dosage.extraHoldTime}s`;
         if (exId === 'unipodal') text += ' /côté';
         return text;
       }
-      
       if (exId === 'adductions') {
         let text = `${dosage.sets}×${dosage.reps}×${dosage.holdTime}s`;
-        if (dosage.extraSets) {
-          text += ` + ${dosage.extraSets}×${dosage.extraReps}×${dosage.holdTime}s`;
-        }
+        if (dosage.extraSets) text += ` + ${dosage.extraSets}×${dosage.extraReps}×${dosage.holdTime}s`;
         return text;
       }
-      
       if (exId === 'squats') {
         let text = `${dosage.sets}×${dosage.reps}`;
-        if (dosage.extraSets) {
-          text += ` + ${dosage.extraSets}×${dosage.extraReps}`;
-        }
+        if (dosage.extraSets) text += ` + ${dosage.extraSets}×${dosage.extraReps}`;
         text += ' (3s desc.)';
         return text;
       }
-      
       if (exId === 'scapula') {
         let text = `${dosage.sets}×${dosage.reps}`;
-        if (dosage.extraSets) {
-          text += ` + ${dosage.extraSets}×${dosage.extraReps}`;
-        }
+        if (dosage.extraSets) text += ` + ${dosage.extraSets}×${dosage.extraReps}`;
         return text;
       }
-      
       return '';
     }
 
     function getTotalSetsAndReps(exId, dosage) {
-      if (!dosage) return { sets: 1, reps: 1, holdTime: null, durationMin: null };
-      
-      if (exId === 'velo') {
-        return { sets: 1, reps: null, holdTime: null, durationMin: dosage.durationMin };
-      }
-      
-      if (exId === 'respiration') {
-        return { sets: dosage.sets, reps: dosage.reps, holdTime: null, durationMin: null };
-      }
-      
+      if (!dosage) return { sets: 1, reps: 1 };
+      if (exId === 'velo') return { sets: 1, reps: null, durationMin: dosage.durationMin };
+      if (exId === 'reset') return { sets: dosage.sets, reps: dosage.reps };
       if (exId === 'chaiseMur') {
         const totalSets = dosage.sets + (dosage.extraSets || 0);
         const holdTimes = [];
         for (let i = 0; i < dosage.sets; i++) holdTimes.push(dosage.holdTime);
-        if (dosage.extraSets) {
-          for (let i = 0; i < dosage.extraSets; i++) holdTimes.push(dosage.extraHoldTime);
-        }
-        return { sets: totalSets, reps: 1, holdTime: holdTimes, durationMin: null, isHoldExercise: true, perSide: false };
+        if (dosage.extraSets) for (let i = 0; i < dosage.extraSets; i++) holdTimes.push(dosage.extraHoldTime);
+        return { sets: totalSets, reps: 1, holdTime: holdTimes, isHoldOnly: true };
       }
-      
       if (exId === 'unipodal') {
         const totalSets = dosage.sets + (dosage.extraSets || 0);
         const holdTimes = [];
         for (let i = 0; i < dosage.sets; i++) holdTimes.push(dosage.holdTime);
-        if (dosage.extraSets) {
-          for (let i = 0; i < dosage.extraSets; i++) holdTimes.push(dosage.extraHoldTime);
-        }
-        return { sets: totalSets, reps: 1, holdTime: holdTimes, durationMin: null, isHoldExercise: true, perSide: true };
+        if (dosage.extraSets) for (let i = 0; i < dosage.extraSets; i++) holdTimes.push(dosage.extraHoldTime);
+        return { sets: totalSets, reps: 1, holdTime: holdTimes, isHoldOnly: true, perSide: true };
       }
-      
       if (exId === 'adductions') {
         const totalSets = dosage.sets + (dosage.extraSets || 0);
         const repsPerSet = [];
         for (let i = 0; i < dosage.sets; i++) repsPerSet.push(dosage.reps);
-        if (dosage.extraSets) {
-          for (let i = 0; i < dosage.extraSets; i++) repsPerSet.push(dosage.extraReps);
-        }
-        return { sets: totalSets, repsPerSet, holdTime: dosage.holdTime, durationMin: null };
+        if (dosage.extraSets) for (let i = 0; i < dosage.extraSets; i++) repsPerSet.push(dosage.extraReps);
+        return { sets: totalSets, repsPerSet, holdTime: dosage.holdTime };
       }
-      
       if (exId === 'squats' || exId === 'scapula') {
         const totalSets = dosage.sets + (dosage.extraSets || 0);
         const repsPerSet = [];
         for (let i = 0; i < dosage.sets; i++) repsPerSet.push(dosage.reps);
-        if (dosage.extraSets) {
-          for (let i = 0; i < dosage.extraSets; i++) repsPerSet.push(dosage.extraReps);
-        }
-        return { sets: totalSets, repsPerSet, holdTime: null, durationMin: null };
+        if (dosage.extraSets) for (let i = 0; i < dosage.extraSets; i++) repsPerSet.push(dosage.extraReps);
+        return { sets: totalSets, repsPerSet };
       }
-      
-      return { sets: 1, reps: 1, holdTime: null, durationMin: null };
+      return { sets: 1, reps: 1 };
     }
 
-    // ============================================
-    // RENDER
-    // ============================================
     function render() {
-      const periodIndex = getPeriodIndex(currentDate);
-      const dosages = getCurrentDosages();
       const daysDiff = getDaysDiff(currentDate);
       const totalDays = getDaysDiff(END_DATE);
       const progress = Math.max(0, Math.min(100, (daysDiff / totalDays) * 100));
-      
       const dayNum = currentDate.getDate();
       const monthName = MONTHS[currentDate.getMonth()];
       const dayName = DAYS_SHORT[currentDate.getDay()];
+      const inRange = isInRange(currentDate);
+      const isReinforcement = isReinforcementDay(currentDate);
       
       let content = '';
-      
-      if (periodIndex === -1) {
-        content = `
-          <div class="out-of-range">
-            <span>📅</span>
-            <h2>Programme pas encore commencé</h2>
-            <p>Le programme débute le <strong>13 janvier 2026</strong>.<br>Reviens à cette date pour commencer !</p>
-          </div>
-        `;
-      } else if (periodIndex === -2) {
-        content = `
-          <div class="out-of-range">
-            <span>🎉</span>
-            <h2>Programme terminé !</h2>
-            <p>Félicitations, tu as complété les 3 mois du programme.<br>Continue à maintenir tes acquis !</p>
-          </div>
-        `;
+      if (daysDiff < 0) {
+        content = `<div class="out-of-range"><span>📅</span><h2>Programme pas encore commencé</h2><p>Le programme débute le <strong>13 janvier 2026</strong>.<br>Utilise les flèches pour naviguer à cette date.</p></div>`;
+      } else if (daysDiff > totalDays) {
+        content = `<div class="out-of-range"><span>🎉</span><h2>Programme terminé !</h2><p>Félicitations, tu as complété les 3 mois du programme.<br>Continue à maintenir tes acquis !</p></div>`;
       } else {
-        const exerciseOrder = ['respiration', 'adductions', 'squats', 'chaiseMur', 'unipodal', 'scapula', 'velo'];
+        const dosages = getCurrentDosages(currentDate);
+        const exerciseOrder = isReinforcement 
+          ? ['reset', 'adductions', 'squats', 'chaiseMur', 'unipodal', 'scapula', 'velo']
+          : ['reset', 'velo'];
         const completedCount = Object.keys(completed).filter(id => completed[id]).length;
+        const sessionNum = getSessionNumber(currentDate);
         
         content = `
-          <div class="header">
-            <h1>Programme du jour</h1>
-            <p>${completedCount}/7 exercices complétés</p>
+          <div class="day-type-container">
+            <div class="day-type ${isReinforcement ? 'full' : 'light'}">
+              ${isReinforcement ? '💪 Jour renforcement (séance ' + sessionNum + '/46)' : '🌿 Jour récupération active'}
+            </div>
           </div>
-          
+          <div class="header"><h1>Programme du jour</h1><p>${completedCount}/${exerciseOrder.length} exercices</p></div>
           <div class="ex-list">
             ${exerciseOrder.map(exId => {
               const ex = EXERCISES[exId];
               const dosage = dosages[exId];
               const done = !!completed[exId];
               const dosageText = formatDosage(exId, dosage);
-              
               return `
                 <div class="ex-card ${done ? 'done' : ''}" onclick="openExercise('${exId}')">
                   <div class="ex-card-accent" style="background: linear-gradient(180deg, ${ex.gradient[0]}, ${ex.gradient[1]})"></div>
                   <div class="ex-card-icon" style="background: linear-gradient(135deg, ${ex.gradient[0]}40, ${ex.gradient[1]}40)">${ex.icon}</div>
                   <div class="ex-card-body">
-                    <div class="ex-card-top">
-                      <h3>${ex.name}</h3>
-                    </div>
+                    <div class="ex-card-top"><h3>${ex.name}</h3></div>
                     <div class="ex-card-dosage">${dosageText}</div>
                   </div>
                   <div class="ex-card-action">
                     ${done ? `<div class="ex-card-check"><svg viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>` : `<svg class="ex-card-arrow" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>`}
                   </div>
-                </div>
-              `;
+                </div>`;
             }).join('')}
           </div>
-          
-          <div class="status-bar">
-            <div class="status-item ${completedCount === 7 ? 'done' : ''}">
-              ${completedCount === 7 ? '✓ Journée complète' : `${7 - completedCount} restant${7 - completedCount > 1 ? 's' : ''}`}
-            </div>
-          </div>
-        `;
+          <div class="status-bar"><div class="status-item ${completedCount === exerciseOrder.length ? 'done' : ''}">${completedCount === exerciseOrder.length ? '✓ Journée complète' : `${exerciseOrder.length - completedCount} restant${exerciseOrder.length - completedCount > 1 ? 's' : ''}`}</div></div>`;
       }
       
       document.getElementById('app').innerHTML = `
         <div class="date-picker">
-          <button class="date-btn" onclick="changeDate(-1)">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-          </button>
-          <div class="date-display">
-            <div class="day">${dayName} ${dayNum}</div>
-            <div class="month">${monthName} ${currentDate.getFullYear()}</div>
-          </div>
-          <button class="date-btn" onclick="changeDate(1)">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
-          </button>
+          <button class="date-btn" onclick="changeDate(-1)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+          <div class="date-display"><div class="day">${dayName} ${dayNum}</div><div class="month">${monthName} ${currentDate.getFullYear()}</div></div>
+          <button class="date-btn" onclick="changeDate(1)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg></button>
         </div>
-        
         <div class="progress-section">
-          <div class="progress-header">
-            <span>Progression globale</span>
-            <strong>${Math.round(Math.max(0, progress))}%</strong>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: ${Math.max(0, progress)}%"></div>
-          </div>
-          ${periodIndex >= 0 ? `
-            <div class="period-info">
-              <div class="label">Période actuelle</div>
-              <div class="value">Jour ${daysDiff + 1} / 92 — Bloc ${periodIndex + 1}/23</div>
-            </div>
-          ` : ''}
+          <div class="progress-header"><span>Progression globale</span><strong>${Math.round(Math.max(0, progress))}%</strong></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: ${Math.max(0, progress)}%"></div></div>
+          ${inRange ? `<div class="period-info"><div class="label">Jour du programme</div><div class="value">Jour ${daysDiff + 1} / ${totalDays + 1}</div></div>` : ''}
         </div>
-        
-        ${content}
-      `;
+        ${content}`;
     }
 
     function renderExerciseScreen() {
       const ex = EXERCISES[currentEx];
-      const dosages = getCurrentDosages();
+      const dosages = getCurrentDosages(currentDate);
       const dosage = dosages[currentEx];
       const dosageText = formatDosage(currentEx, dosage);
       const params = getTotalSetsAndReps(currentEx, dosage);
       const screen = document.getElementById('exercise-screen');
       
-      let currentReps = params.reps || 1;
-      if (params.repsPerSet) {
-        currentReps = params.repsPerSet[setCount - 1] || 1;
-      }
-      
-      let currentHoldTime = null;
-      if (params.isHoldExercise && Array.isArray(params.holdTime)) {
-        currentHoldTime = params.holdTime[setCount - 1] || 30;
-      } else if (params.holdTime && !Array.isArray(params.holdTime)) {
-        currentHoldTime = params.holdTime;
-      }
+      let currentReps = params.repsPerSet ? params.repsPerSet[setCount - 1] || 1 : params.reps || 1;
+      let currentHoldTime = params.isHoldOnly && Array.isArray(params.holdTime) ? params.holdTime[setCount - 1] || 30 : (params.holdTime && !Array.isArray(params.holdTime) ? params.holdTime : null);
       
       screen.innerHTML = `
         <div class="ex-header">
@@ -831,98 +567,32 @@
           <h2><span>${ex.icon}</span> ${ex.name}</h2>
           <div class="hdr-spacer"></div>
         </div>
-        
-        <!-- INTRO -->
         <div class="intro-body" style="display: ${exStep === 'intro' ? 'flex' : 'none'}">
-          <div class="intro-hero" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})">
-            <span>${ex.icon}</span>
-            <div class="glow"></div>
-          </div>
-          
-          <div class="info-block dosage">
-            <h4><span>📊</span> Dosage du jour</h4>
-            <div class="dosage-display">
-              <div class="main">${dosageText}</div>
-              ${currentEx === 'squats' ? '<div class="sub">Descente contrôlée en 3 secondes</div>' : ''}
-              ${currentEx === 'scapula' ? '<div class="sub">Altères 2kg — Plan scapulaire (130-140°)</div>' : ''}
-              ${currentEx === 'unipodal' ? '<div class="sub">Chaque côté — Appui léger au mur</div>' : ''}
-            </div>
-          </div>
-          
-          <div class="info-block">
-            <h4><span>📍</span> Position de départ</h4>
-            <p>${ex.position}</p>
-          </div>
-          
-          <div class="info-block">
-            <h4><span>▶️</span> Exécution</h4>
-            <ol class="steps-list">
-              ${ex.steps.map((s,i) => `<li><div class="num">${i+1}</div><div class="txt"><strong>${s.text}</strong><span>${s.detail}</span></div></li>`).join('')}
-            </ol>
-          </div>
-          
-          <div class="info-block success">
-            <h4><span>✅</span> Tu dois sentir</h4>
-            <p>${ex.feel}</p>
-          </div>
-          
-          <div class="info-block warning">
-            <h4><span>⚠️</span> Évite</h4>
-            <ul class="warn-list">${ex.warnings.map(w => `<li>${w}</li>`).join('')}</ul>
-          </div>
+          <div class="intro-hero" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})"><span>${ex.icon}</span><div class="glow"></div></div>
+          <div class="info-block dosage"><h4><span>📊</span> Dosage du jour</h4><div class="dosage-display"><div class="main">${dosageText}</div>${currentEx === 'squats' ? '<div class="sub">Descente contrôlée en 3 secondes</div>' : ''}${currentEx === 'scapula' ? '<div class="sub">Altères 2kg — Plan scapulaire (130-140°)</div>' : ''}${currentEx === 'unipodal' ? '<div class="sub">Chaque côté — Appui mur léger</div>' : ''}</div></div>
+          <div class="info-block"><h4><span>📍</span> Position de départ</h4><p>${ex.position}</p></div>
+          <div class="info-block"><h4><span>▶️</span> Exécution</h4><ol class="steps-list">${ex.steps.map((s,i) => `<li><div class="num">${i+1}</div><div class="txt"><strong>${s.text}</strong><span>${s.detail}</span></div></li>`).join('')}</ol></div>
+          <div class="info-block success"><h4><span>✅</span> Tu dois sentir</h4><p>${ex.feel}</p></div>
+          <div class="info-block warning"><h4><span>⚠️</span> Évite</h4><ul class="warn-list">${ex.warnings.map(w => `<li>${w}</li>`).join('')}</ul></div>
         </div>
-        
-        <!-- ACTIVE -->
         <div class="active-screen ${exStep === 'active' ? 'show' : ''}">
           <div class="active-bg" style="background: linear-gradient(180deg, ${ex.gradient[0]}20, transparent)"></div>
           ${params.durationMin ? renderTimer(ex, params) : renderRepCounter(ex, params, currentReps, currentHoldTime)}
           <div class="tip-box"><span>💡</span><p>${ex.feel}</p></div>
         </div>
-        
-        <!-- FEEDBACK -->
         <div class="feedback-screen ${exStep === 'feedback' ? 'show' : ''}">
-          <div class="fb-top">
-            <span>🎉</span>
-            <h2>Bravo !</h2>
-            <p>Exercice terminé</p>
-          </div>
+          <div class="fb-top"><span>🎉</span><h2>Bravo !</h2><p>Exercice terminé</p></div>
           <h3 class="fb-title">Comment te sens-tu ?</h3>
           <p class="fb-sub">Évalue ta réponse à cet exercice</p>
           <div class="fb-options">
-            <div class="fb-opt ${feedback === 'green' ? 'selected' : ''}" onclick="selectFeedback('green')">
-              <span class="icon">🟢</span>
-              <div class="txt"><strong>Vert</strong><span>Douleur ≤ 2/10 — Tout va bien</span></div>
-              <div class="check" style="background: var(--green)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-            </div>
-            <div class="fb-opt ${feedback === 'orange' ? 'selected orange' : ''}" onclick="selectFeedback('orange')">
-              <span class="icon">🟠</span>
-              <div class="txt"><strong>Orange</strong><span>Douleur 3-4/10 — Vigilance</span></div>
-              <div class="check" style="background: var(--orange)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-            </div>
-            <div class="fb-opt ${feedback === 'red' ? 'selected red' : ''}" onclick="selectFeedback('red')">
-              <span class="icon">🔴</span>
-              <div class="txt"><strong>Rouge</strong><span>Douleur ≥ 5/10 — Réduire</span></div>
-              <div class="check" style="background: var(--red)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-            </div>
+            <div class="fb-opt ${feedback === 'green' ? 'selected' : ''}" onclick="selectFeedback('green')"><span class="icon">🟢</span><div class="txt"><strong>Vert</strong><span>Douleur ≤ 2/10 — Tout va bien</span></div><div class="check" style="background: var(--green)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
+            <div class="fb-opt ${feedback === 'orange' ? 'selected orange' : ''}" onclick="selectFeedback('orange')"><span class="icon">🟠</span><div class="txt"><strong>Orange</strong><span>Douleur 3-4/10 — Vigilance</span></div><div class="check" style="background: var(--orange)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
+            <div class="fb-opt ${feedback === 'red' ? 'selected red' : ''}" onclick="selectFeedback('red')"><span class="icon">🔴</span><div class="txt"><strong>Rouge</strong><span>Douleur ≥ 5/10 — Réduire</span></div><div class="check" style="background: var(--red)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
           </div>
         </div>
-        
-        <!-- FOOTER -->
-        <div class="intro-footer">
-          <div>
-            ${exStep === 'intro' ? `
-              <button class="btn btn-primary" onclick="startActive()" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})">
-                Commencer <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-              </button>
-            ` : exStep === 'active' ? `
-              <button class="btn btn-secondary" onclick="finishExercise()">Terminer l'exercice</button>
-            ` : `
-              <button class="btn btn-primary" onclick="completeExercise()" ${!feedback ? 'disabled style="opacity:0.4"' : ''}>Continuer</button>
-            `}
-          </div>
-        </div>
-      `;
-      
+        <div class="intro-footer"><div>
+          ${exStep === 'intro' ? `<button class="btn btn-primary" onclick="startActive()" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})">Commencer <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></button>` : exStep === 'active' ? `<button class="btn btn-secondary" onclick="finishExercise()">Terminer l'exercice</button>` : `<button class="btn btn-primary" onclick="completeExercise()" ${!feedback ? 'disabled style="opacity:0.4"' : ''}>Continuer</button>`}
+        </div></div>`;
       screen.classList.add('active');
     }
 
@@ -934,243 +604,56 @@
       const offset = circ - (pct / 100) * circ;
       const mins = Math.floor(timerVal / 60);
       const secs = timerVal % 60;
-      
-      return `
-        <div class="timer">
-          <div class="timer-ring">
-            <svg viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="46" class="track"/>
-              <circle cx="50" cy="50" r="46" class="progress" stroke="${ex.gradient[1]}" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
-            </svg>
-            <div class="timer-center">
-              <div class="timer-time">${mins}:${secs.toString().padStart(2,'0')}</div>
-              <div class="timer-label">${timerRunning ? 'En cours' : 'Pause'}</div>
-            </div>
-          </div>
-          <div class="timer-btns">
-            <button class="timer-btn sec" onclick="resetTimer()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button>
-            <button class="timer-btn main" onclick="toggleTimer()" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})">
-              ${timerRunning ? '<svg viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>' : '<svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>'}
-            </button>
-            <button class="timer-btn sec" onclick="finishExercise()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></button>
-          </div>
-        </div>
-      `;
+      return `<div class="timer"><div class="timer-ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" class="track"/><circle cx="50" cy="50" r="46" class="progress" stroke="${ex.gradient[1]}" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/></svg><div class="timer-center"><div class="timer-time">${mins}:${secs.toString().padStart(2,'0')}</div><div class="timer-label">${timerRunning ? 'En cours' : 'Pause'}</div></div></div><div class="timer-btns"><button class="timer-btn sec" onclick="resetTimer()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button><button class="timer-btn main" onclick="toggleTimer()" style="background: linear-gradient(135deg, ${ex.gradient[0]}, ${ex.gradient[1]})">${timerRunning ? '<svg viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>' : '<svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>'}</button><button class="timer-btn sec" onclick="finishExercise()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></button></div></div>`;
     }
 
     function renderRepCounter(ex, params, currentReps, currentHoldTime) {
       const total = currentReps || 1;
       const pct = (repCount / total) * 100;
-      
-      return `
-        <div class="rep-counter">
-          ${params.perSide ? `
-            <div class="side-switch">
-              <button class="side-btn ${side === 'left' ? 'active' : ''}">← Gauche</button>
-              <button class="side-btn ${side === 'right' ? 'active' : ''}">Droit →</button>
-            </div>
-          ` : ''}
-          <div class="set-info">Série ${setCount} sur ${params.sets}</div>
-          <div class="rep-circle ${holding ? 'holding' : ''}" onclick="tapRep()">
-            <svg viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="46" class="track"/>
-              <circle cx="50" cy="50" r="46" class="progress" stroke="${ex.gradient[1]}" stroke-dasharray="${pct * 2.89} 289"/>
-            </svg>
-            <div class="rep-inner">
-              ${holding ? `
-                <div class="hold-num">${holdTime}</div>
-                <div class="hold-txt">Maintiens</div>
-              ` : `
-                <div class="rep-num">${repCount}<span class="sep">/</span><span class="tot">${total}</span></div>
-                <div class="rep-hint">Tap pour compter</div>
-              `}
-            </div>
-            ${holding ? '<div class="hold-ring"></div>' : ''}
-          </div>
-          ${currentHoldTime && !holding ? `<div class="hold-info">💡 Maintiens ${currentHoldTime}s</div>` : ''}
-        </div>
-      `;
+      return `<div class="rep-counter">${params.perSide ? `<div class="side-switch"><button class="side-btn ${side === 'left' ? 'active' : ''}">← Gauche</button><button class="side-btn ${side === 'right' ? 'active' : ''}">Droit →</button></div>` : ''}<div class="set-info">Série ${setCount} sur ${params.sets}</div><div class="rep-circle ${holding ? 'holding' : ''}" onclick="tapRep()"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" class="track"/><circle cx="50" cy="50" r="46" class="progress" stroke="${ex.gradient[1]}" stroke-dasharray="${pct * 2.89} 289"/></svg><div class="rep-inner">${holding ? `<div class="hold-num">${holdTime}</div><div class="hold-txt">Maintiens</div>` : params.isHoldOnly ? `<div class="rep-hint" style="font-size: 16px; color: var(--text)">Tap pour<br>démarrer ${currentHoldTime}s</div>` : `<div class="rep-num">${repCount}<span class="sep">/</span><span class="tot">${total}</span></div><div class="rep-hint">Tap pour compter</div>`}</div>${holding ? '<div class="hold-ring"></div>' : ''}</div>${currentHoldTime && !holding && !params.isHoldOnly ? `<div class="hold-info">💡 Maintiens ${currentHoldTime}s par rep</div>` : ''}</div>`;
     }
 
-    // ============================================
-    // ACTIONS
-    // ============================================
-    function changeDate(delta) {
-      currentDate = new Date(currentDate.getTime() + delta * 24 * 60 * 60 * 1000);
-      completed = {};
-      render();
-    }
-
+    function changeDate(delta) { currentDate = new Date(currentDate.getTime() + delta * 24 * 60 * 60 * 1000); completed = {}; render(); }
     function openExercise(id) {
-      const dosages = getCurrentDosages();
+      const dosages = getCurrentDosages(currentDate);
       const dosage = dosages[id];
       const params = getTotalSetsAndReps(id, dosage);
-      
-      currentEx = id;
-      exStep = 'intro';
-      feedback = null;
+      currentEx = id; exStep = 'intro'; feedback = null;
       timerVal = params.durationMin ? params.durationMin * 60 : 0;
-      timerRunning = false;
-      repCount = 0;
-      setCount = 1;
-      side = 'left';
-      holding = false;
-      
-      if (params.isHoldExercise && Array.isArray(params.holdTime)) {
-        holdTime = params.holdTime[0] || 30;
-      } else if (params.holdTime && !Array.isArray(params.holdTime)) {
-        holdTime = params.holdTime;
-      } else {
-        holdTime = 0;
-      }
-      
+      timerRunning = false; repCount = 0; setCount = 1; side = 'left'; holding = false;
+      holdTime = params.isHoldOnly && Array.isArray(params.holdTime) ? params.holdTime[0] || 30 : (params.holdTime && !Array.isArray(params.holdTime) ? params.holdTime : 0);
       renderExerciseScreen();
     }
-
-    function closeExercise() {
-      clearInterval(timerInterval);
-      clearInterval(holdInterval);
-      document.getElementById('exercise-screen').classList.remove('active');
-      currentEx = null;
-    }
-
-    function startActive() {
-      const dosages = getCurrentDosages();
-      const dosage = dosages[currentEx];
-      const params = getTotalSetsAndReps(currentEx, dosage);
-      timerVal = params.durationMin ? params.durationMin * 60 : 0;
-      exStep = 'active';
-      renderExerciseScreen();
-    }
-
+    function closeExercise() { clearInterval(timerInterval); clearInterval(holdInterval); document.getElementById('exercise-screen').classList.remove('active'); currentEx = null; }
+    function startActive() { const dosages = getCurrentDosages(currentDate); const dosage = dosages[currentEx]; const params = getTotalSetsAndReps(currentEx, dosage); timerVal = params.durationMin ? params.durationMin * 60 : 0; exStep = 'active'; renderExerciseScreen(); }
     function toggleTimer() {
       timerRunning = !timerRunning;
-      if (timerRunning) {
-        timerInterval = setInterval(() => {
-          timerVal--;
-          if (timerVal <= 0) {
-            clearInterval(timerInterval);
-            timerRunning = false;
-            vibrate([100,50,100,50,100]);
-            finishExercise();
-          } else {
-            renderExerciseScreen();
-          }
-        }, 1000);
-      } else {
-        clearInterval(timerInterval);
-      }
+      if (timerRunning) { timerInterval = setInterval(() => { timerVal--; if (timerVal <= 0) { clearInterval(timerInterval); timerRunning = false; vibrate([100,50,100,50,100]); finishExercise(); } else { renderExerciseScreen(); } }, 1000); } else { clearInterval(timerInterval); }
       renderExerciseScreen();
     }
-
-    function resetTimer() {
-      clearInterval(timerInterval);
-      const dosages = getCurrentDosages();
-      const dosage = dosages[currentEx];
-      const params = getTotalSetsAndReps(currentEx, dosage);
-      timerVal = params.durationMin * 60;
-      timerRunning = false;
-      renderExerciseScreen();
-    }
-
+    function resetTimer() { clearInterval(timerInterval); const dosages = getCurrentDosages(currentDate); const dosage = dosages[currentEx]; const params = getTotalSetsAndReps(currentEx, dosage); timerVal = params.durationMin * 60; timerRunning = false; renderExerciseScreen(); }
     function tapRep() {
       vibrate(30);
-      const dosages = getCurrentDosages();
-      const dosage = dosages[currentEx];
-      const params = getTotalSetsAndReps(currentEx, dosage);
-      
-      let currentHoldTime = null;
-      if (params.isHoldExercise && Array.isArray(params.holdTime)) {
-        currentHoldTime = params.holdTime[setCount - 1] || 30;
-      } else if (params.holdTime && !Array.isArray(params.holdTime)) {
-        currentHoldTime = params.holdTime;
-      }
-      
-      if (currentHoldTime && !holding) {
-        holding = true;
-        holdTime = currentHoldTime;
-        renderExerciseScreen();
-        holdInterval = setInterval(() => {
-          holdTime--;
-          if (holdTime <= 0) {
-            clearInterval(holdInterval);
-            holding = false;
-            vibrate(100);
-            completeRep();
-          } else {
-            renderExerciseScreen();
-          }
-        }, 1000);
-      } else if (!currentHoldTime) {
-        completeRep();
-      }
+      const dosages = getCurrentDosages(currentDate); const dosage = dosages[currentEx]; const params = getTotalSetsAndReps(currentEx, dosage);
+      let currentHoldTime = params.isHoldOnly && Array.isArray(params.holdTime) ? params.holdTime[setCount - 1] || 30 : (params.holdTime && !Array.isArray(params.holdTime) ? params.holdTime : null);
+      if (currentHoldTime && !holding) { holding = true; holdTime = currentHoldTime; renderExerciseScreen(); holdInterval = setInterval(() => { holdTime--; if (holdTime <= 0) { clearInterval(holdInterval); holding = false; vibrate(100); completeRep(); } else { renderExerciseScreen(); } }, 1000); } else if (!currentHoldTime) { completeRep(); }
     }
-
     function completeRep() {
-      const dosages = getCurrentDosages();
-      const dosage = dosages[currentEx];
-      const params = getTotalSetsAndReps(currentEx, dosage);
-      
-      let currentReps = params.reps || 1;
-      if (params.repsPerSet) {
-        currentReps = params.repsPerSet[setCount - 1] || 1;
-      }
-      
+      const dosages = getCurrentDosages(currentDate); const dosage = dosages[currentEx]; const params = getTotalSetsAndReps(currentEx, dosage);
+      let currentReps = params.repsPerSet ? params.repsPerSet[setCount - 1] || 1 : params.reps || 1;
       repCount++;
-      
       if (repCount >= currentReps) {
-        // Gestion côté pour unipodal
-        if (params.perSide && side === 'left') {
-          side = 'right';
-          repCount = 0;
-        } else if (setCount < params.sets) {
-          setCount++;
-          repCount = 0;
-          if (params.perSide) side = 'left';
-          // Update holdTime pour exercices à hold variable
-          if (params.isHoldExercise && Array.isArray(params.holdTime)) {
-            holdTime = params.holdTime[setCount - 1] || 30;
-          }
-        } else {
-          vibrate([100,50,100,50,100]);
-          finishExercise();
-          return;
-        }
+        if (params.perSide && side === 'left') { side = 'right'; repCount = 0; }
+        else if (setCount < params.sets) { setCount++; repCount = 0; if (params.perSide) side = 'left'; if (params.isHoldOnly && Array.isArray(params.holdTime)) holdTime = params.holdTime[setCount - 1] || 30; }
+        else { vibrate([100,50,100,50,100]); finishExercise(); return; }
       }
-      
       renderExerciseScreen();
     }
-
-    function finishExercise() {
-      clearInterval(timerInterval);
-      clearInterval(holdInterval);
-      exStep = 'feedback';
-      timerRunning = false;
-      holding = false;
-      renderExerciseScreen();
-    }
-
-    function selectFeedback(val) {
-      feedback = val;
-      renderExerciseScreen();
-    }
-
-    function completeExercise() {
-      if (!feedback) return;
-      completed[currentEx] = feedback;
-      closeExercise();
-      render();
-    }
-
-    function vibrate(pattern) {
-      if (navigator.vibrate) navigator.vibrate(pattern);
-    }
-
-    // ============================================
-    // INIT
-    // ============================================
+    function finishExercise() { clearInterval(timerInterval); clearInterval(holdInterval); exStep = 'feedback'; timerRunning = false; holding = false; renderExerciseScreen(); }
+    function selectFeedback(val) { feedback = val; renderExerciseScreen(); }
+    function completeExercise() { if (!feedback) return; completed[currentEx] = feedback; closeExercise(); render(); }
+    function vibrate(pattern) { if (navigator.vibrate) navigator.vibrate(pattern); }
     render();
   </script>
-
 </body>
 </html>
